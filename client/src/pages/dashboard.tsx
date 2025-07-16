@@ -57,16 +57,16 @@ export default function Dashboard() {
         </CardHeader>
         <CardContent className="pt-0 pb-4">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-16 h-16 flex items-center justify-center">
-              <svg className="w-16 h-16" viewBox="0 0 42 42">
+            <div className="w-20 h-20 flex items-center justify-center">
+              <svg className="w-20 h-20" viewBox="0 0 42 42">
                 {/* Doughnut chart segments */}
-                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#333" strokeWidth="3" strokeDasharray="35 65" strokeDashoffset="25" transform="rotate(-90 21 21)"/>
-                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#666" strokeWidth="3" strokeDasharray="25 75" strokeDashoffset="40" transform="rotate(-90 21 21)"/>
-                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#999" strokeWidth="3" strokeDasharray="20 80" strokeDashoffset="65" transform="rotate(-90 21 21)"/>
-                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#ccc" strokeWidth="3" strokeDasharray="20 80" strokeDashoffset="85" transform="rotate(-90 21 21)"/>
+                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#333" strokeWidth="4" strokeDasharray="35 65" strokeDashoffset="25" transform="rotate(-90 21 21)"/>
+                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#666" strokeWidth="4" strokeDasharray="25 75" strokeDashoffset="40" transform="rotate(-90 21 21)"/>
+                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#999" strokeWidth="4" strokeDasharray="20 80" strokeDashoffset="65" transform="rotate(-90 21 21)"/>
+                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#ccc" strokeWidth="4" strokeDasharray="20 80" strokeDashoffset="85" transform="rotate(-90 21 21)"/>
               </svg>
             </div>
-            <div className="flex-1 ml-4 space-y-1">
+            <div className="flex-1 ml-6 space-y-1">
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-gray-800 rounded-sm"></div>
