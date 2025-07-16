@@ -41,7 +41,7 @@ export default function Home() {
         </div>
       </header>
       {/* Welcome Banner */}
-      <div className="bg-black mx-4 rounded-lg p-6 text-white border border-black mt-[7px] mb-[7px] pt-[20px] pb-[20px]" style={{ height: '120px' }}>
+      <div className="bg-black mx-4 rounded-lg p-6 text-white border border-black mt-[7px] mb-[7px] pt-[20px] pb-[35px]" style={{ height: '140px' }}>
         <h3 className="text-xl font-semibold mb-2 text-white">
           {translations.welcome_to_barakah || "Welcome to Barakah"}
         </h3>
