@@ -215,6 +215,37 @@ export default function Dashboard() {
           )}
         </CardContent>
       </Card>
+
+      {/* Fund Summary */}
+      <Card className="mx-4 mb-20 border border-black rounded-lg mt-[24px]" style={{ minHeight: '160px' }}>
+        <CardHeader className="pb-2 pt-4 px-8">
+          <CardTitle className="section-header text-black">Fund Summary</CardTitle>
+        </CardHeader>
+        <CardContent className="pt-0 pb-6 px-8">
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <div>
+                <p className="text-black text-sm font-medium mb-1">Total Assets</p>
+                <p className="text-black text-lg font-semibold">₹2,847 Cr</p>
+              </div>
+              <div>
+                <p className="text-black text-sm font-medium mb-1">Inception Date</p>
+                <p className="text-black text-lg font-semibold">March 2019</p>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <p className="text-black text-sm font-medium mb-1">Total Investors</p>
+                <p className="text-black text-lg font-semibold">45,692</p>
+              </div>
+              <div>
+                <p className="text-black text-sm font-medium mb-1">Expense Ratio</p>
+                <p className="text-black text-lg font-semibold">1.25%</p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
