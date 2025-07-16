@@ -88,23 +88,23 @@ export default function Dashboard() {
       </Card>
 
       {/* Recent Transactions */}
-      <Card className="mx-4 mb-6 border border-black rounded-lg" style={{ height: '160px' }}>
-        <CardHeader className="pb-2">
+      <Card className="mx-4 mb-20 border border-black rounded-lg mt-[60px]" style={{ minHeight: '200px' }}>
+        <CardHeader className="pb-2 flex-shrink-0">
           <CardTitle className="section-header text-black">Recent Transactions</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="pt-0 overflow-y-auto" style={{ maxHeight: '180px' }}>
           {transactionsLoading ? (
-            <div className="space-y-2">
+            <div className="space-y-3 pr-2">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="animate-pulse flex items-center justify-between">
+                <div key={i} className="animate-pulse flex items-center justify-between py-2">
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
+                    <div className="w-8 h-8 bg-gray-200 rounded-full flex-shrink-0"></div>
                     <div>
                       <div className="h-3 bg-gray-200 rounded w-16 mb-1"></div>
                       <div className="h-2 bg-gray-200 rounded w-12"></div>
                     </div>
                   </div>
-                  <div>
+                  <div className="text-right flex-shrink-0">
                     <div className="h-3 bg-gray-200 rounded w-10 mb-1"></div>
                     <div className="h-2 bg-gray-200 rounded w-12"></div>
                   </div>
@@ -112,27 +112,27 @@ export default function Dashboard() {
               ))}
             </div>
           ) : (
-            <div className="space-y-2">
-              {transactions?.slice(0, 3).map((transaction) => (
-                <div key={transaction.id} className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+            <div className="space-y-3 pr-2">
+              {transactions?.slice(0, 5).map((transaction) => (
+                <div key={transaction.id} className="flex items-center justify-between py-2">
+                  <div className="flex items-center space-x-3 min-w-0 flex-1">
+                    <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center flex-shrink-0">
                       <i className={`${
                         transaction.type === 'investment' 
                           ? 'fas fa-plus text-white' 
                           : 'fas fa-hand-holding-heart text-white'
                       } text-xs`}></i>
                     </div>
-                    <div>
-                      <p className="font-medium text-sm text-black">
+                    <div className="min-w-0 flex-1">
+                      <p className="font-medium text-sm text-black truncate">
                         {transaction.type === 'investment' ? 'Investment' : 'Zakat Donation'}
                       </p>
-                      <p className="text-black text-xs">
+                      <p className="text-black text-xs truncate">
                         {new Date(transaction.createdAt!).toLocaleDateString()}
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right flex-shrink-0 ml-4">
                     <p className="font-semibold text-black text-sm">₹{transaction.amount}</p>
                     <p className="text-black text-xs">{transaction.status}</p>
                   </div>
