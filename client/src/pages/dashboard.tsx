@@ -51,11 +51,11 @@ export default function Dashboard() {
       </div>
 
       {/* Asset Allocation */}
-      <Card className="mx-4 mb-6 border border-black rounded-lg pt-[-1px] pb-[-1px] mt-[80px]" style={{ height: '160px' }}>
+      <Card className="mx-4 mb-6 border border-black rounded-lg pt-[-1px] pb-[20px] mt-[80px]" style={{ height: '180px' }}>
         <CardHeader className="pb-2">
           <CardTitle className="section-header text-black">Asset Allocation</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="pt-0 pb-4">
           <div className="flex items-center justify-between mb-4">
             <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center">
               <svg className="w-12 h-12" viewBox="0 0 42 42">
