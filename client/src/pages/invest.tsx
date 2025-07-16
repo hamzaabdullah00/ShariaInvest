@@ -68,7 +68,7 @@ export default function Invest() {
       </div>
       {/* Projected Returns */}
       <Card className="bg-card text-card-foreground shadow-sm mx-4 border border-black rounded-lg mt-[13px] mb-[13px]" style={{ height: '160px' }}>
-        <CardHeader className="pb-2">
+        <CardHeader className="flex flex-col space-y-1.5 p-6 pb-2 mt-[-15px] mb-[-15px]">
           <CardTitle className="section-header text-black">Projected Returns</CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
