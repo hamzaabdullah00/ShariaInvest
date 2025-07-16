@@ -88,7 +88,7 @@ export default function Dashboard() {
       </Card>
 
       {/* Recent Transactions */}
-      <Card className="mx-4 mb-20 border border-black rounded-lg mt-[60px]" style={{ minHeight: '200px' }}>
+      <Card className="mx-4 mb-20 border border-black rounded-lg mt-[24px]" style={{ minHeight: '200px' }}>
         <CardHeader className="pb-2 flex-shrink-0">
           <CardTitle className="section-header text-black">Recent Transactions</CardTitle>
         </CardHeader>
