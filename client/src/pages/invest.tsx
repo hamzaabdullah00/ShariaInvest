@@ -62,12 +62,10 @@ export default function Invest() {
         <h3 className="text-xl font-semibold mb-2 text-black">Shariah Investment</h3>
         <p className="text-black text-sm">Invest in halal, ethical opportunities</p>
       </div>
-
       {/* Investment Amount Slider */}
       <div className="mb-6">
         <InvestmentSlider onAmountChange={setInvestmentAmount} />
       </div>
-
       {/* Projected Returns */}
       <Card className="mx-4 mb-6 border border-black rounded-lg" style={{ height: '160px' }}>
         <CardHeader className="pb-2">
@@ -92,14 +90,12 @@ export default function Invest() {
           </div>
         </CardContent>
       </Card>
-
       {/* NAV Chart */}
       <div className="mb-6">
         <NavChart />
       </div>
-
       {/* Fund Details */}
-      <Card className="bg-card text-card-foreground shadow-sm mx-4 border border-black rounded-lg pt-[0px] pb-[0px] mt-[78px] mb-[78px]" style={{ height: '160px' }}>
+      <Card className="bg-card text-card-foreground shadow-sm mx-4 border border-black rounded-lg mt-[83px] mb-[83px] pt-[0px] pb-[0px]" style={{ height: '160px' }}>
         <CardHeader className="pb-2">
           <CardTitle className="section-header text-black">Barakah Equity Fund</CardTitle>
         </CardHeader>
@@ -128,7 +124,6 @@ export default function Invest() {
           </div>
         </CardContent>
       </Card>
-
       {/* Investment CTA */}
       <div className="mx-4 mb-8">
         <Button 
