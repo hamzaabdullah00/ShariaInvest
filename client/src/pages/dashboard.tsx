@@ -51,7 +51,7 @@ export default function Dashboard() {
       </div>
 
       {/* Asset Allocation */}
-      <Card className="mx-4 mb-6 border border-black rounded-lg" style={{ height: '160px' }}>
+      <Card className="mx-4 mb-6 border border-black rounded-lg pt-[-1px] pb-[-1px] mt-[80px]" style={{ height: '160px' }}>
         <CardHeader className="pb-2">
           <CardTitle className="section-header text-black">Asset Allocation</CardTitle>
         </CardHeader>
