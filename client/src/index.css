@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(48, 20%, 97%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(82, 20%, 24%);
+  --primary-foreground: hsl(48, 20%, 97%);
+  --secondary: hsl(0, 0%, 17%);
+  --secondary-foreground: hsl(48, 20%, 97%);
+  --accent: hsl(41, 35%, 60%);
+  --accent-foreground: hsl(82, 20%, 24%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* Custom Barakah colors */
+  --olive: hsl(82, 20%, 24%);
+  --charcoal: hsl(0, 0%, 17%);
+  --gold: hsl(41, 35%, 60%);
+  --sand: hsl(48, 20%, 97%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(82, 20%, 24%);
+  --primary-foreground: hsl(48, 20%, 97%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.bg-olive {
+  background-color: var(--olive);
+}
+
+.bg-charcoal {
+  background-color: var(--charcoal);
+}
+
+.bg-gold {
+  background-color: var(--gold);
+}
+
+.bg-sand {
+  background-color: var(--sand);
+}
+
+.text-olive {
+  color: var(--olive);
+}
+
+.text-charcoal {
+  color: var(--charcoal);
+}
+
+.text-gold {
+  color: var(--gold);
+}
+
+.text-sand {
+  color: var(--sand);
+}
+
+.border-olive {
+  border-color: var(--olive);
+}
+
+.border-gold {
+  border-color: var(--gold);
+}
+
+/* Custom slider styles */
+.investment-slider::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: var(--olive);
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.investment-slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: var(--olive);
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Mobile app container */
+.mobile-container {
+  max-width: 448px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: white;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* Bottom navigation styles */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 448px;
+  background: white;
+  border-top: 1px solid hsl(20, 5.9%, 90%);
+  z-index: 50;
+}
+
+/* Screen content padding for bottom nav */
+.screen-content {
+  padding-bottom: 80px;
+  min-height: 100vh;
+  background: var(--sand);
+}
+
+/* Animation classes */
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+/* Chart container */
+.chart-container {
+  height: 120px;
+  background: linear-gradient(to top, #f0fdf4, #dcfce7);
+  border-radius: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Progress bar styles */
+.progress-bar {
+  transition: width 0.3s ease;
+}
