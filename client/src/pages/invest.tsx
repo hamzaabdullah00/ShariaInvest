@@ -71,18 +71,18 @@ export default function Invest() {
         <CardHeader className="flex flex-col space-y-1.5 p-6 pb-2 mt-[-15px] mb-[-15px]">
           <CardTitle className="section-header text-black">Projected Returns</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0">
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            <div className="text-center p-3 bg-white border border-black rounded-lg">
-              <p className="text-xl font-bold text-black">8.5%</p>
+        <CardContent className="pt-0 px-8 pb-6">
+          <div className="grid grid-cols-2 gap-6 mb-6">
+            <div className="text-center p-4 bg-white border border-black rounded-lg">
+              <p className="text-xl font-bold text-black mb-2">8.5%</p>
               <p className="text-sm text-black">Annual Return</p>
             </div>
-            <div className="text-center p-3 bg-white border border-black rounded-lg">
-              <p className="text-xl font-bold text-black">95%</p>
+            <div className="text-center p-4 bg-white border border-black rounded-lg">
+              <p className="text-xl font-bold text-black mb-2">95%</p>
               <p className="text-sm text-black">Capital Protection</p>
             </div>
           </div>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center px-2">
             <span className="text-sm text-black">Expected Monthly:</span>
             <span className="font-semibold text-black">
               ₹{calculateReturns(investmentAmount).toFixed(0)}
