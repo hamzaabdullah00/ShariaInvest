@@ -98,13 +98,13 @@ export default function Invest() {
       {/* Investment CTA */}
       <div className="mx-4 mb-8">
         <Button 
-          className="btn-primary mt-[55px] mb-[55px]"
+          className="btn-primary mt-[55px] mb-[8px]"
           onClick={handleInvestment}
           disabled={investmentMutation.isPending}
         >
           {investmentMutation.isPending ? "Processing..." : "Confirm Investment"}
         </Button>
-        <p className="text-center text-xs text-black mt-2">
+        <p className="text-center text-xs text-gray-600 mt-1">
           By investing, you agree to our terms and Shariah compliance guidelines
         </p>
       </div>
