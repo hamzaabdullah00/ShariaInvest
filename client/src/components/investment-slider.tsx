@@ -28,7 +28,7 @@ export default function InvestmentSlider({ onAmountChange }: InvestmentSliderPro
       <CardHeader className="pb-2">
         <CardTitle className="section-header text-black">Investment Amount</CardTitle>
       </CardHeader>
-      <CardContent className="pt-0">
+      <CardContent className="p-6 pt-0 mt-[-30px] mb-[-30px]">
         <div className="text-center">
           <div className="text-2xl font-bold text-black mb-2">
             {formatAmount(amount)}
