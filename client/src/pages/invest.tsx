@@ -71,7 +71,7 @@ export default function Invest() {
         <CardHeader className="flex flex-col space-y-1.5 p-6 pb-2 mt-[-15px] mb-[-15px]">
           <CardTitle className="section-header text-black">Projected Returns</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0 px-8 pb-6">
+        <CardContent className="pt-4 px-8 pb-6">
           <div className="grid grid-cols-2 gap-6 mb-6">
             <div className="text-center p-4 bg-white border border-black rounded-lg">
               <p className="text-xl font-bold text-black mb-2">8.5%</p>
