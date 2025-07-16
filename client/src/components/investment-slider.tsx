@@ -25,7 +25,7 @@ export default function InvestmentSlider({ onAmountChange }: InvestmentSliderPro
 
   return (
     <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
-      <CardHeader className="pb-2">
+      <CardHeader className="flex flex-col space-y-1.5 p-6 mt-[-4px] mb-[-4px] pt-[18px] pb-[18px]">
         <CardTitle className="section-header text-black">Investment Amount</CardTitle>
       </CardHeader>
       <CardContent className="p-6 pt-0 mt-[-30px] mb-[-30px]">
