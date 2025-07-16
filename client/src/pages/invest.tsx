@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import InvestmentSlider from "@/components/investment-slider";
+import NavChart from "@/components/nav-chart";
 import type { InsertInvestment } from "@shared/schema";
 
 export default function Invest() {
@@ -63,22 +64,24 @@ export default function Invest() {
       </div>
 
       {/* Investment Amount Slider */}
-      <InvestmentSlider onAmountChange={setInvestmentAmount} />
+      <div className="mb-6">
+        <InvestmentSlider onAmountChange={setInvestmentAmount} />
+      </div>
 
       {/* Projected Returns */}
-      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
+      <Card className="mx-4 mb-6 border border-black rounded-lg" style={{ height: '160px' }}>
         <CardHeader className="pb-2">
           <CardTitle className="section-header text-black">Projected Returns</CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
-          <div className="grid grid-cols-2 gap-4 mb-2">
-            <div className="text-center p-2 bg-white border border-black rounded-lg">
-              <p className="text-lg font-bold text-black">8.5%</p>
-              <p className="text-xs text-black">Annual Return</p>
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="text-center p-3 bg-white border border-black rounded-lg">
+              <p className="text-xl font-bold text-black">8.5%</p>
+              <p className="text-sm text-black">Annual Return</p>
             </div>
-            <div className="text-center p-2 bg-white border border-black rounded-lg">
-              <p className="text-lg font-bold text-black">95%</p>
-              <p className="text-xs text-black">Capital Protection</p>
+            <div className="text-center p-3 bg-white border border-black rounded-lg">
+              <p className="text-xl font-bold text-black">95%</p>
+              <p className="text-sm text-black">Capital Protection</p>
             </div>
           </div>
           <div className="flex justify-between items-center">
@@ -90,13 +93,18 @@ export default function Invest() {
         </CardContent>
       </Card>
 
+      {/* NAV Chart */}
+      <div className="mb-6">
+        <NavChart />
+      </div>
+
       {/* Fund Details */}
-      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
+      <Card className="mx-4 mb-6 border border-black rounded-lg" style={{ height: '160px' }}>
         <CardHeader className="pb-2">
           <CardTitle className="section-header text-black">Barakah Equity Fund</CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
-          <div className="space-y-1">
+          <div className="space-y-2">
             <div className="flex justify-between">
               <span className="text-black text-sm">Fund Size</span>
               <span className="font-medium text-black text-sm">₹45.6 Cr</span>
@@ -110,6 +118,10 @@ export default function Invest() {
               <span className="font-medium text-black text-sm">1.2%</span>
             </div>
             <div className="flex justify-between">
+              <span className="text-black text-sm">Min Investment</span>
+              <span className="font-medium text-black text-sm">₹1,000</span>
+            </div>
+            <div className="flex justify-between">
               <span className="text-black text-sm">Units to be allocated</span>
               <span className="font-medium text-black text-sm">{(investmentAmount / 12.45).toFixed(2)}</span>
             </div>
@@ -118,7 +130,7 @@ export default function Invest() {
       </Card>
 
       {/* Investment CTA */}
-      <div className="mx-4 mt-4 mb-6">
+      <div className="mx-4 mb-8">
         <Button 
           className="btn-primary"
           onClick={handleInvestment}

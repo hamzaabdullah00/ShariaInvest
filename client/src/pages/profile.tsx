@@ -29,28 +29,28 @@ export default function Profile() {
   return (
     <div className="screen-content">
       {/* Profile Header */}
-      <div className="bg-gradient-to-r from-olive to-charcoal px-4 py-8 text-white">
+      <div className="bg-black mx-4 mt-4 rounded-lg p-6 text-white border border-black" style={{ height: '140px' }}>
         {isLoading ? (
           <div className="animate-pulse flex items-center space-x-4">
-            <div className="w-16 h-16 bg-gold rounded-full"></div>
+            <div className="w-16 h-16 bg-white rounded-full"></div>
             <div>
-              <div className="h-6 bg-sand bg-opacity-30 rounded w-32 mb-2"></div>
-              <div className="h-4 bg-sand bg-opacity-30 rounded w-48"></div>
+              <div className="h-6 bg-white bg-opacity-30 rounded w-32 mb-2"></div>
+              <div className="h-4 bg-white bg-opacity-30 rounded w-48"></div>
             </div>
           </div>
         ) : (
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 bg-gold rounded-full flex items-center justify-center">
-              <span className="text-2xl font-bold text-olive">
+            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+              <span className="text-2xl font-bold text-black">
                 {user ? getInitials(user.fullName) : "AI"}
               </span>
             </div>
             <div>
-              <h3 className="text-xl font-semibold">{user?.fullName || "Ahmed Ibrahim"}</h3>
-              <p className="text-sand opacity-90">{user?.email || "ahmed.ibrahim@email.com"}</p>
+              <h3 className="text-xl font-semibold text-white">{user?.fullName || "Ahmed Ibrahim"}</h3>
+              <p className="text-white opacity-90">{user?.email || "ahmed.ibrahim@email.com"}</p>
               <div className="flex items-center space-x-2 mt-1">
-                <i className="fas fa-shield-alt text-gold text-sm"></i>
-                <span className="text-sm">{user?.isKycVerified ? "KYC Verified" : "KYC Pending"}</span>
+                <i className="fas fa-shield-alt text-white text-sm"></i>
+                <span className="text-sm text-white">{user?.isKycVerified ? "KYC Verified" : "KYC Pending"}</span>
               </div>
             </div>
           </div>
@@ -58,32 +58,32 @@ export default function Profile() {
       </div>
 
       {/* Account Stats */}
-      <Card className="mx-4 mt-4 shadow-sm border border-gray-100">
-        <CardHeader>
-          <CardTitle>Account Overview</CardTitle>
+      <Card className="mx-4 mt-4 mb-6 border border-black rounded-lg">
+        <CardHeader className="pb-2">
+          <CardTitle className="section-header text-black">Account Overview</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-4">
-            <div className="text-center p-4 bg-green-50 rounded-lg">
-              <p className="text-2xl font-bold text-green-600">2.5 Years</p>
-              <p className="text-sm text-gray-600">Member Since</p>
+            <div className="text-center p-4 bg-white border border-black rounded-lg">
+              <p className="text-2xl font-bold text-black">2.5 Years</p>
+              <p className="text-sm text-black">Member Since</p>
             </div>
-            <div className="text-center p-4 bg-blue-50 rounded-lg">
-              <p className="text-2xl font-bold text-blue-600">47</p>
-              <p className="text-sm text-gray-600">Forum Posts</p>
+            <div className="text-center p-4 bg-white border border-black rounded-lg">
+              <p className="text-2xl font-bold text-black">47</p>
+              <p className="text-sm text-black">Forum Posts</p>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* Settings Menu */}
-      <Card className="mx-4 mt-4 shadow-sm border border-gray-100 overflow-hidden">
+      <Card className="mx-4 mb-8 border border-black rounded-lg overflow-hidden">
         <CardContent className="p-0">
           <div className="space-y-0">
-            <div className="flex items-center justify-between p-4 border-b border-gray-100">
+            <div className="flex items-center justify-between p-4 border-b border-black">
               <div className="flex items-center space-x-3">
-                <i className="fas fa-globe text-olive"></i>
-                <span className="font-medium">Language</span>
+                <i className="fas fa-globe text-black"></i>
+                <span className="font-medium text-black">Language</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Select value={language} onValueChange={(value) => setLanguage(value as any)}>
@@ -102,44 +102,44 @@ export default function Profile() {
               </div>
             </div>
             
-            <button className="w-full flex items-center justify-between p-4 hover:bg-gray-50 border-b border-gray-100">
+            <button className="w-full flex items-center justify-between p-4 hover:bg-gray-50 border-b border-black">
               <div className="flex items-center space-x-3">
-                <i className="fas fa-bell text-olive"></i>
-                <span className="font-medium">Notifications</span>
+                <i className="fas fa-bell text-black"></i>
+                <span className="font-medium text-black">Notifications</span>
               </div>
-              <ChevronRight className="text-gray-400" size={16} />
+              <ChevronRight className="text-black" size={16} />
             </button>
             
-            <button className="w-full flex items-center justify-between p-4 hover:bg-gray-50 border-b border-gray-100">
+            <button className="w-full flex items-center justify-between p-4 hover:bg-gray-50 border-b border-black">
               <div className="flex items-center space-x-3">
-                <i className="fas fa-credit-card text-olive"></i>
-                <span className="font-medium">Payment Methods</span>
+                <i className="fas fa-credit-card text-black"></i>
+                <span className="font-medium text-black">Payment Methods</span>
               </div>
-              <ChevronRight className="text-gray-400" size={16} />
+              <ChevronRight className="text-black" size={16} />
             </button>
             
-            <button className="w-full flex items-center justify-between p-4 hover:bg-gray-50 border-b border-gray-100">
+            <button className="w-full flex items-center justify-between p-4 hover:bg-gray-50 border-b border-black">
               <div className="flex items-center space-x-3">
-                <i className="fas fa-shield-alt text-olive"></i>
-                <span className="font-medium">Security</span>
+                <i className="fas fa-shield-alt text-black"></i>
+                <span className="font-medium text-black">Security</span>
               </div>
-              <ChevronRight className="text-gray-400" size={16} />
+              <ChevronRight className="text-black" size={16} />
             </button>
             
-            <button className="w-full flex items-center justify-between p-4 hover:bg-gray-50 border-b border-gray-100">
+            <button className="w-full flex items-center justify-between p-4 hover:bg-gray-50 border-b border-black">
               <div className="flex items-center space-x-3">
-                <i className="fas fa-file-alt text-olive"></i>
-                <span className="font-medium">KYC Documents</span>
+                <i className="fas fa-file-alt text-black"></i>
+                <span className="font-medium text-black">KYC Documents</span>
               </div>
-              <ChevronRight className="text-gray-400" size={16} />
+              <ChevronRight className="text-black" size={16} />
             </button>
             
             <button className="w-full flex items-center justify-between p-4 hover:bg-gray-50">
               <div className="flex items-center space-x-3">
-                <i className="fas fa-question-circle text-olive"></i>
-                <span className="font-medium">Help & Support</span>
+                <i className="fas fa-question-circle text-black"></i>
+                <span className="font-medium text-black">Help & Support</span>
               </div>
-              <ChevronRight className="text-gray-400" size={16} />
+              <ChevronRight className="text-black" size={16} />
             </button>
           </div>
         </CardContent>
