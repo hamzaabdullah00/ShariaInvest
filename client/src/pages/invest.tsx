@@ -94,36 +94,7 @@ export default function Invest() {
       <div className="mb-6">
         <NavChart />
       </div>
-      {/* Fund Details */}
-      <Card className="bg-card text-card-foreground shadow-sm mx-4 border border-black rounded-lg mt-[83px] mb-[83px] pt-[0px] pb-[0px]" style={{ height: '160px' }}>
-        <CardHeader className="pb-2">
-          <CardTitle className="section-header text-black">Barakah Equity Fund</CardTitle>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <span className="text-black text-sm">Fund Size</span>
-              <span className="font-medium text-black text-sm">₹45.6 Cr</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-black text-sm">NAV</span>
-              <span className="font-medium text-black text-sm">₹12.45</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-black text-sm">Expense Ratio</span>
-              <span className="font-medium text-black text-sm">1.2%</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-black text-sm">Min Investment</span>
-              <span className="font-medium text-black text-sm">₹1,000</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-black text-sm">Units to be allocated</span>
-              <span className="font-medium text-black text-sm">{(investmentAmount / 12.45).toFixed(2)}</span>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      
       {/* Investment CTA */}
       <div className="mx-4 mb-8">
         <Button 
