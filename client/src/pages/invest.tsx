@@ -67,7 +67,7 @@ export default function Invest() {
         <InvestmentSlider onAmountChange={setInvestmentAmount} />
       </div>
       {/* Projected Returns */}
-      <Card className="mx-4 mb-6 border border-black rounded-lg" style={{ height: '160px' }}>
+      <Card className="bg-card text-card-foreground shadow-sm mx-4 border border-black rounded-lg mt-[13px] mb-[13px]" style={{ height: '160px' }}>
         <CardHeader className="pb-2">
           <CardTitle className="section-header text-black">Projected Returns</CardTitle>
         </CardHeader>
