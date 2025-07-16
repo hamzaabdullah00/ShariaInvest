@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -6,6 +7,7 @@ import NavChart from "@/components/nav-chart";
 import type { Transaction, NgoProject } from "@shared/schema";
 
 export default function Dashboard() {
+  const [hoveredSegment, setHoveredSegment] = useState<{name: string, percentage: string} | null>(null);
   const { data: transactions, isLoading: transactionsLoading } = useQuery<Transaction[]>({
     queryKey: ["/api/transactions"],
   });
@@ -57,14 +59,72 @@ export default function Dashboard() {
         </CardHeader>
         <CardContent className="pt-0 pb-4">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-20 h-20 flex items-center justify-center">
+            <div className="w-20 h-20 flex items-center justify-center relative">
               <svg className="w-20 h-20" viewBox="0 0 42 42">
                 {/* Doughnut chart segments */}
-                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#333" strokeWidth="4" strokeDasharray="35 65" strokeDashoffset="25" transform="rotate(-90 21 21)"/>
-                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#666" strokeWidth="4" strokeDasharray="25 75" strokeDashoffset="40" transform="rotate(-90 21 21)"/>
-                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#999" strokeWidth="4" strokeDasharray="20 80" strokeDashoffset="65" transform="rotate(-90 21 21)"/>
-                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#ccc" strokeWidth="4" strokeDasharray="20 80" strokeDashoffset="85" transform="rotate(-90 21 21)"/>
+                <circle 
+                  cx="21" cy="21" r="15.9" 
+                  fill="transparent" 
+                  stroke="#333" 
+                  strokeWidth="4" 
+                  strokeDasharray="35 65" 
+                  strokeDashoffset="25" 
+                  transform="rotate(-90 21 21)"
+                  className="hover:stroke-black cursor-pointer transition-colors duration-200"
+                  onMouseEnter={() => setHoveredSegment({ name: 'Real Estate', percentage: '35%' })}
+                  onMouseLeave={() => setHoveredSegment(null)}
+                />
+                <circle 
+                  cx="21" cy="21" r="15.9" 
+                  fill="transparent" 
+                  stroke="#666" 
+                  strokeWidth="4" 
+                  strokeDasharray="25 75" 
+                  strokeDashoffset="40" 
+                  transform="rotate(-90 21 21)"
+                  className="hover:stroke-black cursor-pointer transition-colors duration-200"
+                  onMouseEnter={() => setHoveredSegment({ name: 'SMEs', percentage: '25%' })}
+                  onMouseLeave={() => setHoveredSegment(null)}
+                />
+                <circle 
+                  cx="21" cy="21" r="15.9" 
+                  fill="transparent" 
+                  stroke="#999" 
+                  strokeWidth="4" 
+                  strokeDasharray="20 80" 
+                  strokeDashoffset="65" 
+                  transform="rotate(-90 21 21)"
+                  className="hover:stroke-black cursor-pointer transition-colors duration-200"
+                  onMouseEnter={() => setHoveredSegment({ name: 'Venture Capital', percentage: '20%' })}
+                  onMouseLeave={() => setHoveredSegment(null)}
+                />
+                <circle 
+                  cx="21" cy="21" r="15.9" 
+                  fill="transparent" 
+                  stroke="#ccc" 
+                  strokeWidth="4" 
+                  strokeDasharray="20 80" 
+                  strokeDashoffset="85" 
+                  transform="rotate(-90 21 21)"
+                  className="hover:stroke-black cursor-pointer transition-colors duration-200"
+                  onMouseEnter={() => setHoveredSegment({ name: 'Innovation', percentage: '20%' })}
+                  onMouseLeave={() => setHoveredSegment(null)}
+                />
               </svg>
+              
+              {/* Tooltip */}
+              {hoveredSegment && (
+                <div 
+                  className="absolute z-10 px-2 py-1 bg-black text-white text-xs rounded whitespace-nowrap pointer-events-none shadow-lg"
+                  style={{
+                    left: '50%',
+                    top: '-35px',
+                    transform: 'translateX(-50%)'
+                  }}
+                >
+                  {hoveredSegment.name}: {hoveredSegment.percentage}
+                </div>
+              )}
             </div>
             <div className="flex-1 ml-6 space-y-1">
               <div className="flex justify-between items-center">
