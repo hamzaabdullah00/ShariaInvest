@@ -217,7 +217,7 @@ export default function Dashboard() {
       </Card>
 
       {/* Fund Summary */}
-      <Card className="mx-4 mb-20 border border-black rounded-lg mt-[24px]" style={{ minHeight: '160px' }}>
+      <Card className="mx-4 mb-6 border border-black rounded-lg mt-[24px]" style={{ minHeight: '160px' }}>
         <CardHeader className="pb-2 pt-4 px-8">
           <CardTitle className="section-header text-black">Fund Summary</CardTitle>
         </CardHeader>
