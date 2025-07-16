@@ -24,13 +24,13 @@ export default function InvestmentSlider({ onAmountChange }: InvestmentSliderPro
   };
 
   return (
-    <Card className="mx-4 mt-4 shadow-sm border border-gray-100">
-      <CardHeader>
-        <CardTitle>Investment Amount</CardTitle>
+    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
+      <CardHeader className="pb-2">
+        <CardTitle className="section-header text-black">Investment Amount</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="text-center mb-6">
-          <div className="text-3xl font-bold text-olive mb-4">
+      <CardContent className="pt-0">
+        <div className="text-center">
+          <div className="text-2xl font-bold text-black mb-2">
             {formatAmount(amount)}
           </div>
           <Slider
@@ -39,9 +39,9 @@ export default function InvestmentSlider({ onAmountChange }: InvestmentSliderPro
             max={100000}
             min={1000}
             step={1000}
-            className="w-full investment-slider"
+            className="w-full investment-slider mb-2"
           />
-          <div className="flex justify-between text-xs text-gray-500 mt-2">
+          <div className="flex justify-between text-xs text-black">
             <span>₹1,000</span>
             <span>₹1,00,000</span>
           </div>

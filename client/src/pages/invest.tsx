@@ -57,76 +57,61 @@ export default function Invest() {
   return (
     <div className="screen-content">
       {/* Header */}
-      <div className="bg-white px-4 py-6 border-b border-gray-100">
-        <h3 className="text-xl font-semibold mb-2">Shariah Investment</h3>
-        <p className="text-gray-600 text-sm">Invest in halal, ethical opportunities</p>
+      <div className="bg-white px-4 py-6 border-b border-black">
+        <h3 className="text-xl font-semibold mb-2 text-black">Shariah Investment</h3>
+        <p className="text-black text-sm">Invest in halal, ethical opportunities</p>
       </div>
 
       {/* Investment Amount Slider */}
       <InvestmentSlider onAmountChange={setInvestmentAmount} />
 
       {/* Projected Returns */}
-      <Card className="mx-4 mt-4 shadow-sm border border-gray-100">
-        <CardHeader>
-          <CardTitle>Projected Returns</CardTitle>
+      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
+        <CardHeader className="pb-2">
+          <CardTitle className="section-header text-black">Projected Returns</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="text-center p-4 bg-green-50 rounded-lg">
-              <p className="text-2xl font-bold text-green-600">8.5%</p>
-              <p className="text-sm text-gray-600">Annual Return</p>
+        <CardContent className="pt-0">
+          <div className="grid grid-cols-2 gap-4 mb-2">
+            <div className="text-center p-2 bg-white border border-black rounded-lg">
+              <p className="text-lg font-bold text-black">8.5%</p>
+              <p className="text-xs text-black">Annual Return</p>
             </div>
-            <div className="text-center p-4 bg-blue-50 rounded-lg">
-              <p className="text-2xl font-bold text-blue-600">95%</p>
-              <p className="text-sm text-gray-600">Capital Protection</p>
+            <div className="text-center p-2 bg-white border border-black rounded-lg">
+              <p className="text-lg font-bold text-black">95%</p>
+              <p className="text-xs text-black">Capital Protection</p>
             </div>
           </div>
-          <div className="mt-4 p-4 bg-gold bg-opacity-10 rounded-lg">
-            <div className="flex items-center space-x-2 mb-2">
-              <i className="fas fa-certificate text-gold"></i>
-              <span className="font-medium text-sm">Shariah Certified</span>
-            </div>
-            <p className="text-xs text-gray-600">
-              This investment is verified and approved by our Shariah Advisory Board
-            </p>
-          </div>
-          <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">Expected Monthly Return:</span>
-              <span className="font-semibold text-olive">
-                ₹{calculateReturns(investmentAmount).toFixed(0)}
-              </span>
-            </div>
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-black">Expected Monthly:</span>
+            <span className="font-semibold text-black">
+              ₹{calculateReturns(investmentAmount).toFixed(0)}
+            </span>
           </div>
         </CardContent>
       </Card>
 
       {/* Fund Details */}
-      <Card className="mx-4 mt-4 shadow-sm border border-gray-100">
-        <CardHeader>
-          <CardTitle>Barakah Equity Fund</CardTitle>
+      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
+        <CardHeader className="pb-2">
+          <CardTitle className="section-header text-black">Barakah Equity Fund</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
+        <CardContent className="pt-0">
+          <div className="space-y-1">
             <div className="flex justify-between">
-              <span className="text-gray-600">Fund Size</span>
-              <span className="font-medium">₹45.6 Cr</span>
+              <span className="text-black text-sm">Fund Size</span>
+              <span className="font-medium text-black text-sm">₹45.6 Cr</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">NAV</span>
-              <span className="font-medium text-green-600">₹12.45</span>
+              <span className="text-black text-sm">NAV</span>
+              <span className="font-medium text-black text-sm">₹12.45</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Expense Ratio</span>
-              <span className="font-medium">1.2%</span>
+              <span className="text-black text-sm">Expense Ratio</span>
+              <span className="font-medium text-black text-sm">1.2%</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Min Investment</span>
-              <span className="font-medium">₹1,000</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Units to be allocated</span>
-              <span className="font-medium">{(investmentAmount / 12.45).toFixed(2)}</span>
+              <span className="text-black text-sm">Units to be allocated</span>
+              <span className="font-medium text-black text-sm">{(investmentAmount / 12.45).toFixed(2)}</span>
             </div>
           </div>
         </CardContent>
@@ -135,13 +120,13 @@ export default function Invest() {
       {/* Investment CTA */}
       <div className="mx-4 mt-4 mb-6">
         <Button 
-          className="w-full bg-olive text-white hover:bg-olive/90 py-4 text-lg font-semibold shadow-lg"
+          className="btn-primary"
           onClick={handleInvestment}
           disabled={investmentMutation.isPending}
         >
           {investmentMutation.isPending ? "Processing..." : "Confirm Investment"}
         </Button>
-        <p className="text-center text-xs text-gray-500 mt-2">
+        <p className="text-center text-xs text-black mt-2">
           By investing, you agree to our terms and Shariah compliance guidelines
         </p>
       </div>

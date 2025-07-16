@@ -10,11 +10,11 @@ export default function NavChart() {
 
   if (isLoading) {
     return (
-      <Card className="mx-4 mt-4 shadow-sm border border-gray-100">
-        <CardContent className="p-6">
+      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
+        <CardContent className="p-4">
           <div className="animate-pulse">
             <div className="h-4 bg-gray-200 rounded w-1/3 mb-4"></div>
-            <div className="h-32 bg-gray-200 rounded"></div>
+            <div className="h-16 bg-gray-200 rounded"></div>
           </div>
         </CardContent>
       </Card>
@@ -32,11 +32,11 @@ export default function NavChart() {
   }
 
   return (
-    <Card className="mx-4 mt-4 shadow-sm border border-gray-100">
-      <CardHeader className="flex flex-row items-center justify-between pb-4">
-        <CardTitle>NAV Performance</CardTitle>
+    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
+      <CardHeader className="flex flex-row items-center justify-between pb-2">
+        <CardTitle className="section-header text-black">NAV Performance</CardTitle>
         <Select defaultValue="1M">
-          <SelectTrigger className="w-16 text-sm">
+          <SelectTrigger className="w-16 text-sm border-black">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -47,34 +47,34 @@ export default function NavChart() {
           </SelectContent>
         </Select>
       </CardHeader>
-      <CardContent>
-        <div className="chart-container mb-4">
-          <svg className="w-full h-full" viewBox="0 0 300 120">
+      <CardContent className="pt-0">
+        <div className="chart-container mb-2" style={{ height: '60px' }}>
+          <svg className="w-full h-full" viewBox="0 0 300 60">
             <polyline 
-              points="20,100 50,85 80,90 110,70 140,75 170,60 200,65 230,45 260,50 290,35" 
-              stroke="#059669" 
+              points="20,50 50,42 80,45 110,35 140,37 170,30 200,32 230,22 260,25 290,17" 
+              stroke="#000000" 
               strokeWidth="2" 
               fill="none"
             />
-            <circle cx="290" cy="35" r="3" fill="#059669"/>
+            <circle cx="290" cy="17" r="2" fill="#000000"/>
           </svg>
         </div>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-2">
           <div className="text-center">
-            <p className="text-xs text-gray-500">Current NAV</p>
-            <p className="font-semibold text-olive">
+            <p className="text-xs text-black">Current NAV</p>
+            <p className="font-semibold text-black text-xs">
               ₹{currentNav?.navValue || "12.45"}
             </p>
           </div>
           <div className="text-center">
-            <p className="text-xs text-gray-500">Change</p>
-            <p className={`font-semibold ${changePercent >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            <p className="text-xs text-black">Change</p>
+            <p className="font-semibold text-black text-xs">
               {changePercent >= 0 ? '+' : ''}{changePercent.toFixed(2)}%
             </p>
           </div>
           <div className="text-center">
-            <p className="text-xs text-gray-500">52W High</p>
-            <p className="font-semibold text-green-600">₹13.20</p>
+            <p className="text-xs text-black">52W High</p>
+            <p className="font-semibold text-black text-xs">₹13.20</p>
           </div>
         </div>
       </CardContent>

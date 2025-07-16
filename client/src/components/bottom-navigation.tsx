@@ -28,19 +28,19 @@ export default function BottomNavigation() {
                 isDashboard && isActive ? 'dashboard-active' : ''
               }`}>
                 {isDashboard && isActive ? (
-                  <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center -mt-2">
-                    <Icon className="text-olive text-xl" size={20} />
+                  <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center -mt-2">
+                    <Icon className="text-white text-xl" size={20} />
                   </div>
                 ) : (
                   <Icon 
                     className={`text-xl ${
-                      isActive ? 'text-gold' : 'text-charcoal'
+                      isActive ? 'text-white bg-black p-1 rounded' : 'text-black'
                     }`} 
                     size={20} 
                   />
                 )}
                 <span className={`text-xs font-medium ${
-                  isActive ? 'text-gold' : 'text-charcoal'
+                  isActive ? 'text-black' : 'text-black'
                 }`}>
                   {item.label}
                 </span>

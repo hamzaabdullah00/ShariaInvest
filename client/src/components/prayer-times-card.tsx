@@ -14,11 +14,11 @@ export default function PrayerTimesCard() {
 
   if (isLoading) {
     return (
-      <Card className="mx-4 mt-4 shadow-sm border border-gray-100">
-        <CardContent className="p-6">
+      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
+        <CardContent className="p-4">
           <div className="animate-pulse">
             <div className="h-4 bg-gray-200 rounded w-1/3 mb-4"></div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-4 gap-2">
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="text-center">
                   <div className="h-3 bg-gray-200 rounded w-12 mx-auto mb-2"></div>
@@ -33,36 +33,36 @@ export default function PrayerTimesCard() {
   }
 
   return (
-    <Card className="mx-4 mt-4 shadow-sm border border-gray-100">
-      <CardHeader className="pb-4">
-        <CardTitle className="flex items-center justify-between">
-          <span>{translations.prayer_times || "Prayer Times"}</span>
-          <i className="fas fa-mosque text-olive"></i>
+    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
+      <CardHeader className="pb-2">
+        <CardTitle className="flex items-center justify-between text-black">
+          <span className="section-header">{translations.prayer_times || "Prayer Times"}</span>
+          <i className="fas fa-mosque text-black"></i>
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-0">
         {prayerTimes && (
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-4 gap-2 mb-2">
             <div className="text-center">
-              <p className="text-sm text-gray-500">Fajr</p>
-              <p className="font-semibold text-olive">{prayerTimes.fajr}</p>
+              <p className="text-xs text-black">Fajr</p>
+              <p className="font-semibold text-black text-xs">{prayerTimes.fajr}</p>
             </div>
             <div className="text-center">
-              <p className="text-sm text-gray-500">Dhuhr</p>
-              <p className="font-semibold text-olive">{prayerTimes.dhuhr}</p>
+              <p className="text-xs text-black">Dhuhr</p>
+              <p className="font-semibold text-black text-xs">{prayerTimes.dhuhr}</p>
             </div>
             <div className="text-center">
-              <p className="text-sm text-gray-500">Asr</p>
-              <p className="font-semibold text-olive">{prayerTimes.asr}</p>
+              <p className="text-xs text-black">Asr</p>
+              <p className="font-semibold text-black text-xs">{prayerTimes.asr}</p>
             </div>
             <div className="text-center">
-              <p className="text-sm text-gray-500">Maghrib</p>
-              <p className="font-semibold text-olive">{prayerTimes.maghrib}</p>
+              <p className="text-xs text-black">Maghrib</p>
+              <p className="font-semibold text-black text-xs">{prayerTimes.maghrib}</p>
             </div>
           </div>
         )}
-        <Button className="w-full bg-olive text-white hover:bg-olive/90">
-          <MapPin className="w-4 h-4 mr-2" />
+        <Button className="w-full h-8 bg-black text-white hover:bg-white hover:text-black hover:border-black border text-xs" style={{ height: '32px' }}>
+          <MapPin className="w-3 h-3 mr-1" />
           {translations.find_mosque || "Find Nearest Mosque"}
         </Button>
       </CardContent>

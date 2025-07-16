@@ -1,57 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: hsl(48, 20%, 97%);
-  --foreground: hsl(20, 14.3%, 4.1%);
-  --muted: hsl(60, 4.8%, 95.9%);
-  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(0, 0%, 0%);
+  --muted: hsl(0, 0%, 96%);
+  --muted-foreground: hsl(0, 0%, 45%);
   --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --popover-foreground: hsl(0, 0%, 0%);
   --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(20, 14.3%, 4.1%);
-  --border: hsl(20, 5.9%, 90%);
-  --input: hsl(20, 5.9%, 90%);
-  --primary: hsl(82, 20%, 24%);
-  --primary-foreground: hsl(48, 20%, 97%);
-  --secondary: hsl(0, 0%, 17%);
-  --secondary-foreground: hsl(48, 20%, 97%);
-  --accent: hsl(41, 35%, 60%);
-  --accent-foreground: hsl(82, 20%, 24%);
+  --card-foreground: hsl(0, 0%, 0%);
+  --border: hsl(0, 0%, 0%);
+  --input: hsl(0, 0%, 100%);
+  --primary: hsl(0, 0%, 0%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(0, 0%, 96%);
+  --secondary-foreground: hsl(0, 0%, 0%);
+  --accent: hsl(0, 0%, 96%);
+  --accent-foreground: hsl(0, 0%, 0%);
   --destructive: hsl(0, 84.2%, 60.2%);
-  --destructive-foreground: hsl(60, 9.1%, 97.8%);
-  --ring: hsl(20, 14.3%, 4.1%);
-  --radius: 0.5rem;
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(0, 0%, 0%);
+  --radius: 8px;
   
-  /* Custom Barakah colors */
-  --olive: hsl(82, 20%, 24%);
-  --charcoal: hsl(0, 0%, 17%);
-  --gold: hsl(41, 35%, 60%);
-  --sand: hsl(48, 20%, 97%);
+  /* Black & White Design System */
+  --black: hsl(0, 0%, 0%);
+  --white: hsl(0, 0%, 100%);
 }
 
 .dark {
-  --background: hsl(240, 10%, 3.9%);
-  --foreground: hsl(0, 0%, 98%);
-  --muted: hsl(240, 3.7%, 15.9%);
-  --muted-foreground: hsl(240, 5%, 64.9%);
-  --popover: hsl(240, 10%, 3.9%);
-  --popover-foreground: hsl(0, 0%, 98%);
-  --card: hsl(240, 10%, 3.9%);
-  --card-foreground: hsl(0, 0%, 98%);
-  --border: hsl(240, 3.7%, 15.9%);
-  --input: hsl(240, 3.7%, 15.9%);
-  --primary: hsl(82, 20%, 24%);
-  --primary-foreground: hsl(48, 20%, 97%);
-  --secondary: hsl(240, 3.7%, 15.9%);
-  --secondary-foreground: hsl(0, 0%, 98%);
-  --accent: hsl(240, 3.7%, 15.9%);
-  --accent-foreground: hsl(0, 0%, 98%);
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(0, 0%, 0%);
+  --muted: hsl(0, 0%, 96%);
+  --muted-foreground: hsl(0, 0%, 45%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(0, 0%, 0%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(0, 0%, 0%);
+  --border: hsl(0, 0%, 0%);
+  --input: hsl(0, 0%, 100%);
+  --primary: hsl(0, 0%, 0%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(0, 0%, 96%);
+  --secondary-foreground: hsl(0, 0%, 0%);
+  --accent: hsl(0, 0%, 96%);
+  --accent-foreground: hsl(0, 0%, 0%);
   --destructive: hsl(0, 62.8%, 30.6%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(240, 4.9%, 83.9%);
-  --radius: 0.5rem;
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(0, 0%, 0%);
+  --radius: 8px;
 }
 
 @layer base {
@@ -65,46 +65,29 @@
   }
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-.bg-olive {
-  background-color: var(--olive);
+/* Black & White Design System Classes */
+.bg-black {
+  background-color: var(--black);
 }
 
-.bg-charcoal {
-  background-color: var(--charcoal);
+.bg-white {
+  background-color: var(--white);
 }
 
-.bg-gold {
-  background-color: var(--gold);
+.text-black {
+  color: var(--black);
 }
 
-.bg-sand {
-  background-color: var(--sand);
+.text-white {
+  color: var(--white);
 }
 
-.text-olive {
-  color: var(--olive);
+.border-black {
+  border-color: var(--black);
 }
 
-.text-charcoal {
-  color: var(--charcoal);
-}
-
-.text-gold {
-  color: var(--gold);
-}
-
-.text-sand {
-  color: var(--sand);
-}
-
-.border-olive {
-  border-color: var(--olive);
-}
-
-.border-gold {
-  border-color: var(--gold);
+.border-white {
+  border-color: var(--white);
 }
 
 /* Custom slider styles */
@@ -113,9 +96,9 @@
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background: var(--olive);
+  background: var(--black);
   cursor: pointer;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--white);
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
@@ -123,9 +106,9 @@
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background: var(--olive);
+  background: var(--black);
   cursor: pointer;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--white);
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
@@ -134,7 +117,7 @@
   max-width: 448px;
   margin: 0 auto;
   min-height: 100vh;
-  background: white;
+  background: var(--white);
   position: relative;
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
@@ -147,8 +130,8 @@
   transform: translateX(-50%);
   width: 100%;
   max-width: 448px;
-  background: white;
-  border-top: 1px solid hsl(20, 5.9%, 90%);
+  background: var(--white);
+  border-top: 1px solid var(--black);
   z-index: 50;
 }
 
@@ -156,7 +139,7 @@
 .screen-content {
   padding-bottom: 80px;
   min-height: 100vh;
-  background: var(--sand);
+  background: var(--white);
 }
 
 /* Animation classes */
@@ -176,8 +159,9 @@
 /* Chart container */
 .chart-container {
   height: 120px;
-  background: linear-gradient(to top, #f0fdf4, #dcfce7);
-  border-radius: 0.5rem;
+  background: var(--white);
+  border: 1px solid var(--black);
+  border-radius: 8px;
   position: relative;
   overflow: hidden;
 }
@@ -185,4 +169,50 @@
 /* Progress bar styles */
 .progress-bar {
   transition: width 0.3s ease;
+}
+
+/* Button styles */
+.btn-primary {
+  height: 48px;
+  width: 100%;
+  border-radius: 8px;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--white);
+  color: var(--black);
+  border: 1px solid var(--black);
+}
+
+.btn-primary:active {
+  background: var(--white);
+  color: var(--black);
+  border: 1px solid var(--black);
+}
+
+/* Card styles */
+.card-minimal {
+  background: var(--white);
+  border: 1px solid var(--black);
+  border-radius: 8px;
+  padding: 16px;
+  height: 120px;
+  margin: 16px;
+}
+
+/* Grid spacing */
+.grid-16 {
+  gap: 16px;
+}
+
+/* Section headers */
+.section-header {
+  color: var(--black);
+  font-weight: 600;
+  margin-bottom: 16px;
 }
