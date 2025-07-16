@@ -1,0 +1,119 @@
+Project Name: Barakah – Shariah‑Compliant Communal Investment & Social Platform
+Platform: Begin implementation in Replit (React Native or Flutter) for rapid prototyping.
+Target Audience: Indian Muslim middle‑class community
+
+1. Architecture & Tooling
+
+Use React Native (Expo) or Flutter in Replit for a cross‑platform mobile build.
+
+Set up a mock backend (e.g. Replit’s built‑in database or Firebase emulator) with JSON endpoints for fund data, NGOs, forums, mosque locations.
+
+Include user authentication & KYC stub workflows.
+
+2. Bottom Navigation Bar
+
+Fixed at bottom on every screen. Five evenly spaced icons labeled:
+
+Home (house icon)
+
+Invest (coin-stack icon)
+
+Dashboard (center, highlighted – chart icon)
+
+Community (chat-bubble icon)
+
+Profile (user-avatar icon)
+
+Active icon uses Gold accent (#C9A66B) on Dark Olive (#3A4A32); inactive icons in charcoal (#2B2B2B).
+
+3. Screens & Flows
+
+Splash & Onboarding
+
+Barakah logo animation in Dark Olive + charcoal. Language picker (English, Urdu, Hindi, Tamil, Telugu, Bengali).
+
+Home
+
+Welcome banner + “Find a Mosque & Prayer Times” card.
+
+Quick‑links: Invest, Zakat, Forums.
+
+Invest
+
+Slider or input for amount → shows projected profit share + capital protection %.
+
+“Confirm Investment” CTA.
+
+Dashboard (center tab)
+
+Line chart of Barakah fund NAV history; KPI badges (Current NAV, Month Δ%).
+
+Recent transaction list (Investments & Zakat).
+
+Community
+
+Forum rooms (Finance Q&A, Local Events, Culture, Education).
+
+Search bar + “New Room” button.
+
+Profile
+
+User info, language switcher, notification settings, payment methods, security.
+
+4. Secondary Features
+
+Zakat & Grants: Accessible via Invest or Dashboard screen “Give Zakat” CTA—carousel of vetted NGOs with progress bars and “Donate” buttons.
+
+Find a Mosque: Embedded map view with nearest mosques, prayer times, Azaan playback.
+
+Forum Threads: Thread list, nested replies, upvotes.
+
+5. Design Guidelines
+
+Color Palette:
+
+Primary: Dark Olive Green (#3A4A32)
+
+Secondary: Charcoal (#2B2B2B)
+
+Accent: Gold (#C9A66B)
+
+Background: Light Sand (#F5F1E8)
+
+Typography: Poppins or Nunito, clean sans‑serif.
+
+Layout: One feature per screen; bottom nav persists. Generous whitespace, card‑style content.
+
+Dummy Data: Preload each screen with 2–3 sample entries (fund data points, NGOs, threads, mosques).
+
+6. Replit Instructions
+
+Create a new React Native or Flutter Replit named “Barakah.”
+
+Scaffold bottom-tab navigation (e.g. React Navigation or Flutter’s BottomNavigationBar).
+
+Build each screen UI with placeholder JSON data.
+
+Centralize language picker and theming variables in a config file.
+
+Commit early & preview on your device/emulator within Replit.
+
+7. Deliverables
+
+A working Barakah prototype in Replit with bottom‑nav and all 6 screens.
+
+Mock JSON API endpoints.
+
+README: how to run, switch language, and where to edit theme colors.
+
+Alternative Platforms to Explore
+
+FlutterFlow: Visual builder + Firebase.
+
+Adalo/Bubble: No‑code with custom logic.
+
+Thunkable: Map & media-friendly.
+
+Glide: Spreadsheet-driven MVP.
+
+Draftbit: React Native visual editor.
