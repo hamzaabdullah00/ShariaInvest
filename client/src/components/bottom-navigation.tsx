@@ -19,26 +19,17 @@ export default function BottomNavigation() {
       <div className="flex justify-between items-center px-4 py-2">
         {navItems.map((item, index) => {
           const isActive = location === item.path;
-          const isDashboard = item.path === "/dashboard";
           const Icon = item.icon;
 
           return (
             <Link key={item.path} href={item.path} className="nav-item">
-              <button className={`flex flex-col items-center space-y-1 px-2 py-2 ${
-                isDashboard && isActive ? 'dashboard-active' : ''
-              }`}>
-                {isDashboard && isActive ? (
-                  <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center -mt-2">
-                    <Icon className="text-white text-xl" size={20} />
-                  </div>
-                ) : (
-                  <Icon 
-                    className={`text-xl ${
-                      isActive ? 'text-white bg-black p-1 rounded' : 'text-black'
-                    }`} 
-                    size={20} 
-                  />
-                )}
+              <button className="flex flex-col items-center space-y-1 px-2 py-2">
+                <Icon 
+                  className={`text-xl ${
+                    isActive ? 'text-white bg-black p-1 rounded' : 'text-black'
+                  }`} 
+                  size={20} 
+                />
                 <span className={`text-xs font-medium ${
                   isActive ? 'text-black' : 'text-black'
                 }`}>
