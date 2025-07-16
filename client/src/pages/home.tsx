@@ -59,11 +59,11 @@ export default function Home() {
       <PrayerTimesCard />
 
       {/* Quick Actions */}
-      <div className="mx-4 mt-4">
+      <div className="mx-4 mt-4 mb-4">
         <h4 className="section-header text-black">
           {translations.quick_actions || "Quick Actions"}
         </h4>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <Link href="/invest">
             <Button variant="outline" className="h-12 bg-white border-black text-black hover:bg-black hover:text-white flex items-center justify-center">
               <i className="fas fa-coins text-black mr-2"></i>
@@ -80,6 +80,10 @@ export default function Home() {
               <span className="text-sm font-medium">{translations.forums || "Forums"}</span>
             </Button>
           </Link>
+          <Button variant="outline" className="h-12 bg-white border-black text-black hover:bg-black hover:text-white flex items-center justify-center">
+            <i className="fas fa-mosque text-black mr-2"></i>
+            <span className="text-sm font-medium">{translations.mosque || "Mosque"}</span>
+          </Button>
         </div>
       </div>
 
