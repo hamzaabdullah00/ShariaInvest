@@ -57,29 +57,42 @@ export default function Dashboard() {
         </CardHeader>
         <CardContent className="pt-0 pb-4">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center">
-              <svg className="w-12 h-12" viewBox="0 0 42 42">
-                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#666" strokeWidth="2"/>
-                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#000" strokeWidth="2" strokeDasharray="35 65" strokeDashoffset="25"/>
-                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#000" strokeWidth="2" strokeDasharray="25 75" strokeDashoffset="60"/>
-                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#000" strokeWidth="2" strokeDasharray="20 80" strokeDashoffset="85"/>
+            <div className="w-16 h-16 flex items-center justify-center">
+              <svg className="w-16 h-16" viewBox="0 0 42 42">
+                {/* Doughnut chart segments */}
+                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#333" strokeWidth="3" strokeDasharray="35 65" strokeDashoffset="25" transform="rotate(-90 21 21)"/>
+                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#666" strokeWidth="3" strokeDasharray="25 75" strokeDashoffset="40" transform="rotate(-90 21 21)"/>
+                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#999" strokeWidth="3" strokeDasharray="20 80" strokeDashoffset="65" transform="rotate(-90 21 21)"/>
+                <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#ccc" strokeWidth="3" strokeDasharray="20 80" strokeDashoffset="85" transform="rotate(-90 21 21)"/>
               </svg>
             </div>
             <div className="flex-1 ml-4 space-y-1">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-black">Real Estate</span>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-gray-800 rounded-sm"></div>
+                  <span className="text-sm text-black">Real Estate</span>
+                </div>
                 <span className="text-sm font-medium text-black">35%</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-black">SMEs</span>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-gray-600 rounded-sm"></div>
+                  <span className="text-sm text-black">SMEs</span>
+                </div>
                 <span className="text-sm font-medium text-black">25%</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-black">Venture Capital</span>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-gray-400 rounded-sm"></div>
+                  <span className="text-sm text-black">Venture Capital</span>
+                </div>
                 <span className="text-sm font-medium text-black">20%</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-black">Innovation</span>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-gray-300 rounded-sm"></div>
+                  <span className="text-sm text-black">Innovation</span>
+                </div>
                 <span className="text-sm font-medium text-black">20%</span>
               </div>
             </div>
