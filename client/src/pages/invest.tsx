@@ -99,7 +99,7 @@ export default function Invest() {
       </div>
 
       {/* Fund Details */}
-      <Card className="mx-4 mb-6 border border-black rounded-lg" style={{ height: '160px' }}>
+      <Card className="mx-4 border border-black rounded-lg pt-[45px] pb-[45px] mt-[60px] mb-[60px]" style={{ height: '160px' }}>
         <CardHeader className="pb-2">
           <CardTitle className="section-header text-black">Barakah Equity Fund</CardTitle>
         </CardHeader>
