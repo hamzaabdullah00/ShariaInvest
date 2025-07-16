@@ -40,9 +40,8 @@ export default function Home() {
           <div className="w-8 h-8 bg-black rounded-full"></div>
         </div>
       </header>
-
       {/* Welcome Banner */}
-      <div className="bg-black mx-4 mt-4 rounded-lg p-6 text-white border border-black" style={{ height: '120px' }}>
+      <div className="bg-black mx-4 rounded-lg p-6 text-white border border-black mt-[7px] mb-[7px]" style={{ height: '120px' }}>
         <h3 className="text-xl font-semibold mb-2 text-white">
           {translations.welcome_to_barakah || "Welcome to Barakah"}
         </h3>
@@ -54,10 +53,8 @@ export default function Home() {
           <span className="text-sm text-white">100% Shariah Certified</span>
         </div>
       </div>
-
       {/* Prayer Times Card */}
       <PrayerTimesCard />
-
       {/* Quick Actions */}
       <div className="mx-4 mb-6">
         <h4 className="section-header text-black mb-4">
@@ -86,7 +83,6 @@ export default function Home() {
           </Button>
         </div>
       </div>
-
       {/* Recent Activity */}
       <Card className="mx-4 mb-8 border border-black rounded-lg" style={{ height: '160px' }}>
         <CardHeader className="pb-2">
