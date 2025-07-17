@@ -130,12 +130,12 @@ Preferred communication style: Simple, everyday language.
 
 ### Dashboard Card Layout Improvements
 - **Increased Vertical Padding**: Enhanced all dashboard cards with improved padding (pt-6, pb-6)
-- **Portfolio Overview**: Expanded height from 140px to 160px with increased padding (p-8)
+- **Portfolio Overview**: Expanded height from 140px to 180px with increased padding (p-8) and proper enclosure of gain text
 - **Asset Allocation**: Increased height from 180px to 200px with better spacing
 - **Recent Transactions**: Enhanced height to 240px with improved content area (200px max-height)
 - **Fund Summary**: Expanded to 180px min-height with proper padding
 - **Vertical Scrolling**: Enhanced screen-content with proper overflow handling and extended bottom padding (100px)
-- **Consistent Spacing**: Standardized mt-2 mb-2 pattern across all cards for uniform visual rhythm
+- **Enhanced Card Spacing**: Increased spacing between cards from 8px to 24px (mt-6 mb-6) for better visual separation
 
 ### Scalability Considerations
 - **Database**: Serverless PostgreSQL with connection pooling

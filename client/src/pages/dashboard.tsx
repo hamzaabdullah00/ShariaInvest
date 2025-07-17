@@ -26,9 +26,9 @@ export default function Dashboard() {
   return (
     <div className="screen-content pb-20">
       {/* Portfolio Overview */}
-      <div className="bg-black mx-4 mt-4 rounded-lg p-8 text-white border border-black" style={{ height: '160px' }}>
+      <div className="bg-black mx-4 mt-4 rounded-lg p-8 text-white border border-black" style={{ height: '180px' }}>
         <h3 className="text-lg font-semibold mb-4 text-white">Investment Summary</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 mb-6">
           <div>
             <p className="text-white opacity-80 text-sm">Total Investment</p>
             <p className="text-2xl font-bold text-white">₹{totalInvestment.toLocaleString()}</p>
@@ -38,7 +38,7 @@ export default function Dashboard() {
             <p className="text-2xl font-bold text-white">₹{Math.round(currentValue).toLocaleString()}</p>
           </div>
         </div>
-        <div className="mt-4 flex items-center space-x-2">
+        <div className="flex items-center space-x-2 pb-2">
           <i className="fas fa-arrow-up text-white"></i>
           <span className="text-white font-medium">
             +{gainPercent.toFixed(2)}% (₹{Math.round(gainAmount).toLocaleString()})
