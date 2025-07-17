@@ -62,7 +62,7 @@ export default function NavChart() {
 
   if (isLoading) {
     return (
-      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '240px' }}>
+      <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ height: '260px' }}>
         <CardContent className="p-4">
           <div className="animate-pulse">
             <div className="h-4 bg-gray-200 rounded w-1/3 mb-4"></div>
@@ -75,7 +75,7 @@ export default function NavChart() {
 
   if (!navData || navData.length === 0) {
     return (
-      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '240px' }}>
+      <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ height: '260px' }}>
         <CardContent className="p-4">
           <div className="text-center text-gray-500">No data available</div>
         </CardContent>
@@ -113,7 +113,7 @@ export default function NavChart() {
   const high52W = Math.max(...values);
 
   return (
-    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '240px' }}>
+    <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ height: '260px' }}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="section-header text-black">NAV Performance</CardTitle>
         <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
@@ -128,8 +128,8 @@ export default function NavChart() {
           </SelectContent>
         </Select>
       </CardHeader>
-      <CardContent className="pt-0 pb-4">
-        <div className="relative chart-container mb-4" style={{ height: '120px' }}>
+      <CardContent className="pt-0 pb-6">
+        <div className="relative chart-container mb-6" style={{ height: '120px' }}>
           <svg 
             ref={chartRef}
             className="w-full h-full cursor-crosshair" 
@@ -232,21 +232,21 @@ export default function NavChart() {
           )}
         </div>
         
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-4 px-2">
           <div className="text-center">
-            <p className="text-xs text-black">Current NAV</p>
+            <p className="text-xs text-black mb-1">Current NAV</p>
             <p className="font-semibold text-black text-xs">
               ₹{currentNav?.navValue || "12.45"}
             </p>
           </div>
           <div className="text-center">
-            <p className="text-xs text-black">Change</p>
+            <p className="text-xs text-black mb-1">Day Change</p>
             <p className={`font-semibold text-xs ${changePercent >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               {changePercent >= 0 ? '+' : ''}{changePercent.toFixed(2)}%
             </p>
           </div>
           <div className="text-center">
-            <p className="text-xs text-black">52W High</p>
+            <p className="text-xs text-black mb-1">52W High</p>
             <p className="font-semibold text-black text-xs">₹{high52W.toFixed(2)}</p>
           </div>
         </div>
