@@ -113,8 +113,20 @@ Preferred communication style: Simple, everyday language.
 - **Runtime Error Overlay**: Development error modal integration
 - **Cartographer Plugin**: Replit-specific development tools
 - **Banner Integration**: Development environment identification
-- **Migration Status**: Successfully migrated from Replit Agent to Replit environment (July 16, 2025)
+- **Migration Status**: Successfully migrated from Replit Agent to Replit environment (July 17, 2025)
 - **Security**: Client-server separation implemented with robust security practices
+
+## Recent Changes (July 17, 2025)
+
+### Enhanced NAV Performance Chart
+- **Interactive Line Chart**: Replaced basic mock chart with fully interactive line chart
+- **Time Horizon Selection**: Added 1W, 1M, 3M, 1Y period selection with backend support
+- **Movable Guide Line**: Implemented vertical guide line that follows mouse movement
+- **Real-time Tooltips**: Shows exact NAV value and formatted date on hover
+- **Expanded Layout**: Increased card height to 240px with 120px chart area for better proportions
+- **Visual Improvements**: Grey-toned color scheme (#666, #999, #333), subtle grid lines, area fill
+- **Data Generation**: Enhanced backend with realistic NAV data generation (365 days with volatility)
+- **Responsive Design**: Proper scaling and positioning for mobile-first approach
 
 ### Scalability Considerations
 - **Database**: Serverless PostgreSQL with connection pooling

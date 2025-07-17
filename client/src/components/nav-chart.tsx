@@ -22,7 +22,7 @@ export default function NavChart() {
     const rect = chartRef.current.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const chartWidth = 260; // 300 - 40 for padding
-    const chartHeight = 60;
+    const chartHeight = 100; // Updated height
     
     // Calculate the closest data point
     const dataPointWidth = chartWidth / (navData.length - 1);
@@ -38,7 +38,7 @@ export default function NavChart() {
       const maxValue = Math.max(...values);
       const valueRange = maxValue - minValue || 1;
       const navValue = parseFloat(dataPoint.navValue);
-      const pointY = 10 + ((maxValue - navValue) / valueRange) * (chartHeight - 20);
+      const pointY = 15 + ((maxValue - navValue) / valueRange) * (chartHeight - 30);
       
       setHoveredPoint({ x: pointX, y: pointY, data: dataPoint });
       setGuideLine(pointX);
@@ -62,11 +62,11 @@ export default function NavChart() {
 
   if (isLoading) {
     return (
-      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '180px' }}>
+      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '240px' }}>
         <CardContent className="p-4">
           <div className="animate-pulse">
             <div className="h-4 bg-gray-200 rounded w-1/3 mb-4"></div>
-            <div className="h-16 bg-gray-200 rounded"></div>
+            <div className="h-32 bg-gray-200 rounded"></div>
           </div>
         </CardContent>
       </Card>
@@ -75,7 +75,7 @@ export default function NavChart() {
 
   if (!navData || navData.length === 0) {
     return (
-      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '180px' }}>
+      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '240px' }}>
         <CardContent className="p-4">
           <div className="text-center text-gray-500">No data available</div>
         </CardContent>
@@ -101,11 +101,11 @@ export default function NavChart() {
 
   // Generate chart points
   const chartWidth = 260; // 300 - 40 for padding
-  const chartHeight = 60;
+  const chartHeight = 100; // Increased height for better visibility
   const points = navData.map((item, index) => {
     const x = 20 + (index * chartWidth / (navData.length - 1));
     const navValue = parseFloat(item.navValue);
-    const y = 10 + ((maxValue - navValue) / valueRange) * (chartHeight - 20);
+    const y = 15 + ((maxValue - navValue) / valueRange) * (chartHeight - 30);
     return `${x},${y}`;
   }).join(' ');
 
@@ -113,7 +113,7 @@ export default function NavChart() {
   const high52W = Math.max(...values);
 
   return (
-    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '180px' }}>
+    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '240px' }}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="section-header text-black">NAV Performance</CardTitle>
         <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
@@ -128,19 +128,19 @@ export default function NavChart() {
           </SelectContent>
         </Select>
       </CardHeader>
-      <CardContent className="pt-0">
-        <div className="relative chart-container mb-2" style={{ height: '80px' }}>
+      <CardContent className="pt-0 pb-4">
+        <div className="relative chart-container mb-4" style={{ height: '120px' }}>
           <svg 
             ref={chartRef}
             className="w-full h-full cursor-crosshair" 
-            viewBox="0 0 300 80"
+            viewBox="0 0 300 120"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
             {/* Grid lines for better readability */}
             <defs>
-              <pattern id="grid" width="50" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 50 0 L 0 0 0 20" fill="none" stroke="#f0f0f0" strokeWidth="0.5"/>
+              <pattern id="grid" width="50" height="24" patternUnits="userSpaceOnUse">
+                <path d="M 50 0 L 0 0 0 24" fill="none" stroke="#f0f0f0" strokeWidth="0.5"/>
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#grid)" />
@@ -149,14 +149,14 @@ export default function NavChart() {
             <polyline 
               points={points}
               stroke="#666" 
-              strokeWidth="2" 
+              strokeWidth="2.5" 
               fill="none"
               style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' }}
             />
             
             {/* Area fill under the line */}
             <polygon
-              points={`20,70 ${points} ${20 + chartWidth},70`}
+              points={`20,100 ${points} ${20 + chartWidth},100`}
               fill="url(#gradient)"
               opacity="0.1"
             />
@@ -173,9 +173,9 @@ export default function NavChart() {
             {guideLine && (
               <line
                 x1={guideLine}
-                y1="10"
+                y1="15"
                 x2={guideLine}
-                y2="70"
+                y2="100"
                 stroke="#999"
                 strokeWidth="1"
                 strokeDasharray="3,3"
@@ -187,13 +187,13 @@ export default function NavChart() {
             {navData.map((item, index) => {
               const x = 20 + (index * chartWidth / (navData.length - 1));
               const navValue = parseFloat(item.navValue);
-              const y = 10 + ((maxValue - navValue) / valueRange) * (chartHeight - 20);
+              const y = 15 + ((maxValue - navValue) / valueRange) * (chartHeight - 30);
               return (
                 <circle
                   key={index}
                   cx={x}
                   cy={y}
-                  r="2"
+                  r="2.5"
                   fill="#666"
                   opacity={hoveredPoint?.x === x ? 1 : 0.7}
                 />
@@ -205,7 +205,7 @@ export default function NavChart() {
               <circle
                 cx={hoveredPoint.x}
                 cy={hoveredPoint.y}
-                r="4"
+                r="5"
                 fill="#333"
                 stroke="#fff"
                 strokeWidth="2"
@@ -219,7 +219,7 @@ export default function NavChart() {
               className="absolute z-10 bg-white border border-gray-300 rounded-lg p-2 text-xs shadow-lg pointer-events-none"
               style={{
                 left: `${(hoveredPoint.x / 300) * 100}%`,
-                top: `${(hoveredPoint.y / 80) * 100}%`,
+                top: `${(hoveredPoint.y / 120) * 100}%`,
                 transform: 'translate(-50%, -120%)',
                 minWidth: '80px'
               }}
