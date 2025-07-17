@@ -22,7 +22,7 @@ export default function NavChart() {
     const rect = chartRef.current.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const chartWidth = 260; // 300 - 40 for padding
-    const chartHeight = 100; // Updated height
+    const chartHeight = 140; // Updated height
     
     // Calculate the closest data point
     const dataPointWidth = chartWidth / (navData.length - 1);
@@ -38,7 +38,7 @@ export default function NavChart() {
       const maxValue = Math.max(...values);
       const valueRange = maxValue - minValue || 1;
       const navValue = parseFloat(dataPoint.navValue);
-      const pointY = 15 + ((maxValue - navValue) / valueRange) * (chartHeight - 30);
+      const pointY = 20 + ((maxValue - navValue) / valueRange) * (chartHeight - 40);
       
       setHoveredPoint({ x: pointX, y: pointY, data: dataPoint });
       setGuideLine(pointX);
@@ -113,7 +113,7 @@ export default function NavChart() {
   const high52W = Math.max(...values);
 
   return (
-    <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '320px' }}>
+    <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '340px' }}>
       <CardHeader className="flex flex-row items-center justify-between pb-3 pt-6 px-6">
         <CardTitle className="section-header text-black">NAV Performance</CardTitle>
         <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
@@ -129,7 +129,7 @@ export default function NavChart() {
         </Select>
       </CardHeader>
       <CardContent className="pt-0 pb-8 px-6">
-        <div className="relative chart-container pt-[10px] pb-[10px] mt-[15px] mb-[15px] pl-[10px] pr-[10px]" style={{ height: '160px' }}>
+        <div className="relative chart-container pt-[30px] pb-[10px] mt-[15px] mb-[15px] pl-[10px] pr-[10px] overflow-visible" style={{ height: '160px' }}>
           <svg 
             ref={chartRef}
             className="w-full h-full cursor-crosshair" 
@@ -219,8 +219,8 @@ export default function NavChart() {
               className="absolute z-10 bg-white border border-gray-300 rounded-lg p-2 text-xs shadow-lg pointer-events-none"
               style={{
                 left: `${(hoveredPoint.x / 300) * 100}%`,
-                top: `${(hoveredPoint.y / 160) * 100}%`,
-                transform: 'translate(-50%, -120%)',
+                top: `${Math.max(0, (hoveredPoint.y / 160) * 100 - 15)}%`,
+                transform: 'translate(-50%, -100%)',
                 minWidth: '80px'
               }}
             >
