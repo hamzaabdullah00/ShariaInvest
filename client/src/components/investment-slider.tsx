@@ -36,13 +36,13 @@ export default function InvestmentSlider({
   };
 
   return (
-    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '200px' }}>
-      <CardHeader className="flex flex-col space-y-1.5 p-6 mt-[-4px] mb-[-4px] pt-[18px] pb-[12px]">
+    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '220px' }}>
+      <CardHeader className="flex flex-col space-y-1.5 px-6 pt-4 pb-2">
         <CardTitle className="section-header text-black">Investment Amount</CardTitle>
       </CardHeader>
-      <CardContent className="p-6 pt-0 mt-[-20px] mb-[-20px]">
+      <CardContent className="px-6 pt-0 pb-4">
         <div className="text-center">
-          <div className="text-2xl font-bold text-black mb-2">
+          <div className="text-2xl font-bold text-black mb-3">
             {formatAmount(amount)}
           </div>
           <Slider
@@ -59,29 +59,27 @@ export default function InvestmentSlider({
           </div>
           
           {/* Manual Entry Section */}
-          <div className="mt-4 space-y-3">
+          <div className="mt-3 space-y-2">
             <Input
               type="number"
               placeholder="Enter amount manually"
               value={manualAmount}
               onChange={(e) => setManualAmount(e.target.value)}
-              className="w-full text-black border-black text-sm"
+              className="w-full text-black border-black text-sm h-8"
               min="1"
               step="1"
             />
             <div className="flex gap-2">
               <Button 
                 onClick={onManualEntry}
-                className="flex-1 bg-black text-white hover:bg-gray-800 border border-black"
-                size="sm"
+                className="flex-1 bg-black text-white hover:bg-gray-800 border border-black text-xs h-7"
               >
                 Enter
               </Button>
               <Button 
                 onClick={onManualReset}
                 variant="outline"
-                className="flex-1 border-black text-black hover:bg-gray-100"
-                size="sm"
+                className="flex-1 border-black text-black hover:bg-gray-100 text-xs h-7"
               >
                 Reset
               </Button>
