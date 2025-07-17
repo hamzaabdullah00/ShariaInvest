@@ -98,7 +98,7 @@ export default function Invest() {
       {/* Investment CTA */}
       <div className="mx-4 mb-8">
         <Button 
-          className="btn-primary mt-[55px] mb-[8px]"
+          className="btn-primary mt-[29.5px] mb-[29.5px]"
           onClick={handleInvestment}
           disabled={investmentMutation.isPending}
         >
