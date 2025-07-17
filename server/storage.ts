@@ -102,7 +102,7 @@ export class MemStorage implements IStorage {
     this.prayerTimes.set("Mumbai", prayerTime);
 
     // Seed NAV data
-    // Generate realistic NAV data for different time periods
+    // Generate realistic NAV data with consistent upward trend
     const generateNavData = () => {
       const navPoints: NavData[] = [];
       let currentId = 1;
@@ -113,12 +113,12 @@ export class MemStorage implements IStorage {
       for (let days = 365; days >= 0; days--) {
         const date = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
         
-        // Add some realistic volatility (±2% daily change)
-        const changePercent = (Math.random() - 0.5) * 0.04; // -2% to +2%
-        currentValue = Math.max(8.00, currentValue * (1 + changePercent));
+        // Add positive volatility (0% to +3% daily change)
+        const changePercent = Math.random() * 0.03; // 0% to +3%
+        currentValue = currentValue * (1 + changePercent);
         
-        // Add slight upward trend over time
-        const trendFactor = 1 + (0.002 * (365 - days) / 365); // Small positive trend
+        // Add consistent upward trend over time
+        const trendFactor = 1 + (0.003 * (365 - days) / 365); // Stronger positive trend
         currentValue *= trendFactor;
         
         navPoints.push({

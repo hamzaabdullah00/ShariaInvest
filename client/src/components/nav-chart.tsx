@@ -149,7 +149,7 @@ export default function NavChart() {
             <polyline 
               points={points}
               stroke="#666" 
-              strokeWidth="2.5" 
+              strokeWidth="3.5" 
               fill="none"
               style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' }}
             />
@@ -177,9 +177,9 @@ export default function NavChart() {
                 x2={guideLine}
                 y2="140"
                 stroke="#999"
-                strokeWidth="1"
+                strokeWidth="2"
                 strokeDasharray="3,3"
-                opacity="0.7"
+                opacity="0.8"
               />
             )}
             
@@ -219,8 +219,12 @@ export default function NavChart() {
               className="absolute z-10 bg-white border border-gray-300 rounded-lg p-2 text-xs shadow-lg pointer-events-none"
               style={{
                 left: `${(hoveredPoint.x / 300) * 100}%`,
-                top: `${Math.max(0, (hoveredPoint.y / 160) * 100 - 15)}%`,
-                transform: 'translate(-50%, -100%)',
+                top: hoveredPoint.y < 50 
+                  ? `${(hoveredPoint.y / 160) * 100 + 8}%`
+                  : `${Math.max(0, (hoveredPoint.y / 160) * 100 - 15)}%`,
+                transform: hoveredPoint.y < 50 
+                  ? 'translate(-50%, 0%)'
+                  : 'translate(-50%, -100%)',
                 minWidth: '80px'
               }}
             >
