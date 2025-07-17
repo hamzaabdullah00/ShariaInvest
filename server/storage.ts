@@ -102,13 +102,37 @@ export class MemStorage implements IStorage {
     this.prayerTimes.set("Mumbai", prayerTime);
 
     // Seed NAV data
-    const navDataPoints: NavData[] = [
-      { id: 1, fundName: "Barakah Equity Fund", navValue: "10.80", date: new Date(Date.now() - 180 * 24 * 60 * 60 * 1000) },
-      { id: 2, fundName: "Barakah Equity Fund", navValue: "11.20", date: new Date(Date.now() - 150 * 24 * 60 * 60 * 1000) },
-      { id: 3, fundName: "Barakah Equity Fund", navValue: "11.85", date: new Date(Date.now() - 120 * 24 * 60 * 60 * 1000) },
-      { id: 4, fundName: "Barakah Equity Fund", navValue: "12.10", date: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000) },
-      { id: 5, fundName: "Barakah Equity Fund", navValue: "12.45", date: new Date() },
-    ];
+    // Generate realistic NAV data for different time periods
+    const generateNavData = () => {
+      const navPoints: NavData[] = [];
+      let currentId = 1;
+      let currentValue = 10.00;
+      const now = new Date();
+      
+      // Generate data for 1 year with daily points
+      for (let days = 365; days >= 0; days--) {
+        const date = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
+        
+        // Add some realistic volatility (±2% daily change)
+        const changePercent = (Math.random() - 0.5) * 0.04; // -2% to +2%
+        currentValue = Math.max(8.00, currentValue * (1 + changePercent));
+        
+        // Add slight upward trend over time
+        const trendFactor = 1 + (0.002 * (365 - days) / 365); // Small positive trend
+        currentValue *= trendFactor;
+        
+        navPoints.push({
+          id: currentId++,
+          fundName: "Barakah Equity Fund",
+          navValue: currentValue.toFixed(2),
+          date: date
+        });
+      }
+      
+      return navPoints;
+    };
+
+    const navDataPoints = generateNavData();
     navDataPoints.forEach(data => this.navData.set(data.id, data));
 
     // Seed transactions

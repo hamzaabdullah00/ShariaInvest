@@ -120,7 +120,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/nav-data/:fundName", async (req, res) => {
     try {
       const fundName = req.params.fundName;
-      const limit = req.query.limit ? parseInt(req.query.limit as string) : 30;
+      const period = req.query.period as string || "1M";
+      let limit = 30;
+      
+      // Set limit based on period
+      switch (period) {
+        case "1W":
+          limit = 7;
+          break;
+        case "1M":
+          limit = 30;
+          break;
+        case "3M":
+          limit = 90;
+          break;
+        case "1Y":
+          limit = 365;
+          break;
+        default:
+          limit = 30;
+      }
+      
       const navData = await storage.getNavData(fundName, limit);
       res.json(navData);
     } catch (error) {

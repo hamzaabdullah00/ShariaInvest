@@ -1,16 +1,68 @@
+import { useState, useRef, useCallback, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { NavData } from "@shared/schema";
 
 export default function NavChart() {
+  const [selectedPeriod, setSelectedPeriod] = useState("1M");
+  const [hoveredPoint, setHoveredPoint] = useState<{ x: number; y: number; data: NavData } | null>(null);
+  const [guideLine, setGuideLine] = useState<number | null>(null);
+  const chartRef = useRef<SVGSVGElement>(null);
+  
   const { data: navData, isLoading } = useQuery<NavData[]>({
-    queryKey: ["/api/nav-data/Barakah Equity Fund"],
+    queryKey: ["/api/nav-data/Barakah Equity Fund", selectedPeriod],
+    queryFn: () => fetch(`/api/nav-data/Barakah Equity Fund?period=${selectedPeriod}`).then(res => res.json()),
   });
+
+  // Mouse interaction handlers
+  const handleMouseMove = useCallback((event: React.MouseEvent<SVGSVGElement>) => {
+    if (!chartRef.current || !navData || navData.length === 0) return;
+    
+    const rect = chartRef.current.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const chartWidth = 260; // 300 - 40 for padding
+    const chartHeight = 60;
+    
+    // Calculate the closest data point
+    const dataPointWidth = chartWidth / (navData.length - 1);
+    const dataIndex = Math.round(x / dataPointWidth);
+    
+    if (dataIndex >= 0 && dataIndex < navData.length) {
+      const dataPoint = navData[dataIndex];
+      const pointX = 20 + (dataIndex * dataPointWidth);
+      
+      // Calculate y position based on NAV value
+      const values = navData.map(d => parseFloat(d.navValue));
+      const minValue = Math.min(...values);
+      const maxValue = Math.max(...values);
+      const valueRange = maxValue - minValue || 1;
+      const navValue = parseFloat(dataPoint.navValue);
+      const pointY = 10 + ((maxValue - navValue) / valueRange) * (chartHeight - 20);
+      
+      setHoveredPoint({ x: pointX, y: pointY, data: dataPoint });
+      setGuideLine(pointX);
+    }
+  }, [navData]);
+
+  const handleMouseLeave = useCallback(() => {
+    setHoveredPoint(null);
+    setGuideLine(null);
+  }, []);
+
+  // Format date for tooltip
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-IN', { 
+      day: '2-digit', 
+      month: 'short',
+      year: selectedPeriod === '1Y' ? 'numeric' : undefined
+    });
+  };
 
   if (isLoading) {
     return (
-      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
+      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '180px' }}>
         <CardContent className="p-4">
           <div className="animate-pulse">
             <div className="h-4 bg-gray-200 rounded w-1/3 mb-4"></div>
@@ -21,8 +73,24 @@ export default function NavChart() {
     );
   }
 
-  const currentNav = navData && navData.length > 0 ? navData[navData.length - 1] : null;
-  const previousNav = navData && navData.length > 1 ? navData[navData.length - 2] : null;
+  if (!navData || navData.length === 0) {
+    return (
+      <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '180px' }}>
+        <CardContent className="p-4">
+          <div className="text-center text-gray-500">No data available</div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Calculate chart data
+  const values = navData.map(d => parseFloat(d.navValue));
+  const minValue = Math.min(...values);
+  const maxValue = Math.max(...values);
+  const valueRange = maxValue - minValue || 1;
+  
+  const currentNav = navData[navData.length - 1];
+  const previousNav = navData.length > 1 ? navData[navData.length - 2] : navData[0];
   
   let changePercent = 0;
   if (currentNav && previousNav) {
@@ -31,34 +99,139 @@ export default function NavChart() {
     changePercent = ((current - previous) / previous) * 100;
   }
 
+  // Generate chart points
+  const chartWidth = 260; // 300 - 40 for padding
+  const chartHeight = 60;
+  const points = navData.map((item, index) => {
+    const x = 20 + (index * chartWidth / (navData.length - 1));
+    const navValue = parseFloat(item.navValue);
+    const y = 10 + ((maxValue - navValue) / valueRange) * (chartHeight - 20);
+    return `${x},${y}`;
+  }).join(' ');
+
+  // Calculate 52W high (mock for now)
+  const high52W = Math.max(...values);
+
   return (
-    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
+    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '180px' }}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="section-header text-black">NAV Performance</CardTitle>
-        <Select defaultValue="1M">
+        <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
           <SelectTrigger className="w-16 text-sm border-black">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
+            <SelectItem value="1W">1W</SelectItem>
             <SelectItem value="1M">1M</SelectItem>
             <SelectItem value="3M">3M</SelectItem>
-            <SelectItem value="6M">6M</SelectItem>
             <SelectItem value="1Y">1Y</SelectItem>
           </SelectContent>
         </Select>
       </CardHeader>
       <CardContent className="pt-0">
-        <div className="chart-container mb-2" style={{ height: '60px' }}>
-          <svg className="w-full h-full" viewBox="0 0 300 60">
+        <div className="relative chart-container mb-2" style={{ height: '80px' }}>
+          <svg 
+            ref={chartRef}
+            className="w-full h-full cursor-crosshair" 
+            viewBox="0 0 300 80"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
+            {/* Grid lines for better readability */}
+            <defs>
+              <pattern id="grid" width="50" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 50 0 L 0 0 0 20" fill="none" stroke="#f0f0f0" strokeWidth="0.5"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+            
+            {/* Main chart line */}
             <polyline 
-              points="20,50 50,42 80,45 110,35 140,37 170,30 200,32 230,22 260,25 290,17" 
-              stroke="#000000" 
+              points={points}
+              stroke="#666" 
               strokeWidth="2" 
               fill="none"
+              style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' }}
             />
-            <circle cx="290" cy="17" r="2" fill="#000000"/>
+            
+            {/* Area fill under the line */}
+            <polygon
+              points={`20,70 ${points} ${20 + chartWidth},70`}
+              fill="url(#gradient)"
+              opacity="0.1"
+            />
+            
+            {/* Gradient definition */}
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#666" stopOpacity="0.3"/>
+                <stop offset="100%" stopColor="#666" stopOpacity="0"/>
+              </linearGradient>
+            </defs>
+            
+            {/* Guide line */}
+            {guideLine && (
+              <line
+                x1={guideLine}
+                y1="10"
+                x2={guideLine}
+                y2="70"
+                stroke="#999"
+                strokeWidth="1"
+                strokeDasharray="3,3"
+                opacity="0.7"
+              />
+            )}
+            
+            {/* Data points */}
+            {navData.map((item, index) => {
+              const x = 20 + (index * chartWidth / (navData.length - 1));
+              const navValue = parseFloat(item.navValue);
+              const y = 10 + ((maxValue - navValue) / valueRange) * (chartHeight - 20);
+              return (
+                <circle
+                  key={index}
+                  cx={x}
+                  cy={y}
+                  r="2"
+                  fill="#666"
+                  opacity={hoveredPoint?.x === x ? 1 : 0.7}
+                />
+              );
+            })}
+            
+            {/* Hovered point highlight */}
+            {hoveredPoint && (
+              <circle
+                cx={hoveredPoint.x}
+                cy={hoveredPoint.y}
+                r="4"
+                fill="#333"
+                stroke="#fff"
+                strokeWidth="2"
+              />
+            )}
           </svg>
+          
+          {/* Tooltip */}
+          {hoveredPoint && (
+            <div
+              className="absolute z-10 bg-white border border-gray-300 rounded-lg p-2 text-xs shadow-lg pointer-events-none"
+              style={{
+                left: `${(hoveredPoint.x / 300) * 100}%`,
+                top: `${(hoveredPoint.y / 80) * 100}%`,
+                transform: 'translate(-50%, -120%)',
+                minWidth: '80px'
+              }}
+            >
+              <div className="text-center">
+                <div className="font-semibold text-gray-800">₹{hoveredPoint.data.navValue}</div>
+                <div className="text-gray-600">{formatDate(hoveredPoint.data.date.toString())}</div>
+              </div>
+            </div>
+          )}
         </div>
+        
         <div className="grid grid-cols-3 gap-2">
           <div className="text-center">
             <p className="text-xs text-black">Current NAV</p>
@@ -68,13 +241,13 @@ export default function NavChart() {
           </div>
           <div className="text-center">
             <p className="text-xs text-black">Change</p>
-            <p className="font-semibold text-black text-xs">
+            <p className={`font-semibold text-xs ${changePercent >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               {changePercent >= 0 ? '+' : ''}{changePercent.toFixed(2)}%
             </p>
           </div>
           <div className="text-center">
             <p className="text-xs text-black">52W High</p>
-            <p className="font-semibold text-black text-xs">₹13.20</p>
+            <p className="font-semibold text-black text-xs">₹{high52W.toFixed(2)}</p>
           </div>
         </div>
       </CardContent>
