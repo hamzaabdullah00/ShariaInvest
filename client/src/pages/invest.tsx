@@ -105,7 +105,7 @@ export default function Invest() {
           {investmentMutation.isPending ? "Processing..." : "Confirm Investment"}
         </Button>
         <p className="text-center text-xs text-gray-600 mt-1">
-          By investing, you agree to our terms and Shariah compliance guidelines
+          By investing, you agree to our terms and Barakah Fund guidelines
         </p>
       </div>
     </div>
