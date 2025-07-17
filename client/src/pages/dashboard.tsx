@@ -28,7 +28,7 @@ export default function Dashboard() {
       {/* Portfolio Overview */}
       <div className="bg-black mx-4 mt-4 rounded-lg p-8 text-white border border-black" style={{ height: '180px' }}>
         <h3 className="text-lg font-semibold mb-4 text-white">Investment Summary</h3>
-        <div className="grid grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
             <p className="text-white opacity-80 text-sm">Total Investment</p>
             <p className="text-2xl font-bold text-white">₹{totalInvestment.toLocaleString()}</p>
