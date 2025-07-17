@@ -90,47 +90,14 @@ export default function Invest() {
       </div>
       {/* Investment Amount Slider */}
       <div className="mb-6">
-        <InvestmentSlider onAmountChange={setInvestmentAmount} />
+        <InvestmentSlider 
+          onAmountChange={setInvestmentAmount} 
+          manualAmount={manualAmount}
+          setManualAmount={setManualAmount}
+          onManualEntry={handleManualEntry}
+          onManualReset={handleManualReset}
+        />
       </div>
-
-      {/* Manual Investment Amount Input */}
-      <Card className="bg-card text-card-foreground shadow-sm mx-4 border border-black rounded-lg mt-[13px] mb-[13px]">
-        <CardHeader className="flex flex-col space-y-1.5 p-6 pb-2">
-          <CardTitle className="section-header text-black">Manual Amount Entry</CardTitle>
-        </CardHeader>
-        <CardContent className="pt-4 px-6 pb-6">
-          <div className="space-y-4">
-            <div>
-              <Input
-                type="number"
-                placeholder="Enter investment amount"
-                value={manualAmount}
-                onChange={(e) => setManualAmount(e.target.value)}
-                className="w-full text-black border-black"
-                min="1"
-                step="1"
-              />
-            </div>
-            <div className="flex gap-3">
-              <Button 
-                onClick={handleManualEntry}
-                className="flex-1 bg-black text-white hover:bg-gray-800 border border-black"
-                size="sm"
-              >
-                Enter
-              </Button>
-              <Button 
-                onClick={handleManualReset}
-                variant="outline"
-                className="flex-1 border-black text-black hover:bg-gray-100"
-                size="sm"
-              >
-                Reset
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
       {/* Projected Returns */}
       <Card className="bg-card text-card-foreground shadow-sm mx-4 border border-black rounded-lg mt-[13px] mb-[13px]" style={{ height: '210px' }}>
         <CardHeader className="flex flex-col space-y-1.5 p-6 pb-2 mt-[-15px] mb-[-15px]">

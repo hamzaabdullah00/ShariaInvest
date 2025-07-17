@@ -1,12 +1,24 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface InvestmentSliderProps {
   onAmountChange: (amount: number) => void;
+  manualAmount: string;
+  setManualAmount: (amount: string) => void;
+  onManualEntry: () => void;
+  onManualReset: () => void;
 }
 
-export default function InvestmentSlider({ onAmountChange }: InvestmentSliderProps) {
+export default function InvestmentSlider({ 
+  onAmountChange, 
+  manualAmount, 
+  setManualAmount, 
+  onManualEntry, 
+  onManualReset 
+}: InvestmentSliderProps) {
   const [amount, setAmount] = useState(10000);
 
   const handleAmountChange = (value: number[]) => {
@@ -24,11 +36,11 @@ export default function InvestmentSlider({ onAmountChange }: InvestmentSliderPro
   };
 
   return (
-    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '120px' }}>
-      <CardHeader className="flex flex-col space-y-1.5 p-6 mt-[-4px] mb-[-4px] pt-[18px] pb-[18px]">
+    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '200px' }}>
+      <CardHeader className="flex flex-col space-y-1.5 p-6 mt-[-4px] mb-[-4px] pt-[18px] pb-[12px]">
         <CardTitle className="section-header text-black">Investment Amount</CardTitle>
       </CardHeader>
-      <CardContent className="p-6 pt-0 mt-[-30px] mb-[-30px]">
+      <CardContent className="p-6 pt-0 mt-[-20px] mb-[-20px]">
         <div className="text-center">
           <div className="text-2xl font-bold text-black mb-2">
             {formatAmount(amount)}
@@ -41,9 +53,39 @@ export default function InvestmentSlider({ onAmountChange }: InvestmentSliderPro
             step={1000}
             className="w-full investment-slider mb-2"
           />
-          <div className="flex justify-between text-xs text-black">
+          <div className="flex justify-between text-xs text-black mb-4">
             <span>₹1,000</span>
             <span>₹1,00,000</span>
+          </div>
+          
+          {/* Manual Entry Section */}
+          <div className="mt-4 space-y-3">
+            <Input
+              type="number"
+              placeholder="Enter amount manually"
+              value={manualAmount}
+              onChange={(e) => setManualAmount(e.target.value)}
+              className="w-full text-black border-black text-sm"
+              min="1"
+              step="1"
+            />
+            <div className="flex gap-2">
+              <Button 
+                onClick={onManualEntry}
+                className="flex-1 bg-black text-white hover:bg-gray-800 border border-black"
+                size="sm"
+              >
+                Enter
+              </Button>
+              <Button 
+                onClick={onManualReset}
+                variant="outline"
+                className="flex-1 border-black text-black hover:bg-gray-100"
+                size="sm"
+              >
+                Reset
+              </Button>
+            </div>
           </div>
         </div>
       </CardContent>
