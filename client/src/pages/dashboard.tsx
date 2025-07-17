@@ -51,7 +51,7 @@ export default function Dashboard() {
       <NavChart />
 
       {/* Asset Allocation */}
-      <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ height: '200px' }}>
+      <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '200px' }}>
         <CardHeader className="pb-3 pt-6">
           <CardTitle className="section-header text-black">Asset Allocation</CardTitle>
         </CardHeader>
@@ -159,7 +159,7 @@ export default function Dashboard() {
       </Card>
 
       {/* Recent Transactions */}
-      <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ minHeight: '240px' }}>
+      <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ minHeight: '240px' }}>
         <CardHeader className="pb-3 pt-6 flex-shrink-0">
           <CardTitle className="section-header text-black">Recent Transactions</CardTitle>
         </CardHeader>
@@ -215,7 +215,7 @@ export default function Dashboard() {
       </Card>
 
       {/* Fund Summary */}
-      <Card className="mx-4 mt-2 mb-8 border border-black rounded-lg" style={{ minHeight: '180px' }}>
+      <Card className="mx-4 mt-6 mb-12 border border-black rounded-lg" style={{ minHeight: '180px' }}>
         <CardHeader className="pb-3 pt-6">
           <CardTitle className="section-header text-black">Fund Summary</CardTitle>
         </CardHeader>

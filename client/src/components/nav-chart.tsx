@@ -62,7 +62,7 @@ export default function NavChart() {
 
   if (isLoading) {
     return (
-      <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ height: '260px' }}>
+      <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '260px' }}>
         <CardContent className="p-4">
           <div className="animate-pulse">
             <div className="h-4 bg-gray-200 rounded w-1/3 mb-4"></div>
@@ -75,7 +75,7 @@ export default function NavChart() {
 
   if (!navData || navData.length === 0) {
     return (
-      <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ height: '260px' }}>
+      <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '260px' }}>
         <CardContent className="p-4">
           <div className="text-center text-gray-500">No data available</div>
         </CardContent>
@@ -113,7 +113,7 @@ export default function NavChart() {
   const high52W = Math.max(...values);
 
   return (
-    <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ height: '260px' }}>
+    <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '260px' }}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="section-header text-black">NAV Performance</CardTitle>
         <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
