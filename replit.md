@@ -128,6 +128,15 @@ Preferred communication style: Simple, everyday language.
 - **Data Generation**: Enhanced backend with realistic NAV data generation (365 days with volatility)
 - **Responsive Design**: Proper scaling and positioning for mobile-first approach
 
+### Dashboard Card Layout Improvements
+- **Increased Vertical Padding**: Enhanced all dashboard cards with improved padding (pt-6, pb-6)
+- **Portfolio Overview**: Expanded height from 140px to 160px with increased padding (p-8)
+- **Asset Allocation**: Increased height from 180px to 200px with better spacing
+- **Recent Transactions**: Enhanced height to 240px with improved content area (200px max-height)
+- **Fund Summary**: Expanded to 180px min-height with proper padding
+- **Vertical Scrolling**: Enhanced screen-content with proper overflow handling and extended bottom padding (100px)
+- **Consistent Spacing**: Standardized mt-2 mb-2 pattern across all cards for uniform visual rhythm
+
 ### Scalability Considerations
 - **Database**: Serverless PostgreSQL with connection pooling
 - **Session Storage**: PostgreSQL-based session management

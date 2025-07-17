@@ -24,9 +24,9 @@ export default function Dashboard() {
   const gainPercent = totalInvestment > 0 ? (gainAmount / totalInvestment) * 100 : 0;
 
   return (
-    <div className="screen-content">
+    <div className="screen-content pb-20">
       {/* Portfolio Overview */}
-      <div className="bg-black mx-4 mt-4 rounded-lg p-6 text-white border border-black" style={{ height: '140px' }}>
+      <div className="bg-black mx-4 mt-4 rounded-lg p-8 text-white border border-black" style={{ height: '160px' }}>
         <h3 className="text-lg font-semibold mb-4 text-white">Investment Summary</h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -51,11 +51,11 @@ export default function Dashboard() {
       <NavChart />
 
       {/* Asset Allocation */}
-      <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ height: '180px' }}>
-        <CardHeader className="pb-2">
+      <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ height: '200px' }}>
+        <CardHeader className="pb-3 pt-6">
           <CardTitle className="section-header text-black">Asset Allocation</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0 pb-4">
+        <CardContent className="pt-0 pb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="w-20 h-20 flex items-center justify-center relative">
               <svg className="w-20 h-20" viewBox="0 0 42 42">
@@ -159,11 +159,11 @@ export default function Dashboard() {
       </Card>
 
       {/* Recent Transactions */}
-      <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ minHeight: '200px' }}>
-        <CardHeader className="pb-2 flex-shrink-0">
+      <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ minHeight: '240px' }}>
+        <CardHeader className="pb-3 pt-6 flex-shrink-0">
           <CardTitle className="section-header text-black">Recent Transactions</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0 overflow-y-auto" style={{ maxHeight: '180px' }}>
+        <CardContent className="pt-0 pb-6 overflow-y-auto" style={{ maxHeight: '200px' }}>
           {transactionsLoading ? (
             <div className="space-y-3 pr-2">
               {[...Array(3)].map((_, i) => (
@@ -215,11 +215,11 @@ export default function Dashboard() {
       </Card>
 
       {/* Fund Summary */}
-      <Card className="mx-4 mt-2 mb-6 border border-black rounded-lg" style={{ minHeight: '160px' }}>
-        <CardHeader className="pb-2">
+      <Card className="mx-4 mt-2 mb-8 border border-black rounded-lg" style={{ minHeight: '180px' }}>
+        <CardHeader className="pb-3 pt-6">
           <CardTitle className="section-header text-black">Fund Summary</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0 pb-4 px-6">
+        <CardContent className="pt-0 pb-6">
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>

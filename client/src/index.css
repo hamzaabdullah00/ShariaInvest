@@ -120,6 +120,7 @@
   background: var(--white);
   position: relative;
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  overflow-y: auto;
 }
 
 /* Bottom navigation styles */
@@ -137,9 +138,11 @@
 
 /* Screen content padding for bottom nav */
 .screen-content {
-  padding-bottom: 80px;
+  padding-bottom: 100px;
   min-height: 100vh;
   background: var(--white);
+  overflow-y: auto;
+  max-height: none;
 }
 
 /* Animation classes */
