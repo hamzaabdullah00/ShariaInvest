@@ -40,16 +40,14 @@ export default function Dashboard() {
         </div>
         <div className="flex items-center space-x-2 pb-2">
           <i className="fas fa-arrow-up text-white"></i>
-          <span className="text-white font-medium">
+          <span className="text-white font-medium ml-[2px] mr-[2px] pl-[0px] pr-[0px] mt-[-11px] mb-[-11px] pt-[-5px] pb-[-5px] text-[14px]">
             +{gainPercent.toFixed(2)}% (₹{Math.round(gainAmount).toLocaleString()})
           </span>
           <span className="text-white opacity-80 text-sm">This month</span>
         </div>
       </div>
-
       {/* NAV Chart */}
       <NavChart />
-
       {/* Asset Allocation */}
       <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '200px' }}>
         <CardHeader className="pb-3 pt-6">
@@ -157,7 +155,6 @@ export default function Dashboard() {
           </div>
         </CardContent>
       </Card>
-
       {/* Recent Transactions */}
       <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ minHeight: '240px' }}>
         <CardHeader className="pb-3 pt-6 flex-shrink-0">
@@ -213,7 +210,6 @@ export default function Dashboard() {
           )}
         </CardContent>
       </Card>
-
       {/* Fund Summary */}
       <Card className="mx-4 mt-6 mb-12 border border-black rounded-lg" style={{ minHeight: '180px' }}>
         <CardHeader className="pb-3 pt-6">
