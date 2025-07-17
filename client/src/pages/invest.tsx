@@ -132,6 +132,11 @@ export default function Invest() {
         <Button 
           ref={confirmButtonRef}
           className="btn-primary mt-[29.5px] mb-[29.5px]"
+          style={{ 
+            backgroundColor: 'var(--accent-green)', 
+            borderColor: 'var(--accent-green)',
+            color: 'white'
+          }}
           onClick={handleInvestment}
           disabled={investmentMutation.isPending}
         >

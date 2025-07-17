@@ -39,8 +39,8 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="flex items-center space-x-2 pb-2">
-          <i className="fas fa-arrow-up text-white"></i>
-          <span className="text-white font-medium ml-[2px] mr-[2px] pl-[0px] pr-[0px] mt-[-11px] mb-[-11px] pt-[-5px] pb-[-5px] text-[14px]">
+          <i className="fas fa-arrow-up" style={{ color: 'var(--accent-green)' }}></i>
+          <span className="font-medium ml-[2px] mr-[2px] pl-[0px] pr-[0px] mt-[-11px] mb-[-11px] pt-[-5px] pb-[-5px] text-[14px]" style={{ color: 'var(--accent-green)' }}>
             +{gainPercent.toFixed(2)}% (₹{Math.round(gainAmount).toLocaleString()})
           </span>
           <span className="text-white opacity-80 text-sm">This month</span>
