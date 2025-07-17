@@ -129,7 +129,7 @@ export default function NavChart() {
         </Select>
       </CardHeader>
       <CardContent className="pt-0 pb-6">
-        <div className="relative chart-container mb-6" style={{ height: '120px' }}>
+        <div className="relative chart-container pt-[0px] pb-[0px] mt-[9px] mb-[9px] pl-[0px] pr-[0px]" style={{ height: '120px' }}>
           <svg 
             ref={chartRef}
             className="w-full h-full cursor-crosshair" 
