@@ -36,11 +36,11 @@ export default function InvestmentSlider({
   };
 
   return (
-    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '220px' }}>
+    <Card className="mx-4 mt-4 border border-black rounded-lg" style={{ height: '250px' }}>
       <CardHeader className="flex flex-col space-y-1.5 px-6 pt-4 pb-2">
         <CardTitle className="section-header text-black">Investment Amount</CardTitle>
       </CardHeader>
-      <CardContent className="px-6 pt-0 pb-4">
+      <CardContent className="px-6 pt-0 pb-6">
         <div className="text-center">
           <div className="text-2xl font-bold text-black mb-3">
             {formatAmount(amount)}
