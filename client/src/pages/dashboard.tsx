@@ -48,12 +48,10 @@ export default function Dashboard() {
       </div>
 
       {/* NAV Chart */}
-      <div className="mb-6">
-        <NavChart />
-      </div>
+      <NavChart />
 
       {/* Asset Allocation */}
-      <Card className="mx-4 mb-6 border border-black rounded-lg pt-[-1px] pb-[20px] mt-[80px]" style={{ height: '180px' }}>
+      <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ height: '180px' }}>
         <CardHeader className="pb-2">
           <CardTitle className="section-header text-black">Asset Allocation</CardTitle>
         </CardHeader>
@@ -161,7 +159,7 @@ export default function Dashboard() {
       </Card>
 
       {/* Recent Transactions */}
-      <Card className="mx-4 mb-6 border border-black rounded-lg mt-[24px]" style={{ minHeight: '200px' }}>
+      <Card className="mx-4 mt-2 mb-2 border border-black rounded-lg" style={{ minHeight: '200px' }}>
         <CardHeader className="pb-2 flex-shrink-0">
           <CardTitle className="section-header text-black">Recent Transactions</CardTitle>
         </CardHeader>
@@ -217,11 +215,11 @@ export default function Dashboard() {
       </Card>
 
       {/* Fund Summary */}
-      <Card className="mx-4 mb-6 border border-black rounded-lg mt-[24px]" style={{ minHeight: '160px' }}>
-        <CardHeader className="pb-2 pt-4 px-8">
+      <Card className="mx-4 mt-2 mb-6 border border-black rounded-lg" style={{ minHeight: '160px' }}>
+        <CardHeader className="pb-2">
           <CardTitle className="section-header text-black">Fund Summary</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0 pb-6 px-8">
+        <CardContent className="pt-0 pb-4 px-6">
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>
