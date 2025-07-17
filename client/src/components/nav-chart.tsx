@@ -62,11 +62,11 @@ export default function NavChart() {
 
   if (isLoading) {
     return (
-      <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '260px' }}>
-        <CardContent className="p-4">
+      <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '300px' }}>
+        <CardContent className="p-6">
           <div className="animate-pulse">
-            <div className="h-4 bg-gray-200 rounded w-1/3 mb-4"></div>
-            <div className="h-32 bg-gray-200 rounded"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/3 mb-6"></div>
+            <div className="h-40 bg-gray-200 rounded"></div>
           </div>
         </CardContent>
       </Card>
@@ -75,8 +75,8 @@ export default function NavChart() {
 
   if (!navData || navData.length === 0) {
     return (
-      <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '260px' }}>
-        <CardContent className="p-4">
+      <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '300px' }}>
+        <CardContent className="p-6">
           <div className="text-center text-gray-500">No data available</div>
         </CardContent>
       </Card>
@@ -101,11 +101,11 @@ export default function NavChart() {
 
   // Generate chart points
   const chartWidth = 260; // 300 - 40 for padding
-  const chartHeight = 100; // Increased height for better visibility
+  const chartHeight = 140; // Increased height for better visibility
   const points = navData.map((item, index) => {
     const x = 20 + (index * chartWidth / (navData.length - 1));
     const navValue = parseFloat(item.navValue);
-    const y = 15 + ((maxValue - navValue) / valueRange) * (chartHeight - 30);
+    const y = 20 + ((maxValue - navValue) / valueRange) * (chartHeight - 40);
     return `${x},${y}`;
   }).join(' ');
 
@@ -113,8 +113,8 @@ export default function NavChart() {
   const high52W = Math.max(...values);
 
   return (
-    <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '260px' }}>
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
+    <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '320px' }}>
+      <CardHeader className="flex flex-row items-center justify-between pb-3 pt-6 px-6">
         <CardTitle className="section-header text-black">NAV Performance</CardTitle>
         <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
           <SelectTrigger className="w-16 text-sm border-black">
@@ -128,19 +128,19 @@ export default function NavChart() {
           </SelectContent>
         </Select>
       </CardHeader>
-      <CardContent className="pt-0 pb-6">
-        <div className="relative chart-container pt-[0px] pb-[0px] mt-[9px] mb-[9px] pl-[0px] pr-[0px]" style={{ height: '120px' }}>
+      <CardContent className="pt-0 pb-8 px-6">
+        <div className="relative chart-container pt-[10px] pb-[10px] mt-[15px] mb-[15px] pl-[10px] pr-[10px]" style={{ height: '160px' }}>
           <svg 
             ref={chartRef}
             className="w-full h-full cursor-crosshair" 
-            viewBox="0 0 300 120"
+            viewBox="0 0 300 160"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
             {/* Grid lines for better readability */}
             <defs>
-              <pattern id="grid" width="50" height="24" patternUnits="userSpaceOnUse">
-                <path d="M 50 0 L 0 0 0 24" fill="none" stroke="#f0f0f0" strokeWidth="0.5"/>
+              <pattern id="grid" width="50" height="32" patternUnits="userSpaceOnUse">
+                <path d="M 50 0 L 0 0 0 32" fill="none" stroke="#f0f0f0" strokeWidth="0.5"/>
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#grid)" />
@@ -156,7 +156,7 @@ export default function NavChart() {
             
             {/* Area fill under the line */}
             <polygon
-              points={`20,100 ${points} ${20 + chartWidth},100`}
+              points={`20,140 ${points} ${20 + chartWidth},140`}
               fill="url(#gradient)"
               opacity="0.1"
             />
@@ -173,9 +173,9 @@ export default function NavChart() {
             {guideLine && (
               <line
                 x1={guideLine}
-                y1="15"
+                y1="20"
                 x2={guideLine}
-                y2="100"
+                y2="140"
                 stroke="#999"
                 strokeWidth="1"
                 strokeDasharray="3,3"
@@ -187,7 +187,7 @@ export default function NavChart() {
             {navData.map((item, index) => {
               const x = 20 + (index * chartWidth / (navData.length - 1));
               const navValue = parseFloat(item.navValue);
-              const y = 15 + ((maxValue - navValue) / valueRange) * (chartHeight - 30);
+              const y = 20 + ((maxValue - navValue) / valueRange) * (chartHeight - 40);
               return (
                 <circle
                   key={index}
@@ -219,7 +219,7 @@ export default function NavChart() {
               className="absolute z-10 bg-white border border-gray-300 rounded-lg p-2 text-xs shadow-lg pointer-events-none"
               style={{
                 left: `${(hoveredPoint.x / 300) * 100}%`,
-                top: `${(hoveredPoint.y / 120) * 100}%`,
+                top: `${(hoveredPoint.y / 160) * 100}%`,
                 transform: 'translate(-50%, -120%)',
                 minWidth: '80px'
               }}
