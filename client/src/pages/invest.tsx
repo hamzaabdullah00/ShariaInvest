@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -10,8 +11,10 @@ import type { InsertInvestment } from "@shared/schema";
 
 export default function Invest() {
   const [investmentAmount, setInvestmentAmount] = useState(10000);
+  const [manualAmount, setManualAmount] = useState("");
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const confirmButtonRef = useRef<HTMLButtonElement>(null);
 
   const investmentMutation = useMutation({
     mutationFn: async (data: InsertInvestment) => {
@@ -55,6 +58,29 @@ export default function Invest() {
     return monthlyReturn;
   };
 
+  const handleManualEntry = () => {
+    const amount = parseFloat(manualAmount);
+    if (!isNaN(amount) && amount > 0) {
+      setInvestmentAmount(amount);
+      // Scroll to confirm button
+      confirmButtonRef.current?.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
+      });
+    } else {
+      toast({
+        title: "Invalid Amount",
+        description: "Please enter a valid investment amount.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleManualReset = () => {
+    setManualAmount("");
+    setInvestmentAmount(10000);
+  };
+
   return (
     <div className="screen-content">
       {/* Header */}
@@ -66,6 +92,45 @@ export default function Invest() {
       <div className="mb-6">
         <InvestmentSlider onAmountChange={setInvestmentAmount} />
       </div>
+
+      {/* Manual Investment Amount Input */}
+      <Card className="bg-card text-card-foreground shadow-sm mx-4 border border-black rounded-lg mt-[13px] mb-[13px]">
+        <CardHeader className="flex flex-col space-y-1.5 p-6 pb-2">
+          <CardTitle className="section-header text-black">Manual Amount Entry</CardTitle>
+        </CardHeader>
+        <CardContent className="pt-4 px-6 pb-6">
+          <div className="space-y-4">
+            <div>
+              <Input
+                type="number"
+                placeholder="Enter investment amount"
+                value={manualAmount}
+                onChange={(e) => setManualAmount(e.target.value)}
+                className="w-full text-black border-black"
+                min="1"
+                step="1"
+              />
+            </div>
+            <div className="flex gap-3">
+              <Button 
+                onClick={handleManualEntry}
+                className="flex-1 bg-black text-white hover:bg-gray-800 border border-black"
+                size="sm"
+              >
+                Enter
+              </Button>
+              <Button 
+                onClick={handleManualReset}
+                variant="outline"
+                className="flex-1 border-black text-black hover:bg-gray-100"
+                size="sm"
+              >
+                Reset
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
       {/* Projected Returns */}
       <Card className="bg-card text-card-foreground shadow-sm mx-4 border border-black rounded-lg mt-[13px] mb-[13px]" style={{ height: '210px' }}>
         <CardHeader className="flex flex-col space-y-1.5 p-6 pb-2 mt-[-15px] mb-[-15px]">
@@ -98,6 +163,7 @@ export default function Invest() {
       {/* Investment CTA */}
       <div className="mx-4 mb-8">
         <Button 
+          ref={confirmButtonRef}
           className="btn-primary mt-[29.5px] mb-[29.5px]"
           onClick={handleInvestment}
           disabled={investmentMutation.isPending}
