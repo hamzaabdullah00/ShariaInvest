@@ -5,10 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@/lib/language-context";
 import { Link } from "wouter";
 import PrayerTimesCard from "@/components/prayer-times-card";
+import MosqueFinder from "@/components/mosque-finder";
+import { useState } from "react";
 import type { User, Transaction } from "@shared/schema";
 
 export default function Home() {
   const { translations } = useLanguage();
+  const [isMosqueFinderOpen, setIsMosqueFinderOpen] = useState(false);
   
   const { data: user } = useQuery<User>({
     queryKey: ["/api/user"],
@@ -77,12 +80,23 @@ export default function Home() {
               <span className="text-sm font-medium">{translations.forums || "Forums"}</span>
             </Button>
           </Link>
-          <Button variant="outline" className="w-full h-12 bg-white border-black text-black hover:bg-black hover:text-white flex items-center justify-center">
+          <Button 
+            variant="outline" 
+            className="w-full h-12 bg-white border-black text-black hover:bg-black hover:text-white flex items-center justify-center"
+            onClick={() => setIsMosqueFinderOpen(!isMosqueFinderOpen)}
+          >
             <i className="fas fa-mosque text-black mr-2"></i>
-            <span className="text-sm font-medium">{translations.mosque || "Mosque"}</span>
+            <span className="text-sm font-medium">{translations.mosque || "Find Nearest Mosque"}</span>
           </Button>
         </div>
       </div>
+      
+      {/* Mosque Finder */}
+      <MosqueFinder 
+        isOpen={isMosqueFinderOpen} 
+        onClose={() => setIsMosqueFinderOpen(false)} 
+      />
+      
       {/* Recent Activity */}
       <Card className="mx-4 mb-8 border border-black rounded-lg" style={{ height: '160px' }}>
         <CardHeader className="pb-2">
