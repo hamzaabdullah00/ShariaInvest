@@ -119,12 +119,15 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes (July 18, 2025)
 
 ### Interactive Mosque Finder Implementation
+- **Prayer Times Integration**: Moved mosque finder functionality to Prayer Times card only
 - **Dynamic Map Integration**: Added expandable mosque finder with OpenStreetMap integration using React Leaflet
 - **Geolocation Services**: Automatic user location detection with fallback to Mumbai coordinates
 - **Nearby Mosque Discovery**: Mock API implementation for finding mosques within radius (ready for real Places API)
 - **Interactive Map Features**: Clickable markers, popup information, and real-time mosque selection
 - **Route Directions**: Direct integration with Google Maps for turn-by-turn navigation
-- **Responsive Layout**: Map expands without overlapping other content, pushing elements downward
+- **Responsive Layout**: Map expands above Prayer Times card, pushing content below downward
+- **Quick Actions Update**: Replaced mosque button with Dashboard button linking to /dashboard
+- **Community Button Update**: Changed "Create New Room" to "Register Your Cause"
 - **Error Handling**: Graceful fallbacks for location access denied and network errors
 - **Mobile Optimized**: Touch-friendly interface with appropriate sizing for mobile screens
 

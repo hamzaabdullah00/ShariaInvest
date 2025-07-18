@@ -3,10 +3,13 @@ import { Button } from "@/components/ui/button";
 import { MapPin } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@/lib/language-context";
+import { useState } from "react";
+import MosqueFinder from "./mosque-finder";
 import type { PrayerTime } from "@shared/schema";
 
 export default function PrayerTimesCard() {
   const { translations } = useLanguage();
+  const [isMosqueFinderOpen, setIsMosqueFinderOpen] = useState(false);
   
   const { data: prayerTimes, isLoading } = useQuery<PrayerTime>({
     queryKey: ["/api/prayer-times/Mumbai"],
@@ -33,39 +36,51 @@ export default function PrayerTimesCard() {
   }
 
   return (
-    <Card className="mx-4 mt-4 mb-6 border border-black rounded-lg" style={{ height: '140px' }}>
-      <CardHeader className="pb-1">
-        <CardTitle className="flex items-center justify-between text-black text-sm">
-          <span className="section-header">{translations.prayer_times || "Prayer Times"}</span>
-          <i className="fas fa-mosque text-black"></i>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="pt-0">
-        {prayerTimes && (
-          <div className="grid grid-cols-4 gap-1 mb-3">
-            <div className="text-center">
-              <p className="text-xs text-black">Fajr</p>
-              <p className="font-semibold text-black text-xs">{prayerTimes.fajr}</p>
+    <>
+      {/* Mosque Finder - positioned above the Prayer Times card */}
+      <MosqueFinder 
+        isOpen={isMosqueFinderOpen} 
+        onClose={() => setIsMosqueFinderOpen(false)} 
+      />
+      
+      <Card className="mx-4 mt-4 mb-6 border border-black rounded-lg" style={{ height: '140px' }}>
+        <CardHeader className="pb-1">
+          <CardTitle className="flex items-center justify-between text-black text-sm">
+            <span className="section-header">{translations.prayer_times || "Prayer Times"}</span>
+            <i className="fas fa-mosque text-black"></i>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="pt-0">
+          {prayerTimes && (
+            <div className="grid grid-cols-4 gap-1 mb-3">
+              <div className="text-center">
+                <p className="text-xs text-black">Fajr</p>
+                <p className="font-semibold text-black text-xs">{prayerTimes.fajr}</p>
+              </div>
+              <div className="text-center">
+                <p className="text-xs text-black">Dhuhr</p>
+                <p className="font-semibold text-black text-xs">{prayerTimes.dhuhr}</p>
+              </div>
+              <div className="text-center">
+                <p className="text-xs text-black">Asr</p>
+                <p className="font-semibold text-black text-xs">{prayerTimes.asr}</p>
+              </div>
+              <div className="text-center">
+                <p className="text-xs text-black">Maghrib</p>
+                <p className="font-semibold text-black text-xs">{prayerTimes.maghrib}</p>
+              </div>
             </div>
-            <div className="text-center">
-              <p className="text-xs text-black">Dhuhr</p>
-              <p className="font-semibold text-black text-xs">{prayerTimes.dhuhr}</p>
-            </div>
-            <div className="text-center">
-              <p className="text-xs text-black">Asr</p>
-              <p className="font-semibold text-black text-xs">{prayerTimes.asr}</p>
-            </div>
-            <div className="text-center">
-              <p className="text-xs text-black">Maghrib</p>
-              <p className="font-semibold text-black text-xs">{prayerTimes.maghrib}</p>
-            </div>
-          </div>
-        )}
-        <Button className="w-full bg-black text-white hover:bg-white hover:text-black hover:border-black border text-xs" style={{ height: '36px' }}>
-          <MapPin className="w-3 h-3 mr-1" />
-          {translations.find_mosque || "Find Nearest Mosque"}
-        </Button>
-      </CardContent>
-    </Card>
+          )}
+          <Button 
+            className="w-full bg-black text-white hover:bg-white hover:text-black hover:border-black border text-xs" 
+            style={{ height: '36px' }}
+            onClick={() => setIsMosqueFinderOpen(!isMosqueFinderOpen)}
+          >
+            <MapPin className="w-3 h-3 mr-1" />
+            {translations.find_mosque || "Find Nearest Mosque"}
+          </Button>
+        </CardContent>
+      </Card>
+    </>
   );
 }

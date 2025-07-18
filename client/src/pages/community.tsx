@@ -169,7 +169,7 @@ export default function Community() {
       {/* New Room Button */}
       <div className="mx-4 mb-8">
         <Button className="w-full bg-black text-white hover:bg-white hover:text-black hover:border-black border py-4 font-semibold">
-          <i className="fas fa-plus mr-2"></i>Create New Room
+          <i className="fas fa-plus mr-2"></i>Register Your Cause
         </Button>
       </div>
     </div>
