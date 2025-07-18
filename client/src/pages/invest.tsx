@@ -135,7 +135,7 @@ export default function Invest() {
           style={{ 
             backgroundColor: 'var(--accent-green)', 
             borderColor: 'var(--accent-green)',
-            color: 'white'
+            color: 'black'
           }}
           onClick={handleInvestment}
           disabled={investmentMutation.isPending}

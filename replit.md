@@ -116,7 +116,19 @@ Preferred communication style: Simple, everyday language.
 - **Migration Status**: Successfully migrated from Replit Agent to Replit environment (July 17, 2025)
 - **Security**: Client-server separation implemented with robust security practices
 
-## Recent Changes (July 17, 2025)
+## Recent Changes (July 18, 2025)
+
+### Minimal Color Scheme Update
+- **Accent Green Updated**: Changed accent green from multiple green variables to single strategic color #B2D2A4
+- **Quick Action Buttons**: Removed green hover styling, now use black/white theme with hover:bg-black hover:text-white
+- **Manual Investment Input**: Updated "Enter" button from green styling to black/white (bg-black text-white hover:bg-white hover:text-black)
+- **Forum Room Cards**: Removed colored icons, standardized to text-black bg-gray-100 for all room types
+- **Prayer Reminders Card**: Updated to use #B2D2A4 background with black text for better contrast
+- **Investment Confirmation Button**: Updated to use #B2D2A4 background with black text for visibility
+- **Strategic Accent Use**: Maintained #B2D2A4 for dashboard gain indicators and portfolio highlights on black backgrounds
+- **CSS Cleanup**: Removed --accent-green-light and --accent-green-subtle variables, kept only strategic --accent-green
+
+### Previous Changes (July 17, 2025)
 
 ### Enhanced NAV Performance Chart
 - **Interactive Line Chart**: Replaced basic mock chart with fully interactive line chart

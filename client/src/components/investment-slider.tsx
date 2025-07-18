@@ -72,12 +72,7 @@ export default function InvestmentSlider({
             <div className="flex gap-2">
               <Button 
                 onClick={onManualEntry}
-                className="flex-1 text-xs h-7"
-                style={{ 
-                  backgroundColor: 'var(--accent-green)', 
-                  color: 'white',
-                  borderColor: 'var(--accent-green)'
-                }}
+                className="flex-1 text-xs h-7 bg-black text-white hover:bg-white hover:text-black border-black"
               >
                 Enter
               </Button>

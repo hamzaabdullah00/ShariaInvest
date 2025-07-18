@@ -30,10 +30,8 @@
   --black: hsl(0, 0%, 0%);
   --white: hsl(0, 0%, 100%);
   
-  /* Light Green Accent */
-  --accent-green: hsl(142, 76%, 36%);
-  --accent-green-light: hsl(138, 76%, 97%);
-  --accent-green-subtle: hsl(142, 32%, 92%);
+  /* Light Green Accent - Strategic use only */
+  --accent-green: #B2D2A4;
 }
 
 .dark {

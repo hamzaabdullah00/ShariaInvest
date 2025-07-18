@@ -10,15 +10,15 @@ export default function ForumRoomCard({ room, onClick }: ForumRoomCardProps) {
   const getIconColor = (name: string) => {
     switch (name) {
       case "Finance Q&A":
-        return "text-green-600 bg-green-100";
+        return "text-black bg-gray-100";
       case "Local Events":
-        return "text-blue-600 bg-blue-100";
+        return "text-black bg-gray-100";
       case "Culture & Faith":
-        return "text-purple-600 bg-purple-100";
+        return "text-black bg-gray-100";
       case "Education":
-        return "text-orange-600 bg-orange-100";
+        return "text-black bg-gray-100";
       default:
-        return "text-gray-600 bg-gray-100";
+        return "text-black bg-gray-100";
     }
   };
 

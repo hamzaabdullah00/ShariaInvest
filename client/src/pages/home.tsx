@@ -62,12 +62,12 @@ export default function Home() {
         </h4>
         <div className="grid grid-cols-2 gap-4">
           <Link href="/invest" className="block">
-            <Button variant="outline" className="w-full h-12 bg-white border-black text-black flex items-center justify-center" style={{ '--hover-bg': 'var(--accent-green)', '--hover-color': 'white' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent-green)'; e.currentTarget.style.color = 'white'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'white'; e.currentTarget.style.color = 'black'; }}>
+            <Button variant="outline" className="w-full h-12 bg-white border-black text-black hover:bg-black hover:text-white flex items-center justify-center">
               <i className="fas fa-coins mr-2"></i>
               <span className="text-sm font-medium">{translations.invest || "Invest"}</span>
             </Button>
           </Link>
-          <Button variant="outline" className="w-full h-12 bg-white border-black text-black flex items-center justify-center" style={{ '--hover-bg': 'var(--accent-green)', '--hover-color': 'white' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent-green)'; e.currentTarget.style.color = 'white'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'white'; e.currentTarget.style.color = 'black'; }}>
+          <Button variant="outline" className="w-full h-12 bg-white border-black text-black hover:bg-black hover:text-white flex items-center justify-center">
             <i className="fas fa-hand-holding-heart mr-2"></i>
             <span className="text-sm font-medium">{translations.zakat || "Zakat"}</span>
           </Button>
