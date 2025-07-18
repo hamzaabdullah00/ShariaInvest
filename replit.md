@@ -125,7 +125,7 @@ Preferred communication style: Simple, everyday language.
 - **Nearby Mosque Discovery**: Mock API implementation for finding mosques within radius (ready for real Places API)
 - **Interactive Map Features**: Clickable markers, popup information, and real-time mosque selection
 - **Route Directions**: Direct integration with Google Maps for turn-by-turn navigation
-- **Responsive Layout**: Map expands above Prayer Times card, pushing content below downward
+- **Responsive Layout**: Map expands below Prayer Times card, pushing subsequent content downward
 - **Quick Actions Update**: Replaced mosque button with Dashboard button linking to /dashboard
 - **Community Button Update**: Changed "Create New Room" to "Register Your Cause"
 - **Error Handling**: Graceful fallbacks for location access denied and network errors

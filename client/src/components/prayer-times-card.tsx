@@ -37,12 +37,6 @@ export default function PrayerTimesCard() {
 
   return (
     <>
-      {/* Mosque Finder - positioned above the Prayer Times card */}
-      <MosqueFinder 
-        isOpen={isMosqueFinderOpen} 
-        onClose={() => setIsMosqueFinderOpen(false)} 
-      />
-      
       <Card className="mx-4 mt-4 mb-6 border border-black rounded-lg" style={{ height: '140px' }}>
         <CardHeader className="pb-1">
           <CardTitle className="flex items-center justify-between text-black text-sm">
@@ -81,6 +75,12 @@ export default function PrayerTimesCard() {
           </Button>
         </CardContent>
       </Card>
+      
+      {/* Mosque Finder - positioned below the Prayer Times card */}
+      <MosqueFinder 
+        isOpen={isMosqueFinderOpen} 
+        onClose={() => setIsMosqueFinderOpen(false)} 
+      />
     </>
   );
 }
