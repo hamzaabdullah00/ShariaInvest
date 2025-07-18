@@ -119,14 +119,15 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes (July 18, 2025)
 
 ### Minimal Color Scheme Update
-- **Accent Green Updated**: Changed accent green from multiple green variables to single strategic color #94C973
-- **Quick Action Buttons**: Removed green hover styling, now use black/white theme with hover:bg-black hover:text-white
-- **Manual Investment Input**: Updated "Enter" button from green styling to black/white (bg-black text-white hover:bg-white hover:text-black)
-- **Forum Room Cards**: Removed colored icons, standardized to text-black bg-gray-100 for all room types
-- **Prayer Reminders Card**: Updated to use #B2D2A4 background with black text for better contrast
-- **Investment Confirmation Button**: Updated to use #B2D2A4 background with black text for visibility
-- **Strategic Accent Use**: Maintained #B2D2A4 for dashboard gain indicators and portfolio highlights on black backgrounds
-- **CSS Cleanup**: Removed --accent-green-light and --accent-green-subtle variables, kept only strategic --accent-green
+- **Green Color Restriction**: Removed green from all UI elements except gain percentage displays
+- **Gain Indicators Only**: Applied #18A558 exclusively to +7.40% and +2.48% gain displays
+- **Quick Action Buttons**: Use pure black/white theme with hover:bg-black hover:text-white  
+- **Manual Investment Input**: Black/white styling (bg-black text-white hover:bg-white hover:text-black)
+- **Forum Room Cards**: Standardized to text-black bg-gray-100 for all room types
+- **Prayer Reminders Card**: Changed from green to neutral bg-gray-100
+- **Investment Confirmation Button**: Changed from green to black/white styling
+- **CSS Update**: Replaced --accent-green with --gain-green: #18A558 for specific gain displays only
+- **Pure Minimal Design**: Dominant black/white theme with green restricted to financial gains only
 
 ### Previous Changes (July 17, 2025)
 

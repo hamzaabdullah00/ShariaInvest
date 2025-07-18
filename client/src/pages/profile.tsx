@@ -152,7 +152,7 @@ export default function Profile() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 rounded-lg" style={{ backgroundColor: 'var(--accent-green)' }}>
+            <div className="flex items-center justify-between p-3 rounded-lg bg-gray-100">
               <div className="flex items-center space-x-3">
                 <i className="fas fa-prayer-hands text-black"></i>
                 <span className="font-medium text-black">Prayer Reminders</span>

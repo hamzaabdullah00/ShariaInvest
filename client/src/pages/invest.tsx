@@ -131,12 +131,7 @@ export default function Invest() {
       <div className="mx-4 mb-8">
         <Button 
           ref={confirmButtonRef}
-          className="btn-primary mt-[29.5px] mb-[29.5px]"
-          style={{ 
-            backgroundColor: 'var(--accent-green)', 
-            borderColor: 'var(--accent-green)',
-            color: 'black'
-          }}
+          className="btn-primary mt-[29.5px] mb-[29.5px] bg-black text-white hover:bg-white hover:text-black border-black"
           onClick={handleInvestment}
           disabled={investmentMutation.isPending}
         >

@@ -245,7 +245,7 @@ export default function NavChart() {
           </div>
           <div className="text-center">
             <p className="text-xs text-black mb-1">Day Change</p>
-            <p className="font-semibold text-xs" style={{ color: 'var(--accent-green)' }}>
+            <p className="font-semibold text-xs" style={{ color: 'var(--gain-green)' }}>
               +{changePercent.toFixed(2)}%
             </p>
           </div>

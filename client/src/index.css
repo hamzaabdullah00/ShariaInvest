@@ -30,8 +30,8 @@
   --black: hsl(0, 0%, 0%);
   --white: hsl(0, 0%, 100%);
   
-  /* Light Green Accent - Strategic use only */
-  --accent-green: #94C973;
+  /* Green for gain indicators only */
+  --gain-green: #18A558;
 }
 
 .dark {
