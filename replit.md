@@ -119,7 +119,7 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes (July 18, 2025)
 
 ### Minimal Color Scheme Update
-- **Accent Green Updated**: Changed accent green from multiple green variables to single strategic color #B2D2A4
+- **Accent Green Updated**: Changed accent green from multiple green variables to single strategic color #94C973
 - **Quick Action Buttons**: Removed green hover styling, now use black/white theme with hover:bg-black hover:text-white
 - **Manual Investment Input**: Updated "Enter" button from green styling to black/white (bg-black text-white hover:bg-white hover:text-black)
 - **Forum Room Cards**: Removed colored icons, standardized to text-black bg-gray-100 for all room types
