@@ -214,26 +214,56 @@ export default function NavChart() {
           </svg>
           
           {/* Tooltip */}
-          {hoveredPoint && (
-            <div
-              className="absolute z-10 bg-white border border-gray-300 rounded-lg p-2 text-xs shadow-lg pointer-events-none"
-              style={{
-                left: `${(hoveredPoint.x / 300) * 100}%`,
-                top: hoveredPoint.y < 50 
-                  ? `${(hoveredPoint.y / 160) * 100 + 8}%`
-                  : `${Math.max(0, (hoveredPoint.y / 160) * 100 - 15)}%`,
-                transform: hoveredPoint.y < 50 
-                  ? 'translate(-50%, 0%)'
-                  : 'translate(-50%, -100%)',
-                minWidth: '80px'
-              }}
-            >
-              <div className="text-center">
-                <div className="font-semibold text-gray-800">₹{hoveredPoint.data.navValue}</div>
-                <div className="text-gray-600">{formatDate(hoveredPoint.data.date.toString())}</div>
+          {hoveredPoint && (() => {
+            const chartWidth = 300;
+            const chartHeight = 160;
+            const tooltipWidth = 80;
+            const tooltipHeight = 40;
+            const margin = 8;
+            
+            // Calculate responsive positioning
+            let left = (hoveredPoint.x / chartWidth) * 100;
+            let top = (hoveredPoint.y / chartHeight) * 100;
+            let transformX = '-50%';
+            let transformY = '-100%';
+            
+            // Adjust horizontal position if touching left or right edge
+            const leftPos = (hoveredPoint.x / chartWidth) * 100;
+            if (leftPos < 15) { // Too close to left edge
+              left = leftPos + 5;
+              transformX = '0%';
+            } else if (leftPos > 85) { // Too close to right edge
+              left = leftPos - 5;
+              transformX = '-100%';
+            }
+            
+            // Adjust vertical position if touching top or bottom edge
+            const topPos = (hoveredPoint.y / chartHeight) * 100;
+            if (topPos < 25) { // Too close to top edge
+              top = topPos + 8;
+              transformY = '0%';
+            } else if (topPos > 75) { // Too close to bottom edge
+              top = topPos - 8;
+              transformY = '-100%';
+            }
+            
+            return (
+              <div
+                className="absolute z-10 bg-white border border-gray-300 rounded-lg p-2 text-xs shadow-lg pointer-events-none"
+                style={{
+                  left: `${left}%`,
+                  top: `${top}%`,
+                  transform: `translate(${transformX}, ${transformY})`,
+                  minWidth: '80px'
+                }}
+              >
+                <div className="text-center">
+                  <div className="font-semibold text-gray-800">₹{hoveredPoint.data.navValue}</div>
+                  <div className="text-gray-600">{formatDate(hoveredPoint.data.date.toString())}</div>
+                </div>
               </div>
-            </div>
-          )}
+            );
+          })()}
         </div>
         
         <div className="grid grid-cols-3 gap-4 px-2">
