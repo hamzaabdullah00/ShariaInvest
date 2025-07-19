@@ -1,145 +1,140 @@
-import { useState, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import InvestmentSlider from "@/components/investment-slider";
-import NavChart from "@/components/nav-chart";
-import type { InsertInvestment } from "@shared/schema";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRight, TrendingUp, Shield, Target } from "lucide-react";
+import { Link } from "wouter";
+import type { HalalFund } from "@shared/schema";
 
 export default function Invest() {
-  const [investmentAmount, setInvestmentAmount] = useState(10000);
-  const [manualAmount, setManualAmount] = useState("");
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
-  const confirmButtonRef = useRef<HTMLButtonElement>(null);
-
-  const investmentMutation = useMutation({
-    mutationFn: async (data: InsertInvestment) => {
-      const response = await apiRequest("POST", "/api/investments", data);
-      return response.json();
-    },
-    onSuccess: () => {
-      toast({
-        title: "Investment Successful",
-        description: "Your investment has been processed successfully.",
-      });
-      queryClient.invalidateQueries({ queryKey: ["/api/investments"] });
-      queryClient.invalidateQueries({ queryKey: ["/api/transactions"] });
-    },
-    onError: () => {
-      toast({
-        title: "Investment Failed",
-        description: "There was an error processing your investment. Please try again.",
-        variant: "destructive",
-      });
-    },
+  const { data: halalFunds = [], isLoading } = useQuery<HalalFund[]>({
+    queryKey: ["/api/halal-funds"],
   });
 
-  const handleInvestment = () => {
-    const navPrice = 12.45;
-    const units = investmentAmount / navPrice;
-    
-    investmentMutation.mutate({
-      userId: 1,
-      fundName: "Barakah Equity Fund",
-      amount: investmentAmount.toString(),
-      navPrice: navPrice.toString(),
-      units: units.toString(),
-      status: "completed",
-    });
-  };
-
-  const calculateReturns = (amount: number) => {
-    const annualReturn = 8.5;
-    const monthlyReturn = (amount * annualReturn) / (100 * 12);
-    return monthlyReturn;
-  };
-
-  const handleManualEntry = () => {
-    const amount = parseFloat(manualAmount);
-    if (!isNaN(amount) && amount > 0) {
-      setInvestmentAmount(amount);
-      // Scroll to confirm button
-      confirmButtonRef.current?.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'center' 
-      });
-    } else {
-      toast({
-        title: "Invalid Amount",
-        description: "Please enter a valid investment amount.",
-        variant: "destructive",
-      });
+  const getRiskLevelColor = (riskLevel: string) => {
+    switch (riskLevel) {
+      case 'low':
+        return 'bg-green-100 text-green-800';
+      case 'moderate':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'high':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
-  const handleManualReset = () => {
-    setManualAmount("");
-    setInvestmentAmount(10000);
-  };
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading halal investment options...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="screen-content">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-white px-4 py-6 border-b border-black">
-        <h3 className="text-xl font-semibold mb-2 text-black">Shariah Investment</h3>
-        <p className="text-black text-sm">Invest in halal, ethical opportunities</p>
+      <div className="pt-4 pb-4 px-4 border-b border-gray-200">
+        <h1 className="text-2xl font-bold text-black">Halal Investments</h1>
+        <p className="text-sm text-gray-600">Choose from our Shariah-compliant investment options</p>
       </div>
-      {/* Investment Amount Slider */}
-      <div className="mb-6">
-        <InvestmentSlider 
-          onAmountChange={setInvestmentAmount} 
-          manualAmount={manualAmount}
-          setManualAmount={setManualAmount}
-          onManualEntry={handleManualEntry}
-          onManualReset={handleManualReset}
-        />
-      </div>
-      {/* Projected Returns */}
-      <Card className="bg-card text-card-foreground shadow-sm mx-4 border border-black rounded-lg mt-[13px] mb-[13px]" style={{ height: '210px' }}>
-        <CardHeader className="flex flex-col space-y-1.5 p-6 pb-2 mt-[-15px] mb-[-15px]">
-          <CardTitle className="section-header text-black">Projected Returns</CardTitle>
-        </CardHeader>
-        <CardContent className="pt-4 px-8 pb-6">
-          <div className="grid grid-cols-2 gap-6 mb-6">
-            <div className="text-center p-4 bg-white border border-black rounded-lg">
-              <p className="text-xl font-bold text-black mb-2">8.5%</p>
-              <p className="text-sm text-black">Annual Return</p>
+
+      <div className="screen-content pb-24">
+        {/* Investment Options */}
+        <div className="px-4 pt-6 space-y-4">
+          {halalFunds.map((fund) => (
+            <Link key={fund.id} href={`/fund/${fund.id}`}>
+              <Card className="border border-black rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
+                <CardHeader className="pb-3 pt-6">
+                  <div className="flex justify-between items-start mb-2">
+                    <CardTitle className="text-lg text-black font-semibold">
+                      {fund.name}
+                    </CardTitle>
+                    <Badge className={getRiskLevelColor(fund.riskLevel)}>
+                      {fund.riskLevel} risk
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-gray-600">{fund.description}</p>
+                </CardHeader>
+                <CardContent className="pt-0 pb-6">
+                  <div className="space-y-4">
+                    {/* Performance Metrics */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="flex items-center space-x-2">
+                        <TrendingUp className="w-4 h-4 text-gray-500" />
+                        <div>
+                          <p className="text-xs text-gray-500">Expected Return</p>
+                          <p className="text-sm font-medium text-black">{Number(fund.expectedReturn).toFixed(1)}% p.a.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Target className="w-4 h-4 text-gray-500" />
+                        <div>
+                          <p className="text-xs text-gray-500">Current NAV</p>
+                          <p className="text-sm font-medium text-black">₹{Number(fund.currentNav).toFixed(2)}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Minimum Investment */}
+                    <div className="flex items-center space-x-2">
+                      <Shield className="w-4 h-4 text-gray-500" />
+                      <div>
+                        <p className="text-xs text-gray-500">Minimum Investment</p>
+                        <p className="text-sm font-medium text-black">₹{Number(fund.minimumInvestment).toLocaleString('en-IN')}</p>
+                      </div>
+                    </div>
+
+                    {/* Action Button */}
+                    <div className="flex justify-between items-center pt-2">
+                      <Button 
+                        className="bg-black text-white hover:bg-gray-800"
+                        size="sm"
+                      >
+                        Invest Now
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="border-black text-black hover:bg-black hover:text-white"
+                      >
+                        View Details
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+
+        {/* Information Card */}
+        <Card className="mx-4 mt-8 border border-black rounded-lg">
+          <CardContent className="pt-6 pb-6">
+            <div className="text-center">
+              <Shield className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+              <h3 className="font-semibold text-black mb-2">100% Shariah Compliant</h3>
+              <p className="text-sm text-gray-600 mb-4">
+                All our investment products are certified by Islamic scholars and comply with Shariah principles.
+              </p>
+              <div className="grid grid-cols-2 gap-4 text-xs text-gray-500">
+                <div className="text-center">
+                  <p className="font-medium text-black">No Riba</p>
+                  <p>Interest-free investments</p>
+                </div>
+                <div className="text-center">
+                  <p className="font-medium text-black">Halal Only</p>
+                  <p>Ethically screened assets</p>
+                </div>
+              </div>
             </div>
-            <div className="text-center p-4 bg-white border border-black rounded-lg">
-              <p className="text-xl font-bold text-black mb-2">95%</p>
-              <p className="text-sm text-black">Capital Protection</p>
-            </div>
-          </div>
-          <div className="flex justify-between items-center px-2">
-            <span className="text-sm text-black">Expected Monthly:</span>
-            <span className="font-semibold text-black">
-              ₹{calculateReturns(investmentAmount).toFixed(0)}
-            </span>
-          </div>
-        </CardContent>
-      </Card>
-      {/* NAV Chart */}
-      <div className="mb-6">
-        <NavChart />
-      </div>
-      
-      {/* Investment CTA */}
-      <div className="mx-4 mb-8">
-        <Button 
-          ref={confirmButtonRef}
-          className="btn-primary mt-[29.5px] mb-[29.5px] bg-black text-white hover:bg-white hover:text-black border-black"
-          onClick={handleInvestment}
-          disabled={investmentMutation.isPending}
-        >
-          {investmentMutation.isPending ? "Processing..." : "Confirm Investment"}
-        </Button>
-        <p className="text-center text-xs text-gray-600 mt-1">
-          By investing, you agree to our terms and Barakah Fund guidelines
-        </p>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

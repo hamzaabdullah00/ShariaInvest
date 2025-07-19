@@ -7,6 +7,7 @@ import { LanguageProvider } from "@/lib/language-context";
 import SplashScreen from "@/components/splash-screen";
 import Home from "@/pages/home";
 import Invest from "@/pages/invest";
+import FundDetail from "@/pages/fund-detail";
 import Dashboard from "@/pages/dashboard";
 import Investments from "@/pages/investments";
 import Mosque from "@/pages/mosque";
@@ -22,6 +23,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/invest" component={Invest} />
+      <Route path="/fund/:id" component={FundDetail} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/investments" component={Investments} />
       <Route path="/mosque" component={Mosque} />

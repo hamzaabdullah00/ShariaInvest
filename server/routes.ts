@@ -148,6 +148,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get halal funds
+  app.get("/api/halal-funds", async (req, res) => {
+    try {
+      const funds = await storage.getHalalFunds();
+      res.json(funds);
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Get specific halal fund
+  app.get("/api/halal-funds/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const fund = await storage.getHalalFund(id);
+      if (!fund) {
+        return res.status(404).json({ message: "Fund not found" });
+      }
+      res.json(fund);
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

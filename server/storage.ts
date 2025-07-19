@@ -1,8 +1,8 @@
 import { 
-  users, investments, transactions, forumRooms, forumThreads, ngoProjects, prayerTimes, navData,
+  users, investments, transactions, forumRooms, forumThreads, ngoProjects, prayerTimes, navData, halalFunds,
   type User, type InsertUser, type Investment, type InsertInvestment, 
   type Transaction, type InsertTransaction, type ForumRoom, type ForumThread, 
-  type InsertForumThread, type NgoProject, type PrayerTime, type NavData 
+  type InsertForumThread, type NgoProject, type PrayerTime, type NavData, type HalalFund 
 } from "@shared/schema";
 
 export interface IStorage {
@@ -32,6 +32,10 @@ export interface IStorage {
   
   // NAV Data
   getNavData(fundName: string, limit?: number): Promise<NavData[]>;
+  
+  // Halal Funds
+  getHalalFunds(): Promise<HalalFund[]>;
+  getHalalFund(id: number): Promise<HalalFund | undefined>;
 }
 
 export class MemStorage implements IStorage {
@@ -43,6 +47,7 @@ export class MemStorage implements IStorage {
   private ngoProjects: Map<number, NgoProject>;
   private prayerTimes: Map<string, PrayerTime>;
   private navData: Map<number, NavData>;
+  private halalFunds: Map<number, HalalFund>;
   private currentId: number;
 
   constructor() {
@@ -54,6 +59,7 @@ export class MemStorage implements IStorage {
     this.ngoProjects = new Map();
     this.prayerTimes = new Map();
     this.navData = new Map();
+    this.halalFunds = new Map();
     this.currentId = 1;
     this.seedData();
   }
@@ -137,6 +143,16 @@ export class MemStorage implements IStorage {
 
     const navDataPoints = generateNavData();
     navDataPoints.forEach(data => this.navData.set(data.id, data));
+
+    // Seed halal funds
+    const funds: HalalFund[] = [
+      { id: 1, name: "Sukuk Income Fund", description: "Conservative Islamic bonds with stable returns", riskLevel: "low", expectedReturn: "6.5", currentNav: "15.25", category: "sukuk", minimumInvestment: "5000" },
+      { id: 2, name: "Islamic Equity Fund", description: "Shariah-compliant stocks with growth potential", riskLevel: "moderate", expectedReturn: "10.2", currentNav: "28.40", category: "equity", minimumInvestment: "10000" },
+      { id: 3, name: "Shariah-compliant ETF", description: "Diversified halal exchange-traded fund", riskLevel: "moderate", expectedReturn: "8.8", currentNav: "42.15", category: "etf", minimumInvestment: "2500" },
+      { id: 4, name: "Halal Balanced Fund", description: "Mix of Islamic equity and sukuk instruments", riskLevel: "moderate", expectedReturn: "8.0", currentNav: "22.80", category: "balanced", minimumInvestment: "7500" },
+      { id: 5, name: "Islamic Money-Market Fund", description: "Short-term halal investments with liquidity", riskLevel: "low", expectedReturn: "4.5", currentNav: "12.05", category: "money_market", minimumInvestment: "1000" },
+    ];
+    funds.forEach(fund => this.halalFunds.set(fund.id, fund));
 
     // Seed transactions
     const transactions: Transaction[] = [
@@ -222,6 +238,14 @@ export class MemStorage implements IStorage {
       .filter(data => data.fundName === fundName)
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
       .slice(-limit);
+  }
+
+  async getHalalFunds(): Promise<HalalFund[]> {
+    return Array.from(this.halalFunds.values());
+  }
+
+  async getHalalFund(id: number): Promise<HalalFund | undefined> {
+    return this.halalFunds.get(id);
   }
 }
 

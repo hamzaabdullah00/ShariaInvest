@@ -82,6 +82,17 @@ export const navData = pgTable("nav_data", {
   date: timestamp("date").notNull(),
 });
 
+export const halalFunds = pgTable("halal_funds", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
+  riskLevel: text("risk_level").notNull(), // 'low', 'moderate', 'high'
+  expectedReturn: decimal("expected_return", { precision: 5, scale: 2 }).notNull(),
+  currentNav: decimal("current_nav", { precision: 8, scale: 2 }).notNull(),
+  category: text("category").notNull(), // 'sukuk', 'equity', 'etf', 'balanced', 'money_market'
+  minimumInvestment: decimal("minimum_investment", { precision: 10, scale: 2 }).notNull().default("1000"),
+});
+
 // Insert schemas
 export const insertUserSchema = createInsertSchema(users).omit({
   id: true,
@@ -118,3 +129,4 @@ export type InsertForumThread = z.infer<typeof insertForumThreadSchema>;
 export type NgoProject = typeof ngoProjects.$inferSelect;
 export type PrayerTime = typeof prayerTimes.$inferSelect;
 export type NavData = typeof navData.$inferSelect;
+export type HalalFund = typeof halalFunds.$inferSelect;
