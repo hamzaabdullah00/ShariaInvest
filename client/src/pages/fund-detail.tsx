@@ -190,9 +190,9 @@ export default function FundDetail() {
       <div className="screen-content pb-24">
         {/* Investment Amount Section */}
         <Card className="mx-4 mt-6 border border-black rounded-lg">
-          <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
-            <CardTitle className="text-lg" style={{ color: '#B2D2A4' }}>Investment Amount</CardTitle>
-            <p className="text-sm text-white">Choose your investment amount (Min: ₹{Number(fund.minimumInvestment).toLocaleString('en-IN')})</p>
+          <CardHeader className="pb-3 pt-6">
+            <CardTitle className="text-lg text-black font-semibold">Investment Amount</CardTitle>
+            <p className="text-sm text-gray-600">Choose your investment amount (Min: ₹{Number(fund.minimumInvestment).toLocaleString('en-IN')})</p>
           </CardHeader>
           <CardContent className="pb-6">
             <div className="space-y-6">
@@ -272,12 +272,12 @@ export default function FundDetail() {
 
         {/* NAV Performance Chart */}
         <Card className="mx-4 mt-6 border border-black rounded-lg">
-          <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+          <CardHeader className="pb-3 pt-6">
             <CardTitle className="flex items-center text-lg">
-              <TrendingUp className="w-5 h-5 mr-2 text-white" />
-              <span style={{ color: '#B2D2A4' }}>NAV Performance</span>
+              <TrendingUp className="w-5 h-5 mr-2 text-black" />
+              <span className="text-black font-semibold">NAV Performance</span>
             </CardTitle>
-            <p className="text-sm text-white">Historical Net Asset Value trends</p>
+            <p className="text-sm text-gray-600">Historical Net Asset Value trends</p>
           </CardHeader>
           <CardContent className="pb-6">
             <NavChart fundName={fund.name} />
@@ -286,12 +286,12 @@ export default function FundDetail() {
 
         {/* Asset Allocation */}
         <Card className="mx-4 mt-6 border border-black rounded-lg">
-          <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+          <CardHeader className="pb-3 pt-6">
             <CardTitle className="flex items-center text-lg">
-              <PieChart className="w-5 h-5 mr-2 text-white" />
-              <span style={{ color: '#B2D2A4' }}>Asset Allocation</span>
+              <PieChart className="w-5 h-5 mr-2 text-black" />
+              <span className="text-black font-semibold">Asset Allocation</span>
             </CardTitle>
-            <p className="text-sm text-white">Fund portfolio breakdown</p>
+            <p className="text-sm text-gray-600">Fund portfolio breakdown</p>
           </CardHeader>
           <CardContent className="pb-6">
             <div className="space-y-4">
@@ -313,12 +313,12 @@ export default function FundDetail() {
 
         {/* Recent Transactions */}
         <Card className="mx-4 mt-6 border border-black rounded-lg">
-          <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+          <CardHeader className="pb-3 pt-6">
             <CardTitle className="flex items-center text-lg">
-              <History className="w-5 h-5 mr-2 text-white" />
-              <span style={{ color: '#B2D2A4' }}>Recent Transactions</span>
+              <History className="w-5 h-5 mr-2 text-black" />
+              <span className="text-black font-semibold">Recent Transactions</span>
             </CardTitle>
-            <p className="text-sm text-white">Your latest investment activities</p>
+            <p className="text-sm text-gray-600">Your latest investment activities</p>
           </CardHeader>
           <CardContent className="pb-6">
             <div className="space-y-3">

@@ -114,8 +114,8 @@ export default function NavChart() {
 
   return (
     <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg" style={{ height: '340px' }}>
-      <CardHeader className="flex flex-row items-center justify-between pb-3 pt-6 px-6 bg-black rounded-t-lg">
-        <CardTitle className="section-header" style={{ color: '#B2D2A4' }}>NAV Performance</CardTitle>
+      <CardHeader className="flex flex-row items-center justify-between pb-3 pt-6 px-6">
+        <CardTitle className="text-black font-semibold">NAV Performance</CardTitle>
         <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
           <SelectTrigger className="w-16 text-sm border-black">
             <SelectValue />

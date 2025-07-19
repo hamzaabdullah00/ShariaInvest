@@ -79,8 +79,8 @@ export default function Investments() {
 
   const FundSummaryCard = () => (
     <Card className="border border-black rounded-lg">
-      <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
-        <CardTitle className="text-lg" style={{ color: '#B2D2A4' }}>Fund Summary</CardTitle>
+      <CardHeader className="pb-3 pt-6">
+        <CardTitle className="text-lg text-black font-semibold">Fund Summary</CardTitle>
       </CardHeader>
       <CardContent className="pt-0 pb-6">
         <div className="grid grid-cols-2 gap-6">
@@ -375,10 +375,10 @@ export default function Investments() {
 
             {/* Start Zakat SIP Card */}
             <Card className="border border-black rounded-lg">
-              <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+              <CardHeader className="pb-3 pt-6">
                 <CardTitle className="flex items-center text-lg">
-                  <DollarSign className="mr-3 text-white" size={20} />
-                  <span style={{ color: '#B2D2A4' }}>Start Zakat SIP</span>
+                  <DollarSign className="mr-3 text-black" size={20} />
+                  <span className="text-black font-semibold">Start Zakat SIP</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0 pb-6">
@@ -391,10 +391,10 @@ export default function Investments() {
 
             {/* Current Zakat Summary */}
             <Card className="border border-black rounded-lg">
-              <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+              <CardHeader className="pb-3 pt-6">
                 <CardTitle className="flex items-center text-lg">
-                  <Heart className="mr-3 text-white" size={20} />
-                  <span style={{ color: '#B2D2A4' }}>Your Zakat Impact</span>
+                  <Heart className="mr-3 text-black" size={20} />
+                  <span className="text-black font-semibold">Your Zakat Impact</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0 pb-6">
@@ -421,8 +421,8 @@ export default function Investments() {
 
             {/* Donation Options */}
             <div className="space-y-4">
-              <div className="bg-black px-4 py-4 rounded-lg mb-4">
-                <h3 className="text-lg font-semibold" style={{ color: '#B2D2A4' }}>Donate Zakat</h3>
+              <div className="bg-white px-4 py-4 rounded-lg mb-4 border border-gray-200">
+                <h3 className="text-lg font-semibold text-black">Donate Zakat</h3>
               </div>
               
               <Card className="border border-black rounded-lg">

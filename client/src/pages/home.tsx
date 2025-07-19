@@ -80,7 +80,7 @@ export default function Home() {
             <CardHeader className="pb-2 pt-6">
               <CardTitle className="flex items-center text-black text-lg">
                 <i className="fas fa-mosque mr-3 text-xl"></i>
-                <span className="section-header">My Mosque</span>
+                <span className="font-semibold">My Mosque</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
@@ -97,7 +97,7 @@ export default function Home() {
             <CardHeader className="pb-2 pt-6">
               <CardTitle className="flex items-center text-black text-lg">
                 <i className="fas fa-comments mr-3 text-xl"></i>
-                <span className="section-header">My Communities</span>
+                <span className="font-semibold">My Communities</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
@@ -114,7 +114,7 @@ export default function Home() {
             <CardHeader className="pb-2 pt-6">
               <CardTitle className="flex items-center text-black text-lg">
                 <i className="fas fa-hand-holding-heart mr-3 text-xl"></i>
-                <span className="section-header">My Causes</span>
+                <span className="font-semibold">My Causes</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
