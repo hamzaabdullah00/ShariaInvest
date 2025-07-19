@@ -118,7 +118,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (July 19, 2025)
 
-### My Investments Three-Tab Layout Implementation (Latest)
+### Consistent Black Header Styling Implementation (Latest)
+- **Section Title Bars**: Applied black background bars to all section titles throughout the app (except main dashboard)
+- **Color Scheme**: Used #B2D2A4 for title text and white for supporting text in black headers
+- **Card Body Preservation**: Kept card bodies white unless they were originally black cards
+- **Original Black Cards Preserved**: Portfolio summary, dashboard overview, and profile header remain fully black as designed
+- **Consistent Design**: Applied to investments, causes, community, mosque, profile, and fund detail pages
+- **Clean Implementation**: Only CardHeader sections get black styling, maintaining minimalist black/white theme
+
+### My Investments Three-Tab Layout Implementation (Previous)
 - **Tab Structure**: Implemented three-tab layout matching My Causes design pattern with consistent styling
 - **Tab 1: My Portfolio**: Shows Barakah Halal Fund heading, restored black portfolio summary card with Total Invested/Current Value/CAGR, NAV Performance chart, Fund Summary card, and expandable investment section with slider, manual input, and confirmation flow
 - **Tab 2: Zakat**: Clean vertical flow with Calculate Zakat, Start Zakat SIP, impact summary, and donation options by NGO/Cause
