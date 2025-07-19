@@ -116,6 +116,18 @@ Preferred communication style: Simple, everyday language.
 - **Migration Status**: Successfully migrated from Replit Agent to Replit environment (July 17, 2025)
 - **Security**: Client-server separation implemented with robust security practices
 
+## Recent Changes (July 19, 2025)
+
+### My Investments Page Complete Redesign (Latest)
+- **Complete Page Replacement**: Replaced the Invest page content with comprehensive investment tracking structure
+- **Portfolio Overview**: Reused black background Investment Summary card design with white text, consistent 180px height
+- **Asset Allocation**: Implemented doughnut chart with grey-colored legends, thickened chart lines (strokeWidth: 5), and improved hover tooltips
+- **NAV Performance**: Enhanced interactive chart with edge-aware tooltip positioning, accurate movable vertical guide line, and comprehensive stat blocks
+- **Recent Transactions**: Well-padded card with proper scrolling (240px height, 200px max content height) and consistent styling
+- **Fund Summary**: Expanded to 3-column layout with Current NAV, Day Change, and 52W High stat blocks for better information density
+- **Consistent Spacing**: Applied mt-6 mb-6 spacing between all cards for visual harmony
+- **Clean Layout**: Minimalist black/white design with proper card heights to prevent content clipping
+
 ## Recent Changes (July 18, 2025)
 
 ### Home Page Redesign as Main Dashboard (Latest)
