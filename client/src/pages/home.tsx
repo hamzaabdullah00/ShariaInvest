@@ -41,9 +41,9 @@ export default function Home() {
         <Link href="/invest" className="block">
           <Card className="bg-black text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer border-0" style={{ height: '160px' }}>
             <CardHeader className="pb-2 pt-6">
-              <CardTitle className="flex items-center text-white text-lg">
-                <i className="fas fa-chart-line mr-3 text-xl"></i>
-                <span className="section-header">My Investments</span>
+              <CardTitle className="flex items-center text-lg">
+                <i className="fas fa-chart-line mr-3 text-xl" style={{ color: '#B2D2A4' }}></i>
+                <span className="section-header" style={{ color: '#B2D2A4' }}>My Investments</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0 pb-6">
