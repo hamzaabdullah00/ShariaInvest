@@ -79,8 +79,8 @@ export default function Investments() {
 
   const FundSummaryCard = () => (
     <Card className="border border-black rounded-lg">
-      <CardHeader className="pb-3 pt-6">
-        <CardTitle className="text-lg text-black">Fund Summary</CardTitle>
+      <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+        <CardTitle className="text-lg" style={{ color: '#B2D2A4' }}>Fund Summary</CardTitle>
       </CardHeader>
       <CardContent className="pt-0 pb-6">
         <div className="grid grid-cols-2 gap-6">

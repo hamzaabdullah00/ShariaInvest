@@ -118,13 +118,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (July 19, 2025)
 
-### Consistent Black Header Styling Implementation (Latest)
-- **Section Title Bars**: Applied black background bars to all section titles throughout the app (except main dashboard)
-- **Color Scheme**: Used #B2D2A4 for title text and white for supporting text in black headers
-- **Card Body Preservation**: Kept card bodies white unless they were originally black cards
-- **Original Black Cards Preserved**: Portfolio summary, dashboard overview, and profile header remain fully black as designed
-- **Consistent Design**: Applied to investments, causes, community, mosque, profile, and fund detail pages
-- **Clean Implementation**: Only CardHeader sections get black styling, maintaining minimalist black/white theme
+### Consistent Black Header Styling Implementation (Latest Update)
+- **Black Title Bars Only**: Applied black background exclusively to CardHeader sections (title bars) across all pages except main dashboard
+- **Title Color Scheme**: Used #B2D2A4 for main titles and white for subtitles/descriptions within black headers
+- **Card Body Preservation**: All card bodies remain white unless they were originally designed as full black cards
+- **Original Black Cards Preserved**: Portfolio summary, dashboard overview, and profile header maintain their full black styling as intended
+- **Complete Coverage**: Applied consistent styling to investments, causes, community, mosque, profile, and fund detail pages
+- **Surgical Approach**: Only CardHeader components receive black styling, preserving the minimalist black/white design philosophy
 
 ### My Investments Three-Tab Layout Implementation (Previous)
 - **Tab Structure**: Implemented three-tab layout matching My Causes design pattern with consistent styling

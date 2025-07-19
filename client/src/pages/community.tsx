@@ -84,8 +84,10 @@ export default function Community() {
 
       {/* Popular Discussions */}
       <Card className="mx-4 mt-6 border border-black rounded-lg">
-        <CardContent className="p-6">
-          <h4 className="font-semibold text-lg mb-4 text-black">Trending Discussions</h4>
+        <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+          <CardTitle className="font-semibold text-lg" style={{ color: '#B2D2A4' }}>Trending Discussions</CardTitle>
+        </CardHeader>
+        <CardContent className="pt-0 pb-6">
           <div className="space-y-4">
             <div className="border-l-4 border-black pl-4">
               <h5 className="font-medium text-sm text-black">How to calculate Zakat on investments?</h5>
@@ -123,10 +125,10 @@ export default function Community() {
 
       {/* Zakat & Charity Section */}
       <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg">
-        <CardHeader className="pb-2">
-          <CardTitle className="flex items-center justify-between section-header text-black">
-            <span>Zakat & Charity</span>
-            <i className="fas fa-hand-holding-heart text-black"></i>
+        <CardHeader className="pb-2 pt-6 bg-black rounded-t-lg">
+          <CardTitle className="flex items-center justify-between section-header">
+            <span style={{ color: '#B2D2A4' }}>Zakat & Charity</span>
+            <i className="fas fa-hand-holding-heart text-white"></i>
           </CardTitle>
         </CardHeader>
         <CardContent>
