@@ -176,9 +176,9 @@ export default function Investments() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Header */}
-      <div className="pt-4 pb-4 px-4 border-b border-gray-200">
-        <h1 className="text-2xl font-bold text-black">My Investments</h1>
-        <p className="text-sm text-gray-600">Manage your halal investment portfolio</p>
+      <div className="bg-black px-4 py-6 border-b border-black">
+        <h1 className="text-2xl font-bold" style={{ color: '#B2D2A4' }}>My Investments</h1>
+        <p className="text-sm text-white">Manage your halal investment portfolio</p>
       </div>
 
       {/* Tabs */}
@@ -359,10 +359,10 @@ export default function Investments() {
           <div className="px-4 pt-6 space-y-6">
             {/* Calculate Zakat Card */}
             <Card className="border border-black rounded-lg">
-              <CardHeader className="pb-3 pt-6">
-                <CardTitle className="flex items-center text-black text-lg">
-                  <Calculator className="mr-3" size={20} />
-                  Calculate Zakat
+              <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+                <CardTitle className="flex items-center text-lg">
+                  <Calculator className="mr-3 text-white" size={20} />
+                  <span style={{ color: '#B2D2A4' }}>Calculate Zakat</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0 pb-6">
@@ -375,10 +375,10 @@ export default function Investments() {
 
             {/* Start Zakat SIP Card */}
             <Card className="border border-black rounded-lg">
-              <CardHeader className="pb-3 pt-6">
-                <CardTitle className="flex items-center text-black text-lg">
-                  <DollarSign className="mr-3" size={20} />
-                  Start Zakat SIP
+              <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+                <CardTitle className="flex items-center text-lg">
+                  <DollarSign className="mr-3 text-white" size={20} />
+                  <span style={{ color: '#B2D2A4' }}>Start Zakat SIP</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0 pb-6">
@@ -391,10 +391,10 @@ export default function Investments() {
 
             {/* Current Zakat Summary */}
             <Card className="border border-black rounded-lg">
-              <CardHeader className="pb-3 pt-6">
-                <CardTitle className="flex items-center text-black text-lg">
-                  <Heart className="mr-3" size={20} />
-                  Your Zakat Impact
+              <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+                <CardTitle className="flex items-center text-lg">
+                  <Heart className="mr-3 text-white" size={20} />
+                  <span style={{ color: '#B2D2A4' }}>Your Zakat Impact</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0 pb-6">
@@ -421,7 +421,9 @@ export default function Investments() {
 
             {/* Donation Options */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-black">Donate Zakat</h3>
+              <div className="bg-black px-4 py-4 rounded-lg mb-4">
+                <h3 className="text-lg font-semibold" style={{ color: '#B2D2A4' }}>Donate Zakat</h3>
+              </div>
               
               <Card className="border border-black rounded-lg">
                 <CardContent className="pt-6 pb-6">
@@ -462,9 +464,9 @@ export default function Investments() {
         {activeTab === 'explore' && (
           <div className="px-4 pt-6">
             <div className="space-y-6">
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-black mb-2">Halal Investment Options</h3>
-                <p className="text-sm text-gray-600">Choose from our Shariah-compliant investment funds</p>
+              <div className="bg-black px-4 py-4 rounded-lg mb-6">
+                <h3 className="text-lg font-semibold mb-2" style={{ color: '#B2D2A4' }}>Halal Investment Options</h3>
+                <p className="text-sm text-white">Choose from our Shariah-compliant investment funds</p>
               </div>
               {halalFunds.map((fund) => (
                 <ExploreFundCard key={fund.id} fund={fund} />

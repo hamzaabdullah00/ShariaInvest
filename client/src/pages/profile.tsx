@@ -59,8 +59,8 @@ export default function Profile() {
 
       {/* Account Stats */}
       <Card className="mx-4 mt-4 mb-6 border border-black rounded-lg">
-        <CardHeader className="pb-2">
-          <CardTitle className="section-header text-black">Account Overview</CardTitle>
+        <CardHeader className="pb-2 bg-black rounded-t-lg">
+          <CardTitle className="section-header" style={{ color: '#B2D2A4' }}>Account Overview</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-4">

@@ -102,9 +102,9 @@ export default function Causes() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Header */}
-      <div className="pt-4 pb-4 px-4 border-b border-gray-200">
-        <h1 className="text-2xl font-bold text-black">My Causes</h1>
-        <p className="text-sm text-gray-600">Support meaningful causes and make a difference</p>
+      <div className="bg-black px-4 py-6 border-b border-black">
+        <h1 className="text-2xl font-bold" style={{ color: '#B2D2A4' }}>My Causes</h1>
+        <p className="text-sm text-white">Support meaningful causes and make a difference</p>
       </div>
 
       {/* Tab Navigation */}
@@ -138,10 +138,10 @@ export default function Causes() {
           <>
             {/* Summary Card */}
             <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg">
-              <CardHeader className="pb-3 pt-6">
-                <CardTitle className="flex items-center text-black text-lg">
-                  <Heart className="mr-3" size={20} />
-                  <span className="section-header">Your Impact</span>
+              <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+                <CardTitle className="flex items-center text-lg">
+                  <Heart className="mr-3 text-white" size={20} />
+                  <span className="section-header" style={{ color: '#B2D2A4' }}>Your Impact</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0 pb-6">
@@ -186,9 +186,11 @@ export default function Causes() {
           <>
             {/* Filter/Search Bar */}
             <div className="px-4 pt-6 pb-2">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="section-header text-black">All Registered Causes</h3>
-                <p className="text-sm text-gray-600">{allCauses.length} causes</p>
+              <div className="bg-black px-4 py-4 rounded-lg mb-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="section-header" style={{ color: '#B2D2A4' }}>All Registered Causes</h3>
+                  <p className="text-sm text-white">{allCauses.length} causes</p>
+                </div>
               </div>
             </div>
 

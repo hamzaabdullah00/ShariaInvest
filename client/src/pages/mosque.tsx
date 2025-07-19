@@ -51,18 +51,18 @@ export default function Mosque() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Header */}
-      <div className="pt-4 pb-4 px-4 border-b border-gray-200">
-        <h1 className="text-2xl font-bold text-black">My Mosque</h1>
-        <p className="text-sm text-gray-600">Your spiritual hub and community center</p>
+      <div className="bg-black px-4 py-6 border-b border-black">
+        <h1 className="text-2xl font-bold" style={{ color: '#B2D2A4' }}>My Mosque</h1>
+        <p className="text-sm text-white">Your spiritual hub and community center</p>
       </div>
 
       <div className="screen-content pb-24">
         {/* Prayer Times */}
         <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg">
-          <CardHeader className="pb-2 pt-6">
-            <CardTitle className="flex items-center justify-between text-black text-lg">
-              <span className="section-header">Prayer Times</span>
-              <i className="fas fa-mosque text-black"></i>
+          <CardHeader className="pb-2 pt-6 bg-black rounded-t-lg">
+            <CardTitle className="flex items-center justify-between text-lg">
+              <span className="section-header" style={{ color: '#B2D2A4' }}>Prayer Times</span>
+              <i className="fas fa-mosque text-white"></i>
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-0 pb-6">
@@ -101,10 +101,10 @@ export default function Mosque() {
 
         {/* Live Azaan Audio */}
         <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg">
-          <CardHeader className="pb-2 pt-6">
-            <CardTitle className="flex items-center text-black text-lg">
-              <Volume2 className="mr-3" size={20} />
-              <span className="section-header">Live Azaan</span>
+          <CardHeader className="pb-2 pt-6 bg-black rounded-t-lg">
+            <CardTitle className="flex items-center text-lg">
+              <Volume2 className="mr-3 text-white" size={20} />
+              <span className="section-header" style={{ color: '#B2D2A4' }}>Live Azaan</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-0 pb-6">
@@ -138,10 +138,10 @@ export default function Mosque() {
 
         {/* Mosque Fundraising */}
         <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg">
-          <CardHeader className="pb-2 pt-6">
-            <CardTitle className="flex items-center text-black text-lg">
-              <Heart className="mr-3" size={20} />
-              <span className="section-header">Monthly Fundraising</span>
+          <CardHeader className="pb-2 pt-6 bg-black rounded-t-lg">
+            <CardTitle className="flex items-center text-lg">
+              <Heart className="mr-3 text-white" size={20} />
+              <span className="section-header" style={{ color: '#B2D2A4' }}>Monthly Fundraising</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-0 pb-6">
@@ -169,10 +169,10 @@ export default function Mosque() {
 
         {/* Announcements */}
         <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg">
-          <CardHeader className="pb-2 pt-6">
-            <CardTitle className="flex items-center text-black text-lg">
-              <i className="fas fa-bullhorn mr-3"></i>
-              <span className="section-header">Announcements</span>
+          <CardHeader className="pb-2 pt-6 bg-black rounded-t-lg">
+            <CardTitle className="flex items-center text-lg">
+              <i className="fas fa-bullhorn mr-3 text-white"></i>
+              <span className="section-header" style={{ color: '#B2D2A4' }}>Announcements</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-0 pb-6">
@@ -197,10 +197,10 @@ export default function Mosque() {
 
         {/* Dua Requests */}
         <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg">
-          <CardHeader className="pb-2 pt-6">
-            <CardTitle className="flex items-center text-black text-lg">
-              <i className="fas fa-hands-praying mr-3"></i>
-              <span className="section-header">Community Dua Requests</span>
+          <CardHeader className="pb-2 pt-6 bg-black rounded-t-lg">
+            <CardTitle className="flex items-center text-lg">
+              <i className="fas fa-hands-praying mr-3 text-white"></i>
+              <span className="section-header" style={{ color: '#B2D2A4' }}>Community Dua Requests</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-0 pb-6">
@@ -219,10 +219,10 @@ export default function Mosque() {
 
         {/* Find Nearest Mosque */}
         <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg">
-          <CardHeader className="pb-2 pt-6">
-            <CardTitle className="flex items-center text-black text-lg">
-              <MapPin className="mr-3" size={20} />
-              <span className="section-header">Nearby Mosques</span>
+          <CardHeader className="pb-2 pt-6 bg-black rounded-t-lg">
+            <CardTitle className="flex items-center text-lg">
+              <MapPin className="mr-3 text-white" size={20} />
+              <span className="section-header" style={{ color: '#B2D2A4' }}>Nearby Mosques</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-0 pb-6">

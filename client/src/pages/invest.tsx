@@ -38,9 +38,9 @@ export default function Invest() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="pt-4 pb-4 px-4 border-b border-gray-200">
-        <h1 className="text-2xl font-bold text-black">Halal Investments</h1>
-        <p className="text-sm text-gray-600">Choose from our Shariah-compliant investment options</p>
+      <div className="bg-black px-4 py-6 border-b border-black">
+        <h1 className="text-2xl font-bold" style={{ color: '#B2D2A4' }}>Halal Investments</h1>
+        <p className="text-sm text-white">Choose from our Shariah-compliant investment options</p>
       </div>
 
       <div className="screen-content pb-24">

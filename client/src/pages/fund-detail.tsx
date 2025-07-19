@@ -168,20 +168,20 @@ export default function FundDetail() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="pt-4 pb-4 px-4 border-b border-gray-200">
+      <div className="bg-black px-4 py-6 border-b border-black">
         <div className="flex items-center space-x-3 mb-2">
           <Link href="/invest">
-            <Button variant="ghost" size="sm" className="p-1">
+            <Button variant="ghost" size="sm" className="p-1 text-white hover:bg-gray-800">
               <ArrowLeft className="w-5 h-5" />
             </Button>
           </Link>
           <div className="flex-1">
-            <h1 className="text-2xl font-bold text-black">{fund.name}</h1>
+            <h1 className="text-2xl font-bold" style={{ color: '#B2D2A4' }}>{fund.name}</h1>
             <div className="flex items-center space-x-2 mt-1">
               <Badge className={getRiskLevelColor(fund.riskLevel)}>
                 {fund.riskLevel} risk
               </Badge>
-              <span className="text-sm text-gray-600">{fund.description}</span>
+              <span className="text-sm text-white">{fund.description}</span>
             </div>
           </div>
         </div>
@@ -190,9 +190,9 @@ export default function FundDetail() {
       <div className="screen-content pb-24">
         {/* Investment Amount Section */}
         <Card className="mx-4 mt-6 border border-black rounded-lg">
-          <CardHeader className="pb-3 pt-6">
-            <CardTitle className="text-lg text-black">Investment Amount</CardTitle>
-            <p className="text-sm text-gray-600">Choose your investment amount (Min: ₹{Number(fund.minimumInvestment).toLocaleString('en-IN')})</p>
+          <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+            <CardTitle className="text-lg" style={{ color: '#B2D2A4' }}>Investment Amount</CardTitle>
+            <p className="text-sm text-white">Choose your investment amount (Min: ₹{Number(fund.minimumInvestment).toLocaleString('en-IN')})</p>
           </CardHeader>
           <CardContent className="pb-6">
             <div className="space-y-6">
@@ -272,12 +272,12 @@ export default function FundDetail() {
 
         {/* NAV Performance Chart */}
         <Card className="mx-4 mt-6 border border-black rounded-lg">
-          <CardHeader className="pb-3 pt-6">
-            <CardTitle className="flex items-center text-lg text-black">
-              <TrendingUp className="w-5 h-5 mr-2" />
-              NAV Performance
+          <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+            <CardTitle className="flex items-center text-lg">
+              <TrendingUp className="w-5 h-5 mr-2 text-white" />
+              <span style={{ color: '#B2D2A4' }}>NAV Performance</span>
             </CardTitle>
-            <p className="text-sm text-gray-600">Historical Net Asset Value trends</p>
+            <p className="text-sm text-white">Historical Net Asset Value trends</p>
           </CardHeader>
           <CardContent className="pb-6">
             <NavChart fundName={fund.name} />
@@ -286,12 +286,12 @@ export default function FundDetail() {
 
         {/* Asset Allocation */}
         <Card className="mx-4 mt-6 border border-black rounded-lg">
-          <CardHeader className="pb-3 pt-6">
-            <CardTitle className="flex items-center text-lg text-black">
-              <PieChart className="w-5 h-5 mr-2" />
-              Asset Allocation
+          <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+            <CardTitle className="flex items-center text-lg">
+              <PieChart className="w-5 h-5 mr-2 text-white" />
+              <span style={{ color: '#B2D2A4' }}>Asset Allocation</span>
             </CardTitle>
-            <p className="text-sm text-gray-600">Fund portfolio breakdown</p>
+            <p className="text-sm text-white">Fund portfolio breakdown</p>
           </CardHeader>
           <CardContent className="pb-6">
             <div className="space-y-4">
@@ -313,12 +313,12 @@ export default function FundDetail() {
 
         {/* Recent Transactions */}
         <Card className="mx-4 mt-6 border border-black rounded-lg">
-          <CardHeader className="pb-3 pt-6">
-            <CardTitle className="flex items-center text-lg text-black">
-              <History className="w-5 h-5 mr-2" />
-              Recent Transactions
+          <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+            <CardTitle className="flex items-center text-lg">
+              <History className="w-5 h-5 mr-2 text-white" />
+              <span style={{ color: '#B2D2A4' }}>Recent Transactions</span>
             </CardTitle>
-            <p className="text-sm text-gray-600">Your latest investment activities</p>
+            <p className="text-sm text-white">Your latest investment activities</p>
           </CardHeader>
           <CardContent className="pb-6">
             <div className="space-y-3">

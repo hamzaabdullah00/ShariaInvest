@@ -32,9 +32,9 @@ export default function Community() {
   return (
     <div className="screen-content">
       {/* Header */}
-      <div className="bg-white px-4 py-6 border-b border-black">
-        <h3 className="text-xl font-semibold mb-2 text-black">Community Forums</h3>
-        <p className="text-black text-sm">Connect, learn, and grow together</p>
+      <div className="bg-black px-4 py-6 border-b border-black">
+        <h3 className="text-xl font-semibold mb-2" style={{ color: '#B2D2A4' }}>Community Forums</h3>
+        <p className="text-white text-sm">Connect, learn, and grow together</p>
       </div>
 
       {/* Search Bar */}
