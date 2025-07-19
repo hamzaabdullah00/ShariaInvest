@@ -38,7 +38,7 @@ export default function Home() {
       {/* Main Dashboard Cards */}
       <div className="px-4 space-y-6 pb-24">
         {/* My Investments Card */}
-        <Link href="/invest" className="block">
+        <Link href="/investments" className="block">
           <Card className="bg-black text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer border-0" style={{ height: '160px' }}>
             <CardHeader className="pb-2 pt-6">
               <CardTitle className="flex items-center text-lg">
