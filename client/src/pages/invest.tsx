@@ -113,8 +113,27 @@ export default function Invest() {
           ))}
         </div>
 
+        {/* Explore More Funds Section */}
+        <div className="mx-4 mt-8">
+          <h3 className="text-lg font-semibold text-black mb-4">Explore More Funds</h3>
+          <Card className="border border-black rounded-lg">
+            <CardContent className="pt-6 pb-6">
+              <div className="text-center">
+                <TrendingUp className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                <h4 className="font-semibold text-black mb-2">Additional Investment Options</h4>
+                <p className="text-sm text-gray-600 mb-4">
+                  Discover more halal investment opportunities tailored to your financial goals.
+                </p>
+                <Button className="bg-black text-white hover:bg-gray-800">
+                  View All Funds
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Information Card */}
-        <Card className="mx-4 mt-8 border border-black rounded-lg">
+        <Card className="mx-4 mt-6 border border-black rounded-lg">
           <CardContent className="pt-6 pb-6">
             <div className="text-center">
               <Shield className="w-12 h-12 text-gray-400 mx-auto mb-4" />
