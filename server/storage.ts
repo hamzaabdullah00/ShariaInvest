@@ -83,8 +83,11 @@ export class MemStorage implements IStorage {
 
     // Seed NGO projects
     const projects: NgoProject[] = [
-      { id: 1, name: "Children's Education Fund", description: "Supporting underprivileged children's education", targetAmount: "100000", raisedAmount: "68000", category: "education" },
-      { id: 2, name: "Clean Water Initiative", description: "Providing clean water access to rural communities", targetAmount: "150000", raisedAmount: "67500", category: "water" },
+      { id: 1, name: "Children's Education Fund", description: "Supporting underprivileged children's education", targetAmount: "100000", currentAmount: "68000", category: "education", deadline: "2025-12-31" },
+      { id: 2, name: "Clean Water Initiative", description: "Providing clean water access to rural communities", targetAmount: "150000", currentAmount: "67500", category: "water", deadline: "2026-03-15" },
+      { id: 3, name: "Healthcare Support", description: "Medical aid for elderly community members", targetAmount: "80000", currentAmount: "45000", category: "health", deadline: "2025-10-20" },
+      { id: 4, name: "Mosque Renovation", description: "Renovating the community mosque", targetAmount: "200000", currentAmount: "125000", category: "infrastructure", deadline: "2025-09-30" },
+      { id: 5, name: "Food Distribution", description: "Daily meals for underprivileged families", targetAmount: "60000", currentAmount: "38000", category: "food", deadline: "2025-08-15" },
     ];
     projects.forEach(project => this.ngoProjects.set(project.id, project));
 

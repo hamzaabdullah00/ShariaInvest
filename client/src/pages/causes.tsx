@@ -19,7 +19,9 @@ export default function Causes() {
   const exploreCauses = allCauses.slice(2);
 
   const CauseCard = ({ cause, isSupported = false }: { cause: NgoProject; isSupported?: boolean }) => {
-    const progressPercent = (cause.currentAmount / cause.targetAmount) * 100;
+    const currentAmount = Number(cause.currentAmount) || 0;
+    const targetAmount = Number(cause.targetAmount) || 1;
+    const progressPercent = (currentAmount / targetAmount) * 100;
     const daysLeft = Math.ceil((new Date(cause.deadline).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
 
     return (
@@ -43,7 +45,7 @@ export default function Causes() {
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <p className="text-sm text-gray-600">
-                  ₹{cause.currentAmount.toLocaleString('en-IN')} raised
+                  ₹{currentAmount.toLocaleString('en-IN')} raised
                 </p>
                 <p className="text-sm font-medium text-black">
                   {Math.round(progressPercent)}%
@@ -52,7 +54,7 @@ export default function Causes() {
               <Progress value={progressPercent} className="h-2" />
               <div className="flex justify-between items-center text-sm">
                 <p className="text-gray-600">
-                  Goal: ₹{cause.targetAmount.toLocaleString('en-IN')}
+                  Goal: ₹{targetAmount.toLocaleString('en-IN')}
                 </p>
                 <div className="flex items-center text-gray-600">
                   <Calendar className="w-3 h-3 mr-1" />

@@ -59,8 +59,9 @@ export const ngoProjects = pgTable("ngo_projects", {
   name: text("name").notNull(),
   description: text("description").notNull(),
   targetAmount: decimal("target_amount", { precision: 12, scale: 2 }).notNull(),
-  raisedAmount: decimal("raised_amount", { precision: 12, scale: 2 }).notNull().default("0"),
+  currentAmount: decimal("current_amount", { precision: 12, scale: 2 }).notNull().default("0"),
   category: text("category").notNull(),
+  deadline: text("deadline").notNull(),
 });
 
 export const prayerTimes = pgTable("prayer_times", {
