@@ -118,6 +118,18 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (July 18, 2025)
 
+### Home Page Redesign as Main Dashboard (Latest)
+- **Complete UI Overhaul**: Redesigned home page as main dashboard with 4 equally-sized cards
+- **New Page Structure**: 
+  - My Investments (/investments) - Contains all previous dashboard content: NAV chart, asset allocation, recent transactions, fund summary
+  - My Mosque (/mosque) - Prayer times, live Azaan, fundraising tracker, announcements, dua requests, mosque finder
+  - My Communities (/community) - Links to existing discussion forums page
+  - My Causes (/causes) - User's supported causes with explore all causes functionality
+- **Clean Design**: Black/white minimalist cards with consistent 120px height, proper spacing, and hover effects
+- **Removed Elements**: Eliminated prayer times card, quick actions block, and recent activity from home page
+- **Navigation Update**: Added new routes to App.tsx for seamless navigation between sections
+- **Mobile Optimized**: Cards are touch-friendly with proper padding and responsive layout
+
 ### Interactive Mosque Finder Implementation
 - **Prayer Times Integration**: Moved mosque finder functionality to Prayer Times card only
 - **Dynamic Map Integration**: Added expandable mosque finder with OpenStreetMap integration using React Leaflet

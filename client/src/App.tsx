@@ -8,6 +8,9 @@ import SplashScreen from "@/components/splash-screen";
 import Home from "@/pages/home";
 import Invest from "@/pages/invest";
 import Dashboard from "@/pages/dashboard";
+import Investments from "@/pages/investments";
+import Mosque from "@/pages/mosque";
+import Causes from "@/pages/causes";
 import Community from "@/pages/community";
 import Profile from "@/pages/profile";
 import BottomNavigation from "@/components/bottom-navigation";
@@ -20,6 +23,9 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/invest" component={Invest} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/investments" component={Investments} />
+      <Route path="/mosque" component={Mosque} />
+      <Route path="/causes" component={Causes} />
       <Route path="/community" component={Community} />
       <Route path="/profile" component={Profile} />
       <Route component={NotFound} />
