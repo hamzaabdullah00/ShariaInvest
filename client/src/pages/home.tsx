@@ -77,8 +77,8 @@ export default function Home() {
                 My Investments
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-0 pb-4 px-6">
-              <div className="grid grid-cols-3 gap-3 mb-3">
+            <CardContent className="pt-2 pb-4 px-6">
+              <div className="grid grid-cols-3 gap-3 mb-4 mt-1">
                 <div className="text-center">
                   <p className="text-xs text-gray-300 leading-tight">Current Value</p>
                   <p className="text-sm font-bold text-white whitespace-nowrap">
@@ -98,7 +98,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <p className="text-xs text-gray-300 text-center mt-2">
+              <p className="text-xs text-gray-300 text-center mt-3">
                 Explore halal investment options
               </p>
             </CardContent>

@@ -121,7 +121,7 @@ Preferred communication style: Simple, everyday language.
 ### Home Page Dashboard Cards Redesign (Latest Update)
 - **Uniform Dark Grey Background**: All cards (My Investments, My Mosque, My Communities, My Causes) now use consistent #1C1C1C background
 - **Single-Line Layout Fix**: Ensured "Total Investment" label and value display on single line with whitespace-nowrap
-- **Consistent Spacing**: Applied uniform padding (px-6) and spacing (pb-4, mb-3, mt-2) across all cards for perfect alignment
+- **Enhanced Vertical Balance**: Improved My Investment card spacing with better vertical distribution (pt-2, mt-1, mb-4, mt-3) for optimal breathing room
 - **Perfect Left Alignment**: Removed icons from titles to ensure perfect left alignment between card titles and content text below
 - **Dynamic Prayer Times**: Integrated real-time next prayer display in My Mosque card using actual prayer times API
 - **Overlapping Circular Icons**: Implemented Google-style overlapping circular icons for communities and causes
