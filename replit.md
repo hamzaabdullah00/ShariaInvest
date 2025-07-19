@@ -122,7 +122,7 @@ Preferred communication style: Simple, everyday language.
 - **Uniform Dark Grey Background**: All cards (My Investments, My Mosque, My Communities, My Causes) now use consistent #1C1C1C background
 - **Single-Line Layout Fix**: Ensured "Total Investment" label and value display on single line with whitespace-nowrap
 - **Consistent Spacing**: Applied uniform padding (px-6) and spacing (pb-4, mb-3, mt-2) across all cards for perfect alignment
-- **Left-Aligned Content**: All card titles and descriptive text maintain consistent left alignment and padding
+- **Perfect Left Alignment**: Removed icons from titles to ensure perfect left alignment between card titles and content text below
 - **Dynamic Prayer Times**: Integrated real-time next prayer display in My Mosque card using actual prayer times API
 - **Overlapping Circular Icons**: Implemented Google-style overlapping circular icons for communities and causes
   - My Communities: Shows FQ (Finance Q&A), UM (Urban Muslims), II (Islamic Investing), YM (Young Muslims), +2 more

@@ -73,9 +73,8 @@ export default function Home() {
         <Link href="/investments" className="block">
           <Card className="text-white rounded-lg hover:opacity-90 transition-colors cursor-pointer border-0" style={{ height: '160px', backgroundColor: '#1C1C1C' }}>
             <CardHeader className="pb-2 pt-6 px-6">
-              <CardTitle className="flex items-center text-lg">
-                <i className="fas fa-chart-line mr-3 text-xl" style={{ color: '#B2D2A4' }}></i>
-                <span style={{ color: '#B2D2A4' }}>My Investments</span>
+              <CardTitle className="text-lg" style={{ color: '#B2D2A4' }}>
+                My Investments
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0 pb-4 px-6">
@@ -110,9 +109,8 @@ export default function Home() {
         <Link href="/mosque" className="block">
           <Card className="text-white rounded-lg hover:opacity-90 transition-colors cursor-pointer border-0" style={{ height: '160px', backgroundColor: '#1C1C1C' }}>
             <CardHeader className="pb-2 pt-6 px-6">
-              <CardTitle className="flex items-center text-lg">
-                <i className="fas fa-mosque mr-3 text-xl" style={{ color: '#B2D2A4' }}></i>
-                <span style={{ color: '#B2D2A4' }}>My Mosque</span>
+              <CardTitle className="text-lg" style={{ color: '#B2D2A4' }}>
+                My Mosque
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0 pb-4 px-6">
@@ -131,9 +129,8 @@ export default function Home() {
         <Link href="/community" className="block">
           <Card className="text-white rounded-lg hover:opacity-90 transition-colors cursor-pointer border-0" style={{ height: '160px', backgroundColor: '#1C1C1C' }}>
             <CardHeader className="pb-2 pt-6 px-6">
-              <CardTitle className="flex items-center text-lg">
-                <i className="fas fa-comments mr-3 text-xl" style={{ color: '#B2D2A4' }}></i>
-                <span style={{ color: '#B2D2A4' }}>My Communities</span>
+              <CardTitle className="text-lg" style={{ color: '#B2D2A4' }}>
+                My Communities
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0 pb-4 px-6">
@@ -170,9 +167,8 @@ export default function Home() {
         <Link href="/causes" className="block">
           <Card className="text-white rounded-lg hover:opacity-90 transition-colors cursor-pointer border-0" style={{ height: '160px', backgroundColor: '#1C1C1C' }}>
             <CardHeader className="pb-2 pt-6 px-6">
-              <CardTitle className="flex items-center text-lg">
-                <i className="fas fa-hand-holding-heart mr-3 text-xl" style={{ color: '#B2D2A4' }}></i>
-                <span style={{ color: '#B2D2A4' }}>My Causes</span>
+              <CardTitle className="text-lg" style={{ color: '#B2D2A4' }}>
+                My Causes
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0 pb-4 px-6">
