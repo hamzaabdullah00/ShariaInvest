@@ -71,35 +71,35 @@ export default function Home() {
       <div className="px-4 space-y-6 pb-24">
         {/* My Investments Card */}
         <Link href="/investments" className="block">
-          <Card className="bg-black text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer border-0" style={{ height: '160px' }}>
-            <CardHeader className="pb-2 pt-6">
+          <Card className="text-white rounded-lg hover:opacity-90 transition-colors cursor-pointer border-0" style={{ height: '160px', backgroundColor: '#1C1C1C' }}>
+            <CardHeader className="pb-2 pt-6 px-6">
               <CardTitle className="flex items-center text-lg">
                 <i className="fas fa-chart-line mr-3 text-xl" style={{ color: '#B2D2A4' }}></i>
-                <span className="section-header" style={{ color: '#B2D2A4' }}>My Investments</span>
+                <span style={{ color: '#B2D2A4' }}>My Investments</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-0 pb-6">
-              <div className="grid grid-cols-3 gap-4 mb-4">
+            <CardContent className="pt-0 pb-4 px-6">
+              <div className="grid grid-cols-3 gap-3 mb-3">
                 <div className="text-center">
-                  <p className="text-xs text-gray-300">Current Value</p>
-                  <p className="text-sm font-bold text-white">
+                  <p className="text-xs text-gray-300 leading-tight">Current Value</p>
+                  <p className="text-sm font-bold text-white whitespace-nowrap">
                     ₹{currentValue.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                   </p>
                 </div>
                 <div className="text-center">
-                  <p className="text-xs text-gray-300">Total Investment</p>
-                  <p className="text-sm font-bold text-white">
+                  <p className="text-xs text-gray-300 leading-tight whitespace-nowrap">Total Investment</p>
+                  <p className="text-sm font-bold text-white whitespace-nowrap">
                     ₹{totalInvestment.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                   </p>
                 </div>
                 <div className="text-center">
-                  <p className="text-xs text-gray-300">CAGR</p>
-                  <p className="text-sm font-bold" style={{ color: cagr >= 0 ? '#B2D2A4' : '#ff6b6b' }}>
+                  <p className="text-xs text-gray-300 leading-tight">CAGR</p>
+                  <p className="text-sm font-bold whitespace-nowrap" style={{ color: cagr >= 0 ? '#B2D2A4' : '#ff6b6b' }}>
                     {cagr >= 0 ? '+' : ''}{cagr.toFixed(1)}%
                   </p>
                 </div>
               </div>
-              <p className="text-xs text-gray-300 text-center">
+              <p className="text-xs text-gray-300 text-center mt-2">
                 Explore halal investment options
               </p>
             </CardContent>
