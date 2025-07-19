@@ -108,19 +108,19 @@ export default function Home() {
 
         {/* My Mosque Card */}
         <Link href="/mosque" className="block">
-          <Card className="bg-black text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer border-0" style={{ height: '160px' }}>
-            <CardHeader className="pb-2 pt-6">
+          <Card className="text-white rounded-lg hover:opacity-90 transition-colors cursor-pointer border-0" style={{ height: '160px', backgroundColor: '#1C1C1C' }}>
+            <CardHeader className="pb-2 pt-6 px-6">
               <CardTitle className="flex items-center text-lg">
                 <i className="fas fa-mosque mr-3 text-xl" style={{ color: '#B2D2A4' }}></i>
                 <span style={{ color: '#B2D2A4' }}>My Mosque</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-0 pb-6">
-              <div className="mb-4">
+            <CardContent className="pt-0 pb-4 px-6">
+              <div className="mb-3">
                 <p className="text-sm text-gray-300 mb-1">Next Prayer</p>
                 <p className="text-lg font-semibold text-white">{getNextPrayer()}</p>
               </div>
-              <p className="text-xs text-gray-300">
+              <p className="text-xs text-gray-300 mt-2">
                 Prayer times, live Azaan, and community updates
               </p>
             </CardContent>
@@ -129,15 +129,15 @@ export default function Home() {
 
         {/* My Communities Card */}
         <Link href="/community" className="block">
-          <Card className="bg-black text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer border-0" style={{ height: '160px' }}>
-            <CardHeader className="pb-2 pt-6">
+          <Card className="text-white rounded-lg hover:opacity-90 transition-colors cursor-pointer border-0" style={{ height: '160px', backgroundColor: '#1C1C1C' }}>
+            <CardHeader className="pb-2 pt-6 px-6">
               <CardTitle className="flex items-center text-lg">
                 <i className="fas fa-comments mr-3 text-xl" style={{ color: '#B2D2A4' }}></i>
                 <span style={{ color: '#B2D2A4' }}>My Communities</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-0 pb-6">
-              <div className="mb-4">
+            <CardContent className="pt-0 pb-4 px-6">
+              <div className="mb-3">
                 <div className="flex items-center mb-2">
                   {/* Overlapping circular icons for communities */}
                   <div className="flex -space-x-2">
@@ -159,7 +159,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <p className="text-xs text-gray-300">
+              <p className="text-xs text-gray-300 mt-2">
                 Active in 6 communities with 47 forum posts
               </p>
             </CardContent>
@@ -168,15 +168,15 @@ export default function Home() {
 
         {/* My Causes Card */}
         <Link href="/causes" className="block">
-          <Card className="bg-black text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer border-0" style={{ height: '160px' }}>
-            <CardHeader className="pb-2 pt-6">
+          <Card className="text-white rounded-lg hover:opacity-90 transition-colors cursor-pointer border-0" style={{ height: '160px', backgroundColor: '#1C1C1C' }}>
+            <CardHeader className="pb-2 pt-6 px-6">
               <CardTitle className="flex items-center text-lg">
                 <i className="fas fa-hand-holding-heart mr-3 text-xl" style={{ color: '#B2D2A4' }}></i>
                 <span style={{ color: '#B2D2A4' }}>My Causes</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-0 pb-6">
-              <div className="mb-4">
+            <CardContent className="pt-0 pb-4 px-6">
+              <div className="mb-3">
                 <div className="flex items-center mb-2">
                   {/* Overlapping circular icons for causes */}
                   <div className="flex -space-x-2">
@@ -195,7 +195,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <p className="text-xs text-gray-300">
+              <p className="text-xs text-gray-300 mt-2">
                 Supporting 6 causes with ₹12,500 total contributions
               </p>
             </CardContent>

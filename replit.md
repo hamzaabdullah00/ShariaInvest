@@ -119,10 +119,10 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes (July 19, 2025)
 
 ### Home Page Dashboard Cards Redesign (Latest Update)
-- **Dark Grey Investment Card**: Updated My Investments card to use #1C1C1C background for softer contrast while maintaining #B2D2A4 accent
+- **Uniform Dark Grey Background**: All cards (My Investments, My Mosque, My Communities, My Causes) now use consistent #1C1C1C background
 - **Single-Line Layout Fix**: Ensured "Total Investment" label and value display on single line with whitespace-nowrap
-- **Improved Text Positioning**: Raised bottom text positioning for better visual balance within card boundaries
-- **Black Background Cards**: My Mosque, My Communities, and My Causes cards use black backgrounds with #B2D2A4 headings
+- **Consistent Spacing**: Applied uniform padding (px-6) and spacing (pb-4, mb-3, mt-2) across all cards for perfect alignment
+- **Left-Aligned Content**: All card titles and descriptive text maintain consistent left alignment and padding
 - **Dynamic Prayer Times**: Integrated real-time next prayer display in My Mosque card using actual prayer times API
 - **Overlapping Circular Icons**: Implemented Google-style overlapping circular icons for communities and causes
   - My Communities: Shows FQ (Finance Q&A), UM (Urban Muslims), II (Islamic Investing), YM (Young Muslims), +2 more
