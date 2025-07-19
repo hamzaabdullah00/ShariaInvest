@@ -118,7 +118,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (July 19, 2025)
 
-### Halal Investment Portfolio Restructure (Latest)
+### My Investments Three-Tab Layout Implementation (Latest)
+- **Tab Structure**: Implemented three-tab layout matching My Causes design pattern with consistent styling
+- **Tab 1: My Portfolio**: Shows Barakah Halal Fund heading, restored black portfolio summary card with Total Invested/Current Value/CAGR, NAV Performance chart, Fund Summary card, and expandable investment section with slider, manual input, and confirmation flow
+- **Tab 2: Zakat**: Clean vertical flow with Calculate Zakat, Start Zakat SIP, impact summary, and donation options by NGO/Cause
+- **Tab 3: Explore Funds (Phase 2)**: List of halal fund options with consistent card padding and design
+- **Investment Flow**: Full-width black 'Invest Now' button opens investment section with auto-scroll to confirmation
+- **Design Consistency**: Black/white minimalism with strategic #B2D2A4 accent for gains, matching overall app theme
+
+### Halal Investment Portfolio Restructure (Previous)
 - **Investment Listing Page**: Replaced single-fund layout with comprehensive list of 5 halal fund options
 - **Fund Options Added**: Sukuk Income Fund, Islamic Equity Fund, Shariah-compliant ETF, Halal Balanced Fund, Islamic Money-Market Fund
 - **Fund Detail Pages**: Individual pages for each fund with investment slider, manual input, NAV charts, asset allocation

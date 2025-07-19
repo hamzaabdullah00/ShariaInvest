@@ -225,6 +225,35 @@ export default function Investments() {
               <h2 className="text-xl font-semibold text-black">Barakah Halal Fund</h2>
             </div>
 
+            {/* Portfolio Summary Card */}
+            <Card className="bg-black text-white rounded-lg border-0">
+              <CardHeader className="pb-4 pt-8">
+                <CardTitle className="text-lg text-white">Portfolio Summary</CardTitle>
+              </CardHeader>
+              <CardContent className="pt-0 pb-8">
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="text-center">
+                    <p className="text-xs text-gray-300 mb-2">Total Invested</p>
+                    <p className="text-lg font-bold text-white">
+                      ₹{totalInvestment > 0 ? totalInvestment.toLocaleString('en-IN', { maximumFractionDigits: 0 }) : '0'}
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xs text-gray-300 mb-2">Current Value</p>
+                    <p className="text-lg font-bold text-white">
+                      ₹{currentValue > 0 ? currentValue.toLocaleString('en-IN', { maximumFractionDigits: 0 }) : '0'}
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xs text-gray-300 mb-2">CAGR</p>
+                    <p className="text-lg font-bold" style={{ color: cagr >= 0 ? '#B2D2A4' : '#ff6b6b' }}>
+                      {cagr >= 0 ? '+' : ''}{cagr.toFixed(1)}%
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* NAV Performance Chart */}
             <div className="-mx-4">
               <NavChart />
