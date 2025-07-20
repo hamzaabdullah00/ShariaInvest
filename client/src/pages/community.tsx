@@ -2,21 +2,16 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Search } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import ForumRoomCard from "@/components/forum-room-card";
-import type { ForumRoom, NgoProject } from "@shared/schema";
+import type { ForumRoom } from "@shared/schema";
 
 export default function Community() {
   const [searchQuery, setSearchQuery] = useState("");
   
   const { data: forumRooms, isLoading } = useQuery<ForumRoom[]>({
     queryKey: ["/api/forum/rooms"],
-  });
-
-  const { data: ngoProjects, isLoading: projectsLoading } = useQuery<NgoProject[]>({
-    queryKey: ["/api/ngo-projects"],
   });
 
   const filteredRooms = forumRooms?.filter(room =>
@@ -84,8 +79,8 @@ export default function Community() {
 
       {/* Popular Discussions */}
       <Card className="mx-4 mt-6 border border-black rounded-lg">
-        <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
-          <CardTitle className="font-semibold text-lg" style={{ color: '#B2D2A4' }}>Trending Discussions</CardTitle>
+        <CardHeader className="pb-3 pt-6">
+          <CardTitle className="font-semibold text-lg text-black">Trending Discussions</CardTitle>
         </CardHeader>
         <CardContent className="pt-0 pb-6">
           <div className="space-y-4">
@@ -123,53 +118,8 @@ export default function Community() {
         </CardContent>
       </Card>
 
-      {/* Zakat & Charity Section */}
-      <Card className="mx-4 mt-6 mb-6 border border-black rounded-lg">
-        <CardHeader className="pb-2 pt-6 bg-black rounded-t-lg">
-          <CardTitle className="flex items-center justify-between section-header">
-            <span style={{ color: '#B2D2A4' }}>Zakat & Charity</span>
-            <i className="fas fa-hand-holding-heart text-white"></i>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-black text-sm mb-4">Support verified NGOs and causes</p>
-          
-          {projectsLoading ? (
-            <div className="space-y-3">
-              {[...Array(2)].map((_, i) => (
-                <div key={i} className="animate-pulse border border-black rounded-lg p-4">
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                  <div className="h-2 bg-gray-200 rounded w-full mb-3"></div>
-                  <div className="h-8 bg-gray-200 rounded w-full"></div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {ngoProjects?.map((project) => {
-                const fundedPercent = (parseFloat(project.raisedAmount) / parseFloat(project.targetAmount)) * 100;
-                return (
-                  <div key={project.id} className="border border-black rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h5 className="font-medium text-black">{project.name}</h5>
-                      <span className="text-sm text-black">
-                        {Math.round(fundedPercent)}% funded
-                      </span>
-                    </div>
-                    <Progress value={fundedPercent} className="mb-3" />
-                    <Button className="w-full bg-black text-white hover:bg-white hover:text-black hover:border-black border text-sm">
-                      Donate Now
-                    </Button>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
       {/* New Room Button */}
-      <div className="mx-4 mb-8">
+      <div className="mx-4 mt-6 mb-24">
         <Button className="w-full bg-black text-white hover:bg-white hover:text-black hover:border-black border py-4 font-semibold">
           <i className="fas fa-plus mr-2"></i>Register Your Cause
         </Button>
