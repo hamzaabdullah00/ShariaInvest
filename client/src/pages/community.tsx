@@ -164,27 +164,28 @@ export default function Community() {
           </div>
 
           {/* Members Panel */}
-          <div className="w-72 border-l border-gray-200 bg-gray-50">
-            <div className="p-4 border-b border-gray-200">
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="font-semibold text-black">Online Members</h4>
+          <div className="w-72 border-l border-black bg-white">
+            <div className="bg-black px-4 py-3 border-b border-black">
+              <div className="flex items-center justify-between">
+                <h4 className="font-semibold text-white">Online Members</h4>
                 <Dialog open={showMembersDialog} onOpenChange={setShowMembersDialog}>
                   <DialogTrigger asChild>
-                    <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-800 text-xs">
+                    <Button variant="ghost" size="sm" className="text-white hover:bg-gray-800 text-xs">
                       View All
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-md">
+                  <DialogContent className="max-w-md" aria-describedby="members-description">
                     <DialogHeader>
                       <DialogTitle>All Members ({allMembers.length})</DialogTitle>
                     </DialogHeader>
+                    <p id="members-description" className="sr-only">View all community members with their online status</p>
                     <div className="max-h-96 overflow-y-auto">
                       <div className="space-y-2">
                         {allMembers.map((member) => (
                           <div key={member.id} className="flex items-center space-x-3 p-2 hover:bg-gray-50 rounded">
                             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold text-white ${
-                              member.status === 'online' ? 'bg-green-500' : 
-                              member.status === 'away' ? 'bg-yellow-500' : 'bg-gray-400'
+                              member.status === 'online' ? 'bg-black' : 
+                              member.status === 'away' ? 'bg-gray-600' : 'bg-gray-400'
                             }`}>
                               {member.avatar}
                             </div>
@@ -199,18 +200,20 @@ export default function Community() {
                   </DialogContent>
                 </Dialog>
               </div>
-              
-              <div className="space-y-2">
+            </div>
+            
+            <div className="p-4">
+              <div className="space-y-3">
                 {onlineMembers.slice(0, 5).map((member) => (
                   <div key={member.id} className="flex items-center space-x-2">
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold text-white ${
-                      member.status === 'online' ? 'bg-green-500' : 
-                      member.status === 'away' ? 'bg-yellow-500' : 'bg-gray-400'
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold text-white ${
+                      member.status === 'online' ? 'bg-black' : 
+                      member.status === 'away' ? 'bg-gray-600' : 'bg-gray-400'
                     }`}>
                       {member.avatar}
                     </div>
                     <div className="flex-1">
-                      <p className="text-xs font-medium text-black">{member.name}</p>
+                      <p className="text-sm font-medium text-black">{member.name}</p>
                       <p className="text-xs text-gray-500">{member.lastSeen}</p>
                     </div>
                   </div>
@@ -244,16 +247,14 @@ export default function Community() {
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-semibold text-white ${
-                      community.isOnline ? 'bg-green-600' : 'bg-gray-600'
-                    }`}>
+                    <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center font-semibold text-white">
                       {community.name.split(' ').map(word => word[0]).join('').substring(0, 2)}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-2">
                         <h5 className="font-medium text-black">{community.name}</h5>
                         {community.unreadCount > 0 && (
-                          <Badge variant="destructive" className="bg-red-500 text-white text-xs">
+                          <Badge variant="destructive" className="bg-black text-white text-xs">
                             {community.unreadCount}
                           </Badge>
                         )}
@@ -264,7 +265,7 @@ export default function Community() {
                         {community.isOnline && (
                           <>
                             <span>•</span>
-                            <span className="text-green-600">Active now</span>
+                            <span className="text-black font-medium">Active now</span>
                           </>
                         )}
                       </div>
@@ -335,14 +336,14 @@ export default function Community() {
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center font-semibold text-white">
+                    <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center font-semibold text-white">
                       {community.name.split(' ').map(word => word[0]).join('').substring(0, 2)}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-2">
                         <h5 className="font-medium text-black">{community.name}</h5>
                         {community.trending && (
-                          <TrendingUp className="text-orange-500" size={16} />
+                          <TrendingUp className="text-black" size={16} />
                         )}
                       </div>
                       <p className="text-sm text-gray-600 mt-1">{community.description}</p>
