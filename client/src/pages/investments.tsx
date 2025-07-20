@@ -359,10 +359,10 @@ export default function Investments() {
           <div className="px-4 pt-6 space-y-6">
             {/* Calculate Zakat Card */}
             <Card className="border border-black rounded-lg">
-              <CardHeader className="pb-3 pt-6 bg-black rounded-t-lg">
+              <CardHeader className="pb-3 pt-6">
                 <CardTitle className="flex items-center text-lg">
-                  <Calculator className="mr-3 text-white" size={20} />
-                  <span style={{ color: '#B2D2A4' }}>Calculate Zakat</span>
+                  <Calculator className="mr-3 text-black" size={20} />
+                  <span className="text-black font-semibold">Calculate Zakat</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0 pb-6">
