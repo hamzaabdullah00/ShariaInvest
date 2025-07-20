@@ -243,57 +243,54 @@ export default function Community() {
           </div>
         </div>
 
-        <div className="flex h-full">
-          {/* Main Discussion Area */}
-          <div className="flex-1 px-4 py-4">
-            {/* Start Discussion Button */}
-            <div className="mb-4">
-              <Button className="bg-black text-white hover:bg-gray-800">
-                <Plus size={16} className="mr-2" />
-                Start a Discussion
-              </Button>
-            </div>
-
-            {/* Discussion Threads */}
-            <div className="space-y-3">
-              {discussionThreads.map((thread) => (
-                <Card 
-                  key={thread.id} 
-                  className="border border-black rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
-                  onClick={() => handleThreadClick(thread)}
-                >
-                  <CardContent className="p-4">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-2 mb-2">
-                          {thread.isSticky && (
-                            <Badge variant="secondary" className="bg-black text-white text-xs">
-                              Pinned
-                            </Badge>
-                          )}
-                          <h4 className="font-medium text-black text-sm">{thread.title}</h4>
-                        </div>
-                        <div className="flex items-center space-x-4 text-xs text-gray-600">
-                          <span>by {thread.author}</span>
-                          <span>•</span>
-                          <span>{thread.replies} replies</span>
-                          <span>•</span>
-                          <span>{thread.lastActivity}</span>
-                        </div>
-                      </div>
-                      <MessageSquare className="text-gray-400" size={16} />
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+        <div className="px-4 py-4">
+          {/* Start Discussion Button */}
+          <div className="mb-4">
+            <Button className="bg-black text-white hover:bg-gray-800">
+              <Plus size={16} className="mr-2" />
+              Start a Discussion
+            </Button>
           </div>
 
-          {/* Members Panel */}
-          <div className="w-80 border-l border-black bg-white">
-            <div className="bg-black px-4 py-3 border-b border-black">
+          {/* Discussion Threads */}
+          <div className="space-y-3 mb-6">
+            {discussionThreads.map((thread) => (
+              <Card 
+                key={thread.id} 
+                className="border border-black rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+                onClick={() => handleThreadClick(thread)}
+              >
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-2">
+                        {thread.isSticky && (
+                          <Badge variant="secondary" className="bg-black text-white text-xs">
+                            Pinned
+                          </Badge>
+                        )}
+                        <h4 className="font-medium text-black text-sm">{thread.title}</h4>
+                      </div>
+                      <div className="flex items-center space-x-4 text-xs text-gray-600">
+                        <span>by {thread.author}</span>
+                        <span>•</span>
+                        <span>{thread.replies} replies</span>
+                        <span>•</span>
+                        <span>{thread.lastActivity}</span>
+                      </div>
+                    </div>
+                    <MessageSquare className="text-gray-400" size={16} />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Online Members Card */}
+          <Card className="border border-black rounded-lg">
+            <CardHeader className="bg-black pb-3 pt-4">
               <div className="flex items-center justify-between">
-                <h4 className="font-semibold text-white">Online Members</h4>
+                <CardTitle className="text-white font-semibold">Online Members</CardTitle>
                 <Dialog open={showMembersDialog} onOpenChange={setShowMembersDialog}>
                   <DialogTrigger asChild>
                     <Button variant="ghost" size="sm" className="text-white hover:bg-gray-800 text-xs">
@@ -326,27 +323,35 @@ export default function Community() {
                   </DialogContent>
                 </Dialog>
               </div>
-            </div>
-            
-            <div className="p-4">
-              <div className="space-y-3">
-                {onlineMembers.slice(0, 8).map((member) => (
-                  <div key={member.id} className="flex items-center space-x-2">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold text-white ${
+            </CardHeader>
+            <CardContent className="pt-0 pb-4">
+              <div className="flex flex-wrap gap-3 mt-3">
+                {onlineMembers.slice(0, 12).map((member) => (
+                  <div key={member.id} className="flex flex-col items-center space-y-1">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-semibold text-white ${
                       member.status === 'online' ? 'bg-black' : 
                       member.status === 'away' ? 'bg-gray-600' : 'bg-gray-400'
                     }`}>
                       {member.avatar}
                     </div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-black">{member.name}</p>
-                      <p className="text-xs text-gray-500">{member.lastSeen}</p>
-                    </div>
+                    <span className="text-xs text-gray-600 text-center max-w-16 truncate">
+                      {member.name.split(' ')[0]}
+                    </span>
                   </div>
                 ))}
+                {onlineMembers.length > 12 && (
+                  <div className="flex flex-col items-center space-y-1">
+                    <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-xs font-semibold text-black">
+                      +{onlineMembers.length - 12}
+                    </div>
+                    <span className="text-xs text-gray-600">more</span>
+                  </div>
+                )}
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
+
+          <div className="pb-6"></div>
         </div>
       </div>
     );
