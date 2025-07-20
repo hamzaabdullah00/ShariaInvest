@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Search, Users, MessageSquare, TrendingUp, X } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { Search, Users, MessageSquare, TrendingUp, X, Plus, Send } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import ForumRoomCard from "@/components/forum-room-card";
 import type { ForumRoom } from "@shared/schema";
@@ -12,7 +13,9 @@ import type { ForumRoom } from "@shared/schema";
 export default function Community() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCommunity, setSelectedCommunity] = useState<ForumRoom | null>(null);
+  const [selectedThread, setSelectedThread] = useState<any>(null);
   const [showMembersDialog, setShowMembersDialog] = useState(false);
+  const [newMessage, setNewMessage] = useState("");
   
   const { data: forumRooms, isLoading } = useQuery<ForumRoom[]>({
     queryKey: ["/api/forum/rooms"],
@@ -93,8 +96,45 @@ export default function Community() {
     }
   ];
 
+  // Mock thread messages
+  const threadMessages = [
+    {
+      id: 1,
+      author: "Ahmad_Sheikh",
+      content: "I'm trying to understand the correct way to calculate Zakat on my investment portfolio. Should I include unrealized gains?",
+      timestamp: "2h ago",
+      avatar: "AS"
+    },
+    {
+      id: 2,
+      author: "Fatima_Rahman",
+      content: "According to most scholars, you should calculate Zakat on the current market value of your investments, including unrealized gains. The key is the value on your Zakat due date.",
+      timestamp: "1h ago",
+      avatar: "FR"
+    },
+    {
+      id: 3,
+      author: "Yusuf_Ali",
+      content: "That's correct. Also remember that if you hold the investments for trading purposes, it's 2.5% of the total value. If it's for long-term holding, the calculation might differ.",
+      timestamp: "45m ago",
+      avatar: "YA"
+    }
+  ];
+
   const handleCommunityClick = (community: any) => {
     setSelectedCommunity(community);
+    setSelectedThread(null);
+  };
+
+  const handleThreadClick = (thread: any) => {
+    setSelectedThread(thread);
+  };
+
+  const handleSendMessage = () => {
+    if (newMessage.trim()) {
+      console.log("Sending message:", newMessage);
+      setNewMessage("");
+    }
   };
 
   const handleRoomClick = (room: ForumRoom) => {
@@ -102,6 +142,80 @@ export default function Community() {
     // In a real app, this would navigate to the room's thread list
   };
 
+  // Thread view
+  if (selectedThread) {
+    return (
+      <div className="screen-content">
+        {/* Thread Header */}
+        <div className="bg-black px-4 py-6 border-b border-black">
+          <div className="flex items-center space-x-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setSelectedThread(null)}
+              className="text-white hover:bg-gray-800 p-2"
+            >
+              ←
+            </Button>
+            <div>
+              <h3 className="text-xl font-semibold" style={{ color: '#B2D2A4' }}>{selectedThread.title}</h3>
+              <p className="text-white text-sm">in {selectedCommunity?.name}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex-1 px-4 py-4 pb-32">
+          {/* Thread Messages */}
+          <div className="space-y-4">
+            {threadMessages.map((message) => (
+              <Card key={message.id} className="border border-black rounded-lg">
+                <CardContent className="p-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center font-semibold text-white text-sm">
+                      {message.avatar}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <h5 className="font-semibold text-black">{message.author}</h5>
+                        <span className="text-xs text-gray-500">{message.timestamp}</span>
+                      </div>
+                      <p className="text-black text-sm leading-relaxed">{message.content}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Reply Input */}
+          <Card className="mt-6 border border-black rounded-lg">
+            <CardContent className="p-4">
+              <div className="space-y-3">
+                <Textarea
+                  placeholder="Write your reply..."
+                  value={newMessage}
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  className="min-h-20 border-black focus:border-black resize-none"
+                />
+                <div className="flex justify-end">
+                  <Button 
+                    onClick={handleSendMessage}
+                    disabled={!newMessage.trim()}
+                    className="bg-black text-white hover:bg-gray-800 disabled:bg-gray-300"
+                  >
+                    <Send size={16} className="mr-2" />
+                    Reply
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  // Community forum view
   if (selectedCommunity) {
     return (
       <div className="screen-content">
@@ -129,19 +243,31 @@ export default function Community() {
           </div>
         </div>
 
-        <div className="flex">
+        <div className="flex h-full">
           {/* Main Discussion Area */}
           <div className="flex-1 px-4 py-4">
+            {/* Start Discussion Button */}
+            <div className="mb-4">
+              <Button className="bg-black text-white hover:bg-gray-800">
+                <Plus size={16} className="mr-2" />
+                Start a Discussion
+              </Button>
+            </div>
+
             {/* Discussion Threads */}
             <div className="space-y-3">
               {discussionThreads.map((thread) => (
-                <Card key={thread.id} className="border border-black rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+                <Card 
+                  key={thread.id} 
+                  className="border border-black rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+                  onClick={() => handleThreadClick(thread)}
+                >
                   <CardContent className="p-4">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center space-x-2 mb-2">
                           {thread.isSticky && (
-                            <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 text-xs">
+                            <Badge variant="secondary" className="bg-black text-white text-xs">
                               Pinned
                             </Badge>
                           )}
@@ -164,7 +290,7 @@ export default function Community() {
           </div>
 
           {/* Members Panel */}
-          <div className="w-72 border-l border-black bg-white">
+          <div className="w-80 border-l border-black bg-white">
             <div className="bg-black px-4 py-3 border-b border-black">
               <div className="flex items-center justify-between">
                 <h4 className="font-semibold text-white">Online Members</h4>
@@ -174,7 +300,7 @@ export default function Community() {
                       View All
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-md" aria-describedby="members-description">
+                  <DialogContent className="max-w-lg max-h-[80vh]" aria-describedby="members-description">
                     <DialogHeader>
                       <DialogTitle>All Members ({allMembers.length})</DialogTitle>
                     </DialogHeader>
@@ -204,7 +330,7 @@ export default function Community() {
             
             <div className="p-4">
               <div className="space-y-3">
-                {onlineMembers.slice(0, 5).map((member) => (
+                {onlineMembers.slice(0, 8).map((member) => (
                   <div key={member.id} className="flex items-center space-x-2">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold text-white ${
                       member.status === 'online' ? 'bg-black' : 
@@ -401,7 +527,7 @@ export default function Community() {
         </CardContent>
       </Card>
 
-      <div className="pb-24"></div>
+      <div className="pb-6"></div>
     </div>
   );
 }
