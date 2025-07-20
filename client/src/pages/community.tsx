@@ -2,13 +2,17 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Search } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Search, Users, MessageSquare, TrendingUp, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import ForumRoomCard from "@/components/forum-room-card";
 import type { ForumRoom } from "@shared/schema";
 
 export default function Community() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCommunity, setSelectedCommunity] = useState<ForumRoom | null>(null);
+  const [showMembersDialog, setShowMembersDialog] = useState(false);
   
   const { data: forumRooms, isLoading } = useQuery<ForumRoom[]>({
     queryKey: ["/api/forum/rooms"],
@@ -19,21 +23,264 @@ export default function Community() {
     room.description.toLowerCase().includes(searchQuery.toLowerCase())
   ) || [];
 
+  // Mock user communities (communities user is a member of)
+  const userCommunities = [
+    { id: 1, name: "Finance Q&A", description: "Get expert answers on Islamic finance questions", memberCount: 2847, isOnline: true, unreadCount: 3 },
+    { id: 2, name: "Urban Muslims", description: "Modern Muslim lifestyle and city living", memberCount: 1523, isOnline: true, unreadCount: 1 },
+    { id: 3, name: "Islamic Investing", description: "Halal investment strategies and tips", memberCount: 3291, isOnline: false, unreadCount: 0 },
+    { id: 4, name: "Young Muslims", description: "Community for young Muslim professionals", memberCount: 1847, isOnline: true, unreadCount: 5 },
+  ];
+
+  // Mock featured communities
+  const featuredCommunities = [
+    { id: 5, name: "Ramadan 2025", description: "Preparation and spiritual growth", memberCount: 4521, trending: true },
+    { id: 6, name: "Startup Muslims", description: "Entrepreneurs building halal businesses", memberCount: 987, trending: true },
+    { id: 7, name: "Marriage & Family", description: "Islamic guidance for family life", memberCount: 2156, trending: false },
+  ];
+
+  // Mock online members for selected community
+  const onlineMembers = [
+    { id: 1, name: "Ahmad Sheikh", avatar: "AS", status: "online", lastSeen: "now" },
+    { id: 2, name: "Fatima Rahman", avatar: "FR", status: "online", lastSeen: "2m ago" },
+    { id: 3, name: "Yusuf Ali", avatar: "YA", status: "online", lastSeen: "5m ago" },
+    { id: 4, name: "Aisha Khan", avatar: "AK", status: "away", lastSeen: "15m ago" },
+    { id: 5, name: "Omar Hassan", avatar: "OH", status: "online", lastSeen: "1h ago" },
+  ];
+
+  // Mock all members (for dialog)
+  const allMembers = [
+    ...onlineMembers,
+    { id: 6, name: "Zainab Ahmed", avatar: "ZA", status: "offline", lastSeen: "2h ago" },
+    { id: 7, name: "Ibrahim Malik", avatar: "IM", status: "offline", lastSeen: "1d ago" },
+    { id: 8, name: "Mariam Qureshi", avatar: "MQ", status: "offline", lastSeen: "2d ago" },
+    { id: 9, name: "Hassan Ali", avatar: "HA", status: "offline", lastSeen: "3d ago" },
+    { id: 10, name: "Nadia Farooq", avatar: "NF", status: "offline", lastSeen: "1w ago" },
+  ];
+
+  // Mock discussion threads
+  const discussionThreads = [
+    {
+      id: 1,
+      title: "How to calculate Zakat on investments?",
+      author: "Ahmad_Sheikh",
+      replies: 24,
+      lastActivity: "2h ago",
+      isSticky: true
+    },
+    {
+      id: 2,
+      title: "Best books for Islamic finance beginners",
+      author: "Fatima_Rahman", 
+      replies: 18,
+      lastActivity: "5h ago",
+      isSticky: false
+    },
+    {
+      id: 3,
+      title: "Community Iftar planning for Ramadan",
+      author: "Yusuf_Ali",
+      replies: 32,
+      lastActivity: "1d ago", 
+      isSticky: false
+    },
+    {
+      id: 4,
+      title: "Halal ETF recommendations for 2025",
+      author: "Omar_Hassan",
+      replies: 15,
+      lastActivity: "2d ago",
+      isSticky: false
+    }
+  ];
+
+  const handleCommunityClick = (community: any) => {
+    setSelectedCommunity(community);
+  };
+
   const handleRoomClick = (room: ForumRoom) => {
     console.log("Navigate to room:", room.name);
     // In a real app, this would navigate to the room's thread list
   };
 
+  if (selectedCommunity) {
+    return (
+      <div className="screen-content">
+        {/* Forum Header */}
+        <div className="bg-black px-4 py-6 border-b border-black">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSelectedCommunity(null)}
+                className="text-white hover:bg-gray-800 p-2"
+              >
+                ←
+              </Button>
+              <div>
+                <h3 className="text-xl font-semibold" style={{ color: '#B2D2A4' }}>{selectedCommunity.name}</h3>
+                <p className="text-white text-sm">{selectedCommunity.description}</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Users className="text-white" size={16} />
+              <span className="text-white text-sm">{selectedCommunity.memberCount}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex">
+          {/* Main Discussion Area */}
+          <div className="flex-1 px-4 py-4">
+            {/* Discussion Threads */}
+            <div className="space-y-3">
+              {discussionThreads.map((thread) => (
+                <Card key={thread.id} className="border border-black rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+                  <CardContent className="p-4">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center space-x-2 mb-2">
+                          {thread.isSticky && (
+                            <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 text-xs">
+                              Pinned
+                            </Badge>
+                          )}
+                          <h4 className="font-medium text-black text-sm">{thread.title}</h4>
+                        </div>
+                        <div className="flex items-center space-x-4 text-xs text-gray-600">
+                          <span>by {thread.author}</span>
+                          <span>•</span>
+                          <span>{thread.replies} replies</span>
+                          <span>•</span>
+                          <span>{thread.lastActivity}</span>
+                        </div>
+                      </div>
+                      <MessageSquare className="text-gray-400" size={16} />
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Members Panel */}
+          <div className="w-72 border-l border-gray-200 bg-gray-50">
+            <div className="p-4 border-b border-gray-200">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="font-semibold text-black">Online Members</h4>
+                <Dialog open={showMembersDialog} onOpenChange={setShowMembersDialog}>
+                  <DialogTrigger asChild>
+                    <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-800 text-xs">
+                      View All
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>All Members ({allMembers.length})</DialogTitle>
+                    </DialogHeader>
+                    <div className="max-h-96 overflow-y-auto">
+                      <div className="space-y-2">
+                        {allMembers.map((member) => (
+                          <div key={member.id} className="flex items-center space-x-3 p-2 hover:bg-gray-50 rounded">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold text-white ${
+                              member.status === 'online' ? 'bg-green-500' : 
+                              member.status === 'away' ? 'bg-yellow-500' : 'bg-gray-400'
+                            }`}>
+                              {member.avatar}
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-sm font-medium text-black">{member.name}</p>
+                              <p className="text-xs text-gray-500">{member.lastSeen}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </div>
+              
+              <div className="space-y-2">
+                {onlineMembers.slice(0, 5).map((member) => (
+                  <div key={member.id} className="flex items-center space-x-2">
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold text-white ${
+                      member.status === 'online' ? 'bg-green-500' : 
+                      member.status === 'away' ? 'bg-yellow-500' : 'bg-gray-400'
+                    }`}>
+                      {member.avatar}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-xs font-medium text-black">{member.name}</p>
+                      <p className="text-xs text-gray-500">{member.lastSeen}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="screen-content">
       {/* Header */}
       <div className="bg-black px-4 py-6 border-b border-black">
-        <h3 className="text-xl font-semibold mb-2" style={{ color: '#B2D2A4' }}>Community Forums</h3>
+        <h3 className="text-xl font-semibold mb-2" style={{ color: '#B2D2A4' }}>My Communities</h3>
         <p className="text-white text-sm">Connect, learn, and grow together</p>
       </div>
 
-      {/* Search Bar */}
+      {/* My Communities */}
       <div className="mx-4 mt-4">
+        <h4 className="font-semibold text-black mb-3">Your Communities</h4>
+        <div className="space-y-3">
+          {userCommunities.map((community) => (
+            <Card 
+              key={community.id} 
+              className="border border-black rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+              onClick={() => handleCommunityClick(community)}
+            >
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-semibold text-white ${
+                      community.isOnline ? 'bg-green-600' : 'bg-gray-600'
+                    }`}>
+                      {community.name.split(' ').map(word => word[0]).join('').substring(0, 2)}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2">
+                        <h5 className="font-medium text-black">{community.name}</h5>
+                        {community.unreadCount > 0 && (
+                          <Badge variant="destructive" className="bg-red-500 text-white text-xs">
+                            {community.unreadCount}
+                          </Badge>
+                        )}
+                      </div>
+                      <p className="text-sm text-gray-600 mt-1">{community.description}</p>
+                      <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
+                        <span>{community.memberCount.toLocaleString()} members</span>
+                        {community.isOnline && (
+                          <>
+                            <span>•</span>
+                            <span className="text-green-600">Active now</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <MessageSquare className="text-gray-400" size={20} />
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Search Communities */}
+      <div className="mx-4 mt-6">
+        <h4 className="font-semibold text-black mb-3">Search Communities</h4>
         <div className="relative">
           <Input
             type="text"
@@ -46,38 +293,73 @@ export default function Community() {
         </div>
       </div>
 
-      {/* Forum Rooms */}
-      <div className="mx-4 mt-4 space-y-3">
-        {isLoading ? (
-          [...Array(4)].map((_, i) => (
-            <Card key={i} className="border border-black rounded-lg">
+      {/* Forum Rooms (Search Results) */}
+      {searchQuery && (
+        <div className="mx-4 mt-4 space-y-3">
+          {isLoading ? (
+            [...Array(4)].map((_, i) => (
+              <Card key={i} className="border border-black rounded-lg">
+                <CardContent className="p-4">
+                  <div className="animate-pulse flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-gray-200 rounded-xl"></div>
+                    <div className="flex-1">
+                      <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                      <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                    </div>
+                    <div>
+                      <div className="h-4 bg-gray-200 rounded w-8 mb-1"></div>
+                      <div className="h-3 bg-gray-200 rounded w-12"></div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          ) : (
+            filteredRooms.map((room) => (
+              <ForumRoomCard
+                key={room.id}
+                room={room}
+                onClick={() => handleRoomClick(room)}
+              />
+            ))
+          )}
+        </div>
+      )}
+
+      {/* Featured Communities */}
+      <div className="mx-4 mt-6">
+        <h4 className="font-semibold text-black mb-3">Featured Communities</h4>
+        <div className="space-y-3">
+          {featuredCommunities.map((community) => (
+            <Card key={community.id} className="border border-black rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
               <CardContent className="p-4">
-                <div className="animate-pulse flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-gray-200 rounded-xl"></div>
-                  <div className="flex-1">
-                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                    <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center font-semibold text-white">
+                      {community.name.split(' ').map(word => word[0]).join('').substring(0, 2)}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2">
+                        <h5 className="font-medium text-black">{community.name}</h5>
+                        {community.trending && (
+                          <TrendingUp className="text-orange-500" size={16} />
+                        )}
+                      </div>
+                      <p className="text-sm text-gray-600 mt-1">{community.description}</p>
+                      <p className="text-xs text-gray-500 mt-2">{community.memberCount.toLocaleString()} members</p>
+                    </div>
                   </div>
-                  <div>
-                    <div className="h-4 bg-gray-200 rounded w-8 mb-1"></div>
-                    <div className="h-3 bg-gray-200 rounded w-12"></div>
-                  </div>
+                  <Button variant="outline" size="sm" className="border-black text-black hover:bg-black hover:text-white">
+                    Join
+                  </Button>
                 </div>
               </CardContent>
             </Card>
-          ))
-        ) : (
-          filteredRooms.map((room) => (
-            <ForumRoomCard
-              key={room.id}
-              room={room}
-              onClick={() => handleRoomClick(room)}
-            />
-          ))
-        )}
+          ))}
+        </div>
       </div>
 
-      {/* Popular Discussions */}
+      {/* Trending Discussions */}
       <Card className="mx-4 mt-6 border border-black rounded-lg">
         <CardHeader className="pb-3 pt-6">
           <CardTitle className="font-semibold text-lg text-black">Trending Discussions</CardTitle>
@@ -118,12 +400,7 @@ export default function Community() {
         </CardContent>
       </Card>
 
-      {/* New Room Button */}
-      <div className="mx-4 mt-6 mb-24">
-        <Button className="w-full bg-black text-white hover:bg-white hover:text-black hover:border-black border py-4 font-semibold">
-          <i className="fas fa-plus mr-2"></i>Register Your Cause
-        </Button>
-      </div>
+      <div className="pb-24"></div>
     </div>
   );
 }
