@@ -21,10 +21,11 @@ export default function Investments() {
   const confirmSectionRef = useRef<HTMLDivElement>(null);
   
   // Zakat donation states
-  const [showDonationOverlay, setShowDonationOverlay] = useState(false);
+  const [showDonationPopup, setShowDonationPopup] = useState(false);
   const [zakatAmount, setZakatAmount] = useState("");
   const [donationType, setDonationType] = useState<'one-time' | 'sip'>('one-time');
   const [donationMethod, setDonationMethod] = useState<'cause' | 'ngo'>('cause');
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
   
   const { data: halalFunds = [] } = useQuery<HalalFund[]>({
     queryKey: ["/api/halal-funds"],
@@ -430,7 +431,7 @@ export default function Investments() {
                     
                     <Button 
                       className="w-full bg-black text-white hover:bg-gray-800"
-                      onClick={() => setShowDonationOverlay(true)}
+                      onClick={() => setShowDonationPopup(true)}
                       disabled={!zakatAmount || Number(zakatAmount) <= 0}
                     >
                       Donate Now
@@ -466,7 +467,7 @@ export default function Investments() {
                     
                     <Button 
                       className="w-full bg-black text-white hover:bg-gray-800"
-                      onClick={() => setShowDonationOverlay(true)}
+                      onClick={() => setShowDonationPopup(true)}
                       disabled={!zakatAmount || Number(zakatAmount) <= 0}
                     >
                       Start SIP
@@ -525,93 +526,75 @@ export default function Investments() {
         )}
       </div>
 
-      {/* Donation Overlay */}
-      {showDonationOverlay && (
-        <Card className="mx-4 mb-6 border border-black rounded-lg">
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-black">
-                {donationType === 'one-time' ? 'Donate Zakat' : 'Start Zakat SIP'}
-              </CardTitle>
+      {/* Donation Popup */}
+      {showDonationPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg shadow-lg max-w-md w-full max-h-96 overflow-hidden">
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h3 className="text-lg font-semibold text-black">
+                {donationMethod === 'cause' ? 'Select Causes' : 'Select NGOs'}
+              </h3>
               <Button 
                 variant="ghost" 
                 size="sm" 
-                onClick={() => setShowDonationOverlay(false)}
+                onClick={() => setShowDonationPopup(false)}
                 className="h-8 w-8 p-0 hover:bg-gray-100"
               >
                 <X size={16} />
               </Button>
             </div>
-          </CardHeader>
-          <CardContent className="pt-0 space-y-6">
-            {/* Donation Summary */}
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h3 className="font-semibold text-black mb-2">Donation Details</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Amount:</span>
-                  <span className="font-medium text-black">₹{Number(zakatAmount).toLocaleString('en-IN')}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Type:</span>
-                  <span className="font-medium text-black">
-                    {donationType === 'one-time' ? 'One-time Donation' : 'Monthly SIP'}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Method:</span>
-                  <span className="font-medium text-black">
-                    {donationMethod === 'cause' ? 'By Cause' : 'By NGO'}
-                  </span>
-                </div>
+            
+            <div className="p-4">
+              <div className="mb-4 text-sm text-gray-600">
+                Amount: ₹{Number(zakatAmount).toLocaleString('en-IN')} 
+                ({donationType === 'one-time' ? 'One-time' : 'Monthly SIP'})
               </div>
-            </div>
-
-            {/* Selection Options */}
-            {donationMethod === 'cause' ? (
-              <div className="space-y-3">
-                <h4 className="font-semibold text-black">Select Causes</h4>
-                <div className="space-y-2">
-                  {['Education for Children', 'Healthcare Access', 'Clean Water Projects', 'Poverty Alleviation'].map((cause) => (
-                    <div key={cause} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
-                      <span className="text-black">{cause}</span>
-                      <input type="checkbox" className="rounded border-black" />
+              
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {donationMethod === 'cause' ? (
+                  ['Education for Children', 'Healthcare Access', 'Clean Water Projects', 'Poverty Alleviation', 'Women Empowerment', 'Skill Development'].map((cause) => (
+                    <div 
+                      key={cause} 
+                      className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+                      onClick={() => {
+                        setSelectedItems([cause]);
+                        setShowDonationPopup(false);
+                        // Here you would typically handle the donation logic
+                        alert(`Selected: ${cause} for ₹${Number(zakatAmount).toLocaleString('en-IN')}`);
+                      }}
+                    >
+                      <span className="text-black font-medium">{cause}</span>
+                      <p className="text-sm text-gray-600 mt-1">Support {cause.toLowerCase()} initiatives</p>
                     </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                <h4 className="font-semibold text-black">Select NGOs</h4>
-                <div className="space-y-2">
-                  {ngoProjects.slice(0, 4).map((ngo) => (
-                    <div key={ngo.id} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
-                      <div>
-                        <span className="text-black font-medium">{ngo.name}</span>
-                        <p className="text-sm text-gray-600">{Math.round((parseFloat(ngo.raisedAmount) / parseFloat(ngo.targetAmount)) * 100)}% funded</p>
+                  ))
+                ) : (
+                  ngoProjects.map((ngo) => (
+                    <div 
+                      key={ngo.id} 
+                      className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+                      onClick={() => {
+                        setSelectedItems([ngo.name]);
+                        setShowDonationPopup(false);
+                        // Here you would typically handle the donation logic
+                        alert(`Selected: ${ngo.name} for ₹${Number(zakatAmount).toLocaleString('en-IN')}`);
+                      }}
+                    >
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <span className="text-black font-medium">{ngo.name}</span>
+                          <div className="mt-1 text-sm text-gray-600">
+                            <p>{Math.round((parseFloat(ngo.raisedAmount) / parseFloat(ngo.targetAmount)) * 100)}% funded</p>
+                            <p>₹{Number(ngo.raisedAmount).toLocaleString('en-IN')} of ₹{Number(ngo.targetAmount).toLocaleString('en-IN')}</p>
+                          </div>
+                        </div>
                       </div>
-                      <input type="checkbox" className="rounded border-black" />
                     </div>
-                  ))}
-                </div>
+                  ))
+                )}
               </div>
-            )}
-
-            {/* Action Buttons */}
-            <div className="flex space-x-3 pt-4">
-              <Button 
-                variant="outline" 
-                className="flex-1 border-black text-black hover:bg-gray-50"
-                onClick={() => setShowDonationOverlay(false)}
-              >
-                Cancel
-              </Button>
-              <Button className="flex-1 bg-black text-white hover:bg-gray-800">
-                {donationType === 'one-time' ? 'Confirm Donation' : 'Setup SIP'}
-              </Button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       )}
     </div>
   );
