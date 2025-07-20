@@ -118,7 +118,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (July 20, 2025)
 
-### My Causes 4-Tab Structure Implementation (Latest Update)
+### Donation Popup UI Enhancement (Latest Update)
+- **Dialog Component Migration**: Updated donation popups to use shadcn Dialog component instead of custom overlay
+- **Consistent Styling**: Applied same darkened transparent overlay (30% opacity) as hamburger menu and notifications
+- **Improved Accessibility**: Added proper aria-describedby attributes and screen reader descriptions
+- **Enhanced UX**: Background tap to close, proper centering, and smooth animation transitions
+- **Scrollable Content**: Max height constraints with overflow handling for long lists
+- **Fixed Data Access**: Corrected NGO data property references for funding percentage calculations
+
+### My Causes 4-Tab Structure Implementation (Previous Update)
 - **4-Tab Layout**: Implemented complete tab structure with My Causes, Explore All, Zakat Causes, and NGOs
 - **My Causes Tab**: Shows user's supported causes with "Supporting" badges and impact tracking
 - **Explore All Tab**: Links to Investment page Zakat section with "View All Donation Options" button

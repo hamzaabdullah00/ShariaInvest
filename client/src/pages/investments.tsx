@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ArrowRight, TrendingUp, Shield, Target, Calculator, Heart, DollarSign, X } from "lucide-react";
 import { Link } from "wouter";
 import NavChart from "@/components/nav-chart";
@@ -630,106 +631,97 @@ export default function Investments() {
       </div>
 
       {/* Donation Popup */}
-      {showDonationPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-lg max-w-md w-full max-h-96 overflow-hidden">
-            <div className="flex items-center justify-between p-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-black">
-                {donationMethod === 'cause' ? 'Select Causes' : 'Select NGOs'}
-              </h3>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setShowDonationPopup(false)}
-                className="h-8 w-8 p-0 hover:bg-gray-100"
-              >
-                <X size={16} />
-              </Button>
+      <Dialog open={showDonationPopup} onOpenChange={setShowDonationPopup}>
+        <DialogContent className="max-w-md max-h-[80vh]" aria-describedby="donation-description">
+          <DialogHeader>
+            <DialogTitle>
+              {donationMethod === 'cause' ? 'Select Causes' : 'Select NGOs'}
+            </DialogTitle>
+          </DialogHeader>
+          <p id="donation-description" className="sr-only">Select causes or NGOs for your donation</p>
+          
+          <div className="space-y-4">
+            <div className="text-sm text-gray-600">
+              Amount: ₹{Number(zakatAmount).toLocaleString('en-IN')} 
+              ({donationType === 'one-time' ? 'One-time' : 'Monthly SIP'})
             </div>
             
-            <div className="p-4">
-              <div className="mb-4 text-sm text-gray-600">
-                Amount: ₹{Number(zakatAmount).toLocaleString('en-IN')} 
-                ({donationType === 'one-time' ? 'One-time' : 'Monthly SIP'})
-              </div>
-              
-              <div className="space-y-2 max-h-64 overflow-y-auto">
-                {donationMethod === 'cause' ? (
-                  ['Education for Children', 'Healthcare Access', 'Clean Water Projects', 'Poverty Alleviation', 'Women Empowerment', 'Skill Development'].map((cause) => (
-                    <div 
-                      key={cause} 
-                      className={`p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors ${
-                        selectedItems.includes(cause) ? 'bg-gray-100 border-black' : ''
-                      }`}
-                      onClick={() => {
-                        if (selectedItems.includes(cause)) {
-                          setSelectedItems(selectedItems.filter(item => item !== cause));
-                        } else {
-                          setSelectedItems([...selectedItems, cause]);
-                        }
-                      }}
-                    >
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                          <span className="text-black font-medium">{cause}</span>
-                          <p className="text-sm text-gray-600 mt-1">Support {cause.toLowerCase()} initiatives</p>
-                        </div>
-                        {selectedItems.includes(cause) && (
-                          <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center ml-2">
-                            <span className="text-white text-xs">✓</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  ngoProjects.map((ngo) => (
-                    <div 
-                      key={ngo.id} 
-                      className={`p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors ${
-                        selectedItems.includes(ngo.name) ? 'bg-gray-100 border-black' : ''
-                      }`}
-                      onClick={() => {
-                        if (selectedItems.includes(ngo.name)) {
-                          setSelectedItems(selectedItems.filter(item => item !== ngo.name));
-                        } else {
-                          setSelectedItems([...selectedItems, ngo.name]);
-                        }
-                      }}
-                    >
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                          <span className="text-black font-medium">{ngo.name}</span>
-                          <div className="mt-1 text-sm text-gray-600">
-                            <p>{Math.round((parseFloat(ngo.raisedAmount) / parseFloat(ngo.targetAmount)) * 100)}% funded</p>
-                            <p>₹{Number(ngo.raisedAmount).toLocaleString('en-IN')} of ₹{Number(ngo.targetAmount).toLocaleString('en-IN')}</p>
-                          </div>
-                        </div>
-                        {selectedItems.includes(ngo.name) && (
-                          <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center ml-2">
-                            <span className="text-white text-xs">✓</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-              
-              {selectedItems.length > 0 && (
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <Button 
-                    className="w-full bg-black text-white hover:bg-gray-800"
-                    onClick={() => setShowDonationPopup(false)}
+            <div className="space-y-2 max-h-64 overflow-y-auto">
+              {donationMethod === 'cause' ? (
+                ['Education for Children', 'Healthcare Access', 'Clean Water Projects', 'Poverty Alleviation', 'Women Empowerment', 'Skill Development'].map((cause) => (
+                  <div 
+                    key={cause} 
+                    className={`p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors ${
+                      selectedItems.includes(cause) ? 'bg-gray-100 border-black' : ''
+                    }`}
+                    onClick={() => {
+                      if (selectedItems.includes(cause)) {
+                        setSelectedItems(selectedItems.filter(item => item !== cause));
+                      } else {
+                        setSelectedItems([...selectedItems, cause]);
+                      }
+                    }}
                   >
-                    Confirm Selection ({selectedItems.length} items)
-                  </Button>
-                </div>
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <span className="text-black font-medium">{cause}</span>
+                        <p className="text-sm text-gray-600 mt-1">Support {cause.toLowerCase()} initiatives</p>
+                      </div>
+                      {selectedItems.includes(cause) && (
+                        <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center ml-2">
+                          <span className="text-white text-xs">✓</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                ngoProjects.map((ngo) => (
+                  <div 
+                    key={ngo.id} 
+                    className={`p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors ${
+                      selectedItems.includes(ngo.name) ? 'bg-gray-100 border-black' : ''
+                    }`}
+                    onClick={() => {
+                      if (selectedItems.includes(ngo.name)) {
+                        setSelectedItems(selectedItems.filter(item => item !== ngo.name));
+                      } else {
+                        setSelectedItems([...selectedItems, ngo.name]);
+                      }
+                    }}
+                  >
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <span className="text-black font-medium">{ngo.name}</span>
+                        <div className="mt-1 text-sm text-gray-600">
+                          <p>{Math.round((parseFloat(ngo.currentAmount || '0') / parseFloat(ngo.targetAmount || '1')) * 100)}% funded</p>
+                          <p>₹{Number(ngo.currentAmount || 0).toLocaleString('en-IN')} of ₹{Number(ngo.targetAmount || 0).toLocaleString('en-IN')}</p>
+                        </div>
+                      </div>
+                      {selectedItems.includes(ngo.name) && (
+                        <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center ml-2">
+                          <span className="text-white text-xs">✓</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))
               )}
             </div>
+            
+            {selectedItems.length > 0 && (
+              <div className="pt-4 border-t border-gray-200">
+                <Button 
+                  className="w-full bg-black text-white hover:bg-gray-800"
+                  onClick={() => setShowDonationPopup(false)}
+                >
+                  Confirm Selection ({selectedItems.length} items)
+                </Button>
+              </div>
+            )}
           </div>
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
 
       {/* Payment Screen */}
       {showPaymentScreen && (
