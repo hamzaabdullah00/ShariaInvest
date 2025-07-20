@@ -472,9 +472,19 @@ export default function Investments() {
                     </div>
                     
                     <Button 
-                      className="w-full bg-black text-white hover:bg-gray-800"
-                      onClick={() => setShowPaymentScreen(true)}
-                      disabled={!zakatAmount || Number(zakatAmount) <= 0 || selectedItems.length === 0}
+                      className={`w-full transition-colors ${
+                        zakatAmount && Number(zakatAmount) > 0 
+                          ? 'bg-black text-white hover:bg-gray-800' 
+                          : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      }`}
+                      onClick={() => {
+                        if (selectedItems.length === 0) {
+                          alert('Please select at least one cause or NGO first');
+                          return;
+                        }
+                        setShowPaymentScreen(true);
+                      }}
+                      disabled={!zakatAmount || Number(zakatAmount) <= 0}
                     >
                       Donate Now
                     </Button>
@@ -549,9 +559,19 @@ export default function Investments() {
                     </div>
                     
                     <Button 
-                      className="w-full bg-black text-white hover:bg-gray-800"
-                      onClick={() => setShowPaymentScreen(true)}
-                      disabled={!zakatAmount || Number(zakatAmount) <= 0 || selectedItems.length === 0}
+                      className={`w-full transition-colors ${
+                        zakatAmount && Number(zakatAmount) > 0 
+                          ? 'bg-black text-white hover:bg-gray-800' 
+                          : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      }`}
+                      onClick={() => {
+                        if (selectedItems.length === 0) {
+                          alert('Please select at least one cause or NGO first');
+                          return;
+                        }
+                        setShowPaymentScreen(true);
+                      }}
+                      disabled={!zakatAmount || Number(zakatAmount) <= 0}
                     >
                       Start SIP
                     </Button>
@@ -713,76 +733,126 @@ export default function Investments() {
 
       {/* Payment Screen */}
       {showPaymentScreen && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-lg max-w-md w-full overflow-hidden">
-            <div className="flex items-center justify-between p-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-black">
-                {donationType === 'one-time' ? 'Complete Donation' : 'Setup SIP Payment'}
-              </h3>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setShowPaymentScreen(false)}
-                className="h-8 w-8 p-0 hover:bg-gray-100"
-              >
-                <X size={16} />
-              </Button>
+        <div className="fixed inset-0 bg-white z-50 overflow-y-auto">
+          <div className="min-h-screen">
+            {/* Header */}
+            <div className="bg-black px-4 py-6 border-b border-black">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-semibold" style={{ color: '#B2D2A4' }}>
+                  {donationType === 'one-time' ? 'Complete Donation' : 'Setup SIP Payment'}
+                </h3>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => setShowPaymentScreen(false)}
+                  className="h-8 w-8 p-0 text-white hover:bg-gray-800"
+                >
+                  <X size={16} />
+                </Button>
+              </div>
             </div>
             
-            <div className="p-4 space-y-4">
+            <div className="px-4 py-6 space-y-6">
               {/* Payment Summary */}
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <h4 className="font-semibold text-black mb-2">Payment Summary</h4>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Total Amount:</span>
-                    <span className="font-medium text-black">₹{Number(zakatAmount).toLocaleString('en-IN')}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Recipients:</span>
-                    <span className="font-medium text-black">{selectedItems.length}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Per recipient:</span>
-                    <span className="font-medium text-black">₹{Math.round(Number(zakatAmount) / selectedItems.length).toLocaleString('en-IN')}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Payment type:</span>
-                    <span className="font-medium text-black">
-                      {donationType === 'one-time' ? 'One-time' : 'Monthly SIP'}
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="mt-3 pt-3 border-t border-gray-200">
-                  <p className="text-xs text-gray-600 mb-2">Recipients:</p>
-                  <div className="flex flex-wrap gap-1">
-                    {selectedItems.map((item, index) => (
-                      <span
-                        key={index}
-                        className="inline-block px-2 py-1 text-xs bg-white border border-gray-300 rounded"
-                      >
-                        {item}
+              <Card className="border border-black rounded-lg">
+                <CardHeader className="pb-3 pt-6">
+                  <CardTitle className="text-black font-semibold">Payment Summary</CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0 pb-6">
+                  <div className="space-y-3 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Total Amount:</span>
+                      <span className="font-semibold text-black text-lg">₹{Number(zakatAmount).toLocaleString('en-IN')}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Recipients:</span>
+                      <span className="font-medium text-black">{selectedItems.length}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Amount per recipient:</span>
+                      <span className="font-medium text-black">₹{Math.round(Number(zakatAmount) / selectedItems.length).toLocaleString('en-IN')}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Payment type:</span>
+                      <span className="font-medium text-black">
+                        {donationType === 'one-time' ? 'One-time Donation' : 'Monthly SIP'}
                       </span>
-                    ))}
+                    </div>
                   </div>
-                </div>
-              </div>
+                  
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <p className="text-sm text-gray-600 mb-3">Recipients:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedItems.map((item, index) => (
+                        <span
+                          key={index}
+                          className="inline-block px-3 py-1 text-sm bg-gray-100 border border-gray-300 rounded-full text-black"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
               {/* Payment Methods */}
-              <div className="space-y-3">
-                <h4 className="font-semibold text-black">Choose Payment Method</h4>
-                <div className="space-y-2">
-                  <Button className="w-full bg-blue-600 text-white hover:bg-blue-700 py-3">
-                    💳 Pay with UPI
-                  </Button>
-                  <Button className="w-full bg-green-600 text-white hover:bg-green-700 py-3">
-                    💰 Net Banking
-                  </Button>
-                  <Button className="w-full bg-purple-600 text-white hover:bg-purple-700 py-3">
-                    📱 Digital Wallet
-                  </Button>
-                </div>
+              <Card className="border border-black rounded-lg">
+                <CardHeader className="pb-3 pt-6">
+                  <CardTitle className="text-black font-semibold">Choose Payment Method</CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0 pb-6">
+                  <div className="space-y-3">
+                    <Button 
+                      className="w-full bg-blue-600 text-white hover:bg-blue-700 py-4 text-base font-medium"
+                      onClick={() => {
+                        alert(`Processing UPI payment of ₹${Number(zakatAmount).toLocaleString('en-IN')} for ${selectedItems.length} recipients`);
+                        setShowPaymentScreen(false);
+                        setZakatAmount("");
+                        setSelectedItems([]);
+                      }}
+                    >
+                      <span className="mr-2">📱</span>
+                      Pay with UPI
+                    </Button>
+                    <Button 
+                      className="w-full bg-green-600 text-white hover:bg-green-700 py-4 text-base font-medium"
+                      onClick={() => {
+                        alert(`Processing Net Banking payment of ₹${Number(zakatAmount).toLocaleString('en-IN')} for ${selectedItems.length} recipients`);
+                        setShowPaymentScreen(false);
+                        setZakatAmount("");
+                        setSelectedItems([]);
+                      }}
+                    >
+                      <span className="mr-2">🏦</span>
+                      Net Banking
+                    </Button>
+                    <Button 
+                      className="w-full bg-purple-600 text-white hover:bg-purple-700 py-4 text-base font-medium"
+                      onClick={() => {
+                        alert(`Processing Digital Wallet payment of ₹${Number(zakatAmount).toLocaleString('en-IN')} for ${selectedItems.length} recipients`);
+                        setShowPaymentScreen(false);
+                        setZakatAmount("");
+                        setSelectedItems([]);
+                      }}
+                    >
+                      <span className="mr-2">💳</span>
+                      Digital Wallet
+                    </Button>
+                  </div>
+                  
+                  <div className="mt-6 p-3 bg-gray-50 rounded-lg">
+                    <p className="text-xs text-gray-600 text-center">
+                      Your payment is secured with bank-level encryption. 
+                      Transaction fees may apply based on your payment method.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Security Notice */}
+              <div className="text-center text-sm text-gray-600 px-4">
+                <p>By proceeding, you agree to our terms and conditions for charitable donations.</p>
               </div>
             </div>
           </div>
