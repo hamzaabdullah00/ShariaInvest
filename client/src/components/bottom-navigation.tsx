@@ -7,8 +7,8 @@ export default function BottomNavigation() {
   const { translations } = useLanguage();
 
   const navItems = [
-    { path: "/investments", icon: TrendingUp, label: "Invest" },
     { path: "/", icon: Home, label: translations.home || "Home" },
+    { path: "/investments", icon: TrendingUp, label: "Invest" },
     { path: "/community", icon: MessageCircle, label: translations.community || "Community" },
     { path: "/causes", icon: Heart, label: "Causes" },
   ];
