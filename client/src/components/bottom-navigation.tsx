@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Home, Coins, BarChart3, MessageCircle, User } from "lucide-react";
+import { Home, TrendingUp, MessageCircle, Heart } from "lucide-react";
 import { useLanguage } from "@/lib/language-context";
 
 export default function BottomNavigation() {
@@ -7,11 +7,10 @@ export default function BottomNavigation() {
   const { translations } = useLanguage();
 
   const navItems = [
+    { path: "/investments", icon: TrendingUp, label: "Invest" },
     { path: "/", icon: Home, label: translations.home || "Home" },
-    { path: "/invest", icon: Coins, label: translations.invest || "Invest" },
-    { path: "/dashboard", icon: BarChart3, label: translations.dashboard || "Dashboard" },
     { path: "/community", icon: MessageCircle, label: translations.community || "Community" },
-    { path: "/profile", icon: User, label: translations.profile || "Profile" },
+    { path: "/causes", icon: Heart, label: "Causes" },
   ];
 
   return (
