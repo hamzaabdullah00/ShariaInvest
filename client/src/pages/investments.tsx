@@ -26,6 +26,7 @@ export default function Investments() {
   const [donationType, setDonationType] = useState<'one-time' | 'sip'>('one-time');
   const [donationMethod, setDonationMethod] = useState<'cause' | 'ngo'>('cause');
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [showPaymentScreen, setShowPaymentScreen] = useState(false);
   
   const { data: halalFunds = [] } = useQuery<HalalFund[]>({
     queryKey: ["/api/halal-funds"],
@@ -420,19 +421,60 @@ export default function Investments() {
                       <RadioGroup value={donationMethod} onValueChange={(value) => setDonationMethod(value as 'cause' | 'ngo')}>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="cause" id="cause" />
-                          <Label htmlFor="cause">Donate by Cause</Label>
+                          <Label 
+                            htmlFor="cause" 
+                            className="cursor-pointer"
+                            onClick={() => {
+                              setDonationMethod('cause');
+                              setShowDonationPopup(true);
+                            }}
+                          >
+                            Donate by Cause
+                          </Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="ngo" id="ngo" />
-                          <Label htmlFor="ngo">Donate by NGO</Label>
+                          <Label 
+                            htmlFor="ngo" 
+                            className="cursor-pointer"
+                            onClick={() => {
+                              setDonationMethod('ngo');
+                              setShowDonationPopup(true);
+                            }}
+                          >
+                            Donate by NGO
+                          </Label>
                         </div>
                       </RadioGroup>
+                      
+                      {/* Selected Items Tags */}
+                      {selectedItems.length > 0 && (
+                        <div className="mt-3">
+                          <Label className="text-sm text-gray-600 mb-2 block">Selected {donationMethod === 'cause' ? 'Causes' : 'NGOs'}:</Label>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedItems.map((item, index) => (
+                              <span
+                                key={index}
+                                className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-black border border-gray-300"
+                              >
+                                {item}
+                                <button
+                                  onClick={() => setSelectedItems(selectedItems.filter((_, i) => i !== index))}
+                                  className="ml-2 text-gray-500 hover:text-black"
+                                >
+                                  ×
+                                </button>
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                     
                     <Button 
                       className="w-full bg-black text-white hover:bg-gray-800"
-                      onClick={() => setShowDonationPopup(true)}
-                      disabled={!zakatAmount || Number(zakatAmount) <= 0}
+                      onClick={() => setShowPaymentScreen(true)}
+                      disabled={!zakatAmount || Number(zakatAmount) <= 0 || selectedItems.length === 0}
                     >
                       Donate Now
                     </Button>
@@ -456,19 +498,60 @@ export default function Investments() {
                       <RadioGroup value={donationMethod} onValueChange={(value) => setDonationMethod(value as 'cause' | 'ngo')}>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="cause" id="sip-cause" />
-                          <Label htmlFor="sip-cause">Donate by Cause</Label>
+                          <Label 
+                            htmlFor="sip-cause" 
+                            className="cursor-pointer"
+                            onClick={() => {
+                              setDonationMethod('cause');
+                              setShowDonationPopup(true);
+                            }}
+                          >
+                            Donate by Cause
+                          </Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="ngo" id="sip-ngo" />
-                          <Label htmlFor="sip-ngo">Donate by NGO</Label>
+                          <Label 
+                            htmlFor="sip-ngo" 
+                            className="cursor-pointer"
+                            onClick={() => {
+                              setDonationMethod('ngo');
+                              setShowDonationPopup(true);
+                            }}
+                          >
+                            Donate by NGO
+                          </Label>
                         </div>
                       </RadioGroup>
+                      
+                      {/* Selected Items Tags */}
+                      {selectedItems.length > 0 && (
+                        <div className="mt-3">
+                          <Label className="text-sm text-gray-600 mb-2 block">Selected {donationMethod === 'cause' ? 'Causes' : 'NGOs'}:</Label>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedItems.map((item, index) => (
+                              <span
+                                key={index}
+                                className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-black border border-gray-300"
+                              >
+                                {item}
+                                <button
+                                  onClick={() => setSelectedItems(selectedItems.filter((_, i) => i !== index))}
+                                  className="ml-2 text-gray-500 hover:text-black"
+                                >
+                                  ×
+                                </button>
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                     
                     <Button 
                       className="w-full bg-black text-white hover:bg-gray-800"
-                      onClick={() => setShowDonationPopup(true)}
-                      disabled={!zakatAmount || Number(zakatAmount) <= 0}
+                      onClick={() => setShowPaymentScreen(true)}
+                      disabled={!zakatAmount || Number(zakatAmount) <= 0 || selectedItems.length === 0}
                     >
                       Start SIP
                     </Button>
@@ -528,7 +611,7 @@ export default function Investments() {
 
       {/* Donation Popup */}
       {showDonationPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-lg max-w-md w-full max-h-96 overflow-hidden">
             <div className="flex items-center justify-between p-4 border-b border-gray-200">
               <h3 className="text-lg font-semibold text-black">
@@ -555,28 +638,43 @@ export default function Investments() {
                   ['Education for Children', 'Healthcare Access', 'Clean Water Projects', 'Poverty Alleviation', 'Women Empowerment', 'Skill Development'].map((cause) => (
                     <div 
                       key={cause} 
-                      className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+                      className={`p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors ${
+                        selectedItems.includes(cause) ? 'bg-gray-100 border-black' : ''
+                      }`}
                       onClick={() => {
-                        setSelectedItems([cause]);
-                        setShowDonationPopup(false);
-                        // Here you would typically handle the donation logic
-                        alert(`Selected: ${cause} for ₹${Number(zakatAmount).toLocaleString('en-IN')}`);
+                        if (selectedItems.includes(cause)) {
+                          setSelectedItems(selectedItems.filter(item => item !== cause));
+                        } else {
+                          setSelectedItems([...selectedItems, cause]);
+                        }
                       }}
                     >
-                      <span className="text-black font-medium">{cause}</span>
-                      <p className="text-sm text-gray-600 mt-1">Support {cause.toLowerCase()} initiatives</p>
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <span className="text-black font-medium">{cause}</span>
+                          <p className="text-sm text-gray-600 mt-1">Support {cause.toLowerCase()} initiatives</p>
+                        </div>
+                        {selectedItems.includes(cause) && (
+                          <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center ml-2">
+                            <span className="text-white text-xs">✓</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   ))
                 ) : (
                   ngoProjects.map((ngo) => (
                     <div 
                       key={ngo.id} 
-                      className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+                      className={`p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors ${
+                        selectedItems.includes(ngo.name) ? 'bg-gray-100 border-black' : ''
+                      }`}
                       onClick={() => {
-                        setSelectedItems([ngo.name]);
-                        setShowDonationPopup(false);
-                        // Here you would typically handle the donation logic
-                        alert(`Selected: ${ngo.name} for ₹${Number(zakatAmount).toLocaleString('en-IN')}`);
+                        if (selectedItems.includes(ngo.name)) {
+                          setSelectedItems(selectedItems.filter(item => item !== ngo.name));
+                        } else {
+                          setSelectedItems([...selectedItems, ngo.name]);
+                        }
                       }}
                     >
                       <div className="flex justify-between items-start">
@@ -587,10 +685,104 @@ export default function Investments() {
                             <p>₹{Number(ngo.raisedAmount).toLocaleString('en-IN')} of ₹{Number(ngo.targetAmount).toLocaleString('en-IN')}</p>
                           </div>
                         </div>
+                        {selectedItems.includes(ngo.name) && (
+                          <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center ml-2">
+                            <span className="text-white text-xs">✓</span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))
                 )}
+              </div>
+              
+              {selectedItems.length > 0 && (
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <Button 
+                    className="w-full bg-black text-white hover:bg-gray-800"
+                    onClick={() => setShowDonationPopup(false)}
+                  >
+                    Confirm Selection ({selectedItems.length} items)
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Payment Screen */}
+      {showPaymentScreen && (
+        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg shadow-lg max-w-md w-full overflow-hidden">
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h3 className="text-lg font-semibold text-black">
+                {donationType === 'one-time' ? 'Complete Donation' : 'Setup SIP Payment'}
+              </h3>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setShowPaymentScreen(false)}
+                className="h-8 w-8 p-0 hover:bg-gray-100"
+              >
+                <X size={16} />
+              </Button>
+            </div>
+            
+            <div className="p-4 space-y-4">
+              {/* Payment Summary */}
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-black mb-2">Payment Summary</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Total Amount:</span>
+                    <span className="font-medium text-black">₹{Number(zakatAmount).toLocaleString('en-IN')}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Recipients:</span>
+                    <span className="font-medium text-black">{selectedItems.length}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Per recipient:</span>
+                    <span className="font-medium text-black">₹{Math.round(Number(zakatAmount) / selectedItems.length).toLocaleString('en-IN')}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Payment type:</span>
+                    <span className="font-medium text-black">
+                      {donationType === 'one-time' ? 'One-time' : 'Monthly SIP'}
+                    </span>
+                  </div>
+                </div>
+                
+                <div className="mt-3 pt-3 border-t border-gray-200">
+                  <p className="text-xs text-gray-600 mb-2">Recipients:</p>
+                  <div className="flex flex-wrap gap-1">
+                    {selectedItems.map((item, index) => (
+                      <span
+                        key={index}
+                        className="inline-block px-2 py-1 text-xs bg-white border border-gray-300 rounded"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Payment Methods */}
+              <div className="space-y-3">
+                <h4 className="font-semibold text-black">Choose Payment Method</h4>
+                <div className="space-y-2">
+                  <Button className="w-full bg-blue-600 text-white hover:bg-blue-700 py-3">
+                    💳 Pay with UPI
+                  </Button>
+                  <Button className="w-full bg-green-600 text-white hover:bg-green-700 py-3">
+                    💰 Net Banking
+                  </Button>
+                  <Button className="w-full bg-purple-600 text-white hover:bg-purple-700 py-3">
+                    📱 Digital Wallet
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
