@@ -118,7 +118,17 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (July 20, 2025)
 
-### Navigation Structure Overhaul (Latest Update)
+### My Causes 4-Tab Structure Implementation (Latest Update)
+- **4-Tab Layout**: Implemented complete tab structure with My Causes, Explore All, Zakat Causes, and NGOs
+- **My Causes Tab**: Shows user's supported causes with "Supporting" badges and impact tracking
+- **Explore All Tab**: Links to Investment page Zakat section with "View All Donation Options" button
+- **Zakat Causes Tab**: Lists Zakat-eligible causes with "View Supported Causes" button linking to investment impact
+- **NGOs Tab**: Features NGO cards with donation and monthly SIP options
+- **NGO Cards**: Display organization info, impact stats, categories, and dual action buttons (Donate Now/Start SIP)
+- **Consistent Styling**: Applied black/white theme with proper card layouts and button styling
+- **Navigation Integration**: Connected to investment page sections via URL parameters for seamless flow
+
+### Navigation Structure Overhaul (Previous Update)
 - **Bottom Navigation Update**: Changed from 5 to 4 icons (Invest → Home → Community → Causes)
 - **Top Navigation Addition**: Added fixed top navigation bar with hamburger menu, logo, notifications, and profile
 - **Removed Dashboard**: Eliminated dashboard page and navigation icon entirely  
