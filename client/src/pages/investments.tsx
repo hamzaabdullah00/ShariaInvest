@@ -4,11 +4,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, TrendingUp, Shield, Target, Calculator, Heart, DollarSign } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowRight, TrendingUp, Shield, Target, Calculator, Heart, DollarSign, X } from "lucide-react";
 import { Link } from "wouter";
 import NavChart from "@/components/nav-chart";
 import InvestmentSlider from "@/components/investment-slider";
-import type { HalalFund, Investment } from "@shared/schema";
+import type { HalalFund, Investment, NgoProject } from "@shared/schema";
 
 export default function Investments() {
   const [activeTab, setActiveTab] = useState<'my-portfolio' | 'zakat' | 'explore'>('my-portfolio');
@@ -17,12 +20,22 @@ export default function Investments() {
   const [manualAmount, setManualAmount] = useState("5000");
   const confirmSectionRef = useRef<HTMLDivElement>(null);
   
+  // Zakat donation states
+  const [showDonationOverlay, setShowDonationOverlay] = useState(false);
+  const [zakatAmount, setZakatAmount] = useState("");
+  const [donationType, setDonationType] = useState<'one-time' | 'sip'>('one-time');
+  const [donationMethod, setDonationMethod] = useState<'cause' | 'ngo'>('cause');
+  
   const { data: halalFunds = [] } = useQuery<HalalFund[]>({
     queryKey: ["/api/halal-funds"],
   });
 
   const { data: investments = [] } = useQuery<Investment[]>({
     queryKey: ["/api/investments"],
+  });
+
+  const { data: ngoProjects = [] } = useQuery<NgoProject[]>({
+    queryKey: ["/api/ngo-projects"],
   });
 
   // Calculate portfolio metrics
@@ -373,19 +386,93 @@ export default function Investments() {
               </CardContent>
             </Card>
 
-            {/* Start Zakat SIP Card */}
+            {/* Merged Zakat Donation Card */}
             <Card className="border border-black rounded-lg">
               <CardHeader className="pb-3 pt-6">
                 <CardTitle className="flex items-center text-lg">
-                  <DollarSign className="mr-3 text-black" size={20} />
-                  <span className="text-black font-semibold">Start Zakat SIP</span>
+                  <Heart className="mr-3 text-black" size={20} />
+                  <span className="text-black font-semibold">Donate Zakat</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0 pb-6">
-                <p className="text-sm text-gray-600 mb-4">Set up automatic monthly zakat contributions</p>
-                <Button className="w-full bg-black text-white hover:bg-gray-800">
-                  Setup Monthly Zakat
-                </Button>
+                <Tabs value={donationType} onValueChange={(value) => setDonationType(value as 'one-time' | 'sip')}>
+                  <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="one-time">Donate One Time</TabsTrigger>
+                    <TabsTrigger value="sip">Start SIP</TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsContent value="one-time" className="space-y-4 mt-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="zakat-amount">Zakat Amount</Label>
+                      <Input
+                        id="zakat-amount"
+                        type="number"
+                        placeholder="Enter amount in ₹"
+                        value={zakatAmount}
+                        onChange={(e) => setZakatAmount(e.target.value)}
+                        className="border-black focus:border-black"
+                      />
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <Label>Donation Method</Label>
+                      <RadioGroup value={donationMethod} onValueChange={(value) => setDonationMethod(value as 'cause' | 'ngo')}>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="cause" id="cause" />
+                          <Label htmlFor="cause">Donate by Cause</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="ngo" id="ngo" />
+                          <Label htmlFor="ngo">Donate by NGO</Label>
+                        </div>
+                      </RadioGroup>
+                    </div>
+                    
+                    <Button 
+                      className="w-full bg-black text-white hover:bg-gray-800"
+                      onClick={() => setShowDonationOverlay(true)}
+                      disabled={!zakatAmount || Number(zakatAmount) <= 0}
+                    >
+                      Donate Now
+                    </Button>
+                  </TabsContent>
+                  
+                  <TabsContent value="sip" className="space-y-4 mt-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="sip-amount">Monthly SIP Amount</Label>
+                      <Input
+                        id="sip-amount"
+                        type="number"
+                        placeholder="Enter monthly amount in ₹"
+                        value={zakatAmount}
+                        onChange={(e) => setZakatAmount(e.target.value)}
+                        className="border-black focus:border-black"
+                      />
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <Label>Donation Method</Label>
+                      <RadioGroup value={donationMethod} onValueChange={(value) => setDonationMethod(value as 'cause' | 'ngo')}>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="cause" id="sip-cause" />
+                          <Label htmlFor="sip-cause">Donate by Cause</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="ngo" id="sip-ngo" />
+                          <Label htmlFor="sip-ngo">Donate by NGO</Label>
+                        </div>
+                      </RadioGroup>
+                    </div>
+                    
+                    <Button 
+                      className="w-full bg-black text-white hover:bg-gray-800"
+                      onClick={() => setShowDonationOverlay(true)}
+                      disabled={!zakatAmount || Number(zakatAmount) <= 0}
+                    >
+                      Start SIP
+                    </Button>
+                  </TabsContent>
+                </Tabs>
               </CardContent>
             </Card>
 
@@ -419,45 +506,7 @@ export default function Investments() {
               </CardContent>
             </Card>
 
-            {/* Donation Options */}
-            <div className="space-y-4">
-              <div className="bg-white px-4 py-4 rounded-lg mb-4 border border-gray-200">
-                <h3 className="text-lg font-semibold text-black">Donate Zakat</h3>
-              </div>
-              
-              <Card className="border border-black rounded-lg">
-                <CardContent className="pt-6 pb-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h4 className="font-semibold text-black">By NGO</h4>
-                      <p className="text-sm text-gray-600">Choose specific organizations</p>
-                    </div>
-                    <Button className="bg-black text-white hover:bg-gray-800">
-                      Browse NGOs
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
 
-              <Card className="border border-black rounded-lg">
-                <CardContent className="pt-6 pb-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h4 className="font-semibold text-black">By Cause</h4>
-                      <p className="text-sm text-gray-600">Support meaningful causes</p>
-                    </div>
-                    <Button 
-                      onClick={() => setActiveTab('explore')}
-                      className="bg-black text-white hover:bg-gray-800"
-                    >
-                      View Causes
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
           </div>
         )}
 
@@ -475,6 +524,95 @@ export default function Investments() {
           </div>
         )}
       </div>
+
+      {/* Donation Overlay */}
+      {showDonationOverlay && (
+        <Card className="mx-4 mb-6 border border-black rounded-lg">
+          <CardHeader className="pb-4">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-black">
+                {donationType === 'one-time' ? 'Donate Zakat' : 'Start Zakat SIP'}
+              </CardTitle>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setShowDonationOverlay(false)}
+                className="h-8 w-8 p-0 hover:bg-gray-100"
+              >
+                <X size={16} />
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-0 space-y-6">
+            {/* Donation Summary */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="font-semibold text-black mb-2">Donation Details</h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Amount:</span>
+                  <span className="font-medium text-black">₹{Number(zakatAmount).toLocaleString('en-IN')}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Type:</span>
+                  <span className="font-medium text-black">
+                    {donationType === 'one-time' ? 'One-time Donation' : 'Monthly SIP'}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Method:</span>
+                  <span className="font-medium text-black">
+                    {donationMethod === 'cause' ? 'By Cause' : 'By NGO'}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Selection Options */}
+            {donationMethod === 'cause' ? (
+              <div className="space-y-3">
+                <h4 className="font-semibold text-black">Select Causes</h4>
+                <div className="space-y-2">
+                  {['Education for Children', 'Healthcare Access', 'Clean Water Projects', 'Poverty Alleviation'].map((cause) => (
+                    <div key={cause} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                      <span className="text-black">{cause}</span>
+                      <input type="checkbox" className="rounded border-black" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                <h4 className="font-semibold text-black">Select NGOs</h4>
+                <div className="space-y-2">
+                  {ngoProjects.slice(0, 4).map((ngo) => (
+                    <div key={ngo.id} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                      <div>
+                        <span className="text-black font-medium">{ngo.name}</span>
+                        <p className="text-sm text-gray-600">{Math.round((parseFloat(ngo.raisedAmount) / parseFloat(ngo.targetAmount)) * 100)}% funded</p>
+                      </div>
+                      <input type="checkbox" className="rounded border-black" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Action Buttons */}
+            <div className="flex space-x-3 pt-4">
+              <Button 
+                variant="outline" 
+                className="flex-1 border-black text-black hover:bg-gray-50"
+                onClick={() => setShowDonationOverlay(false)}
+              >
+                Cancel
+              </Button>
+              <Button className="flex-1 bg-black text-white hover:bg-gray-800">
+                {donationType === 'one-time' ? 'Confirm Donation' : 'Setup SIP'}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
